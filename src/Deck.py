@@ -2,7 +2,7 @@ class Deck:
     
     def __init__(self,rutaArchivo):
         listaCartas = self.cargarCartas(rutaArchivo);
-        self.baraja = self.asignarCartas(self.barajear(listaCartas));
+        self.__baraja = self.asignarCartas(self.barajear(listaCartas));
 
     def cargarCartas(rutaArchivo):
         '''Crea cartas y las aniade a una lista de cartas sacadas a partir de un
