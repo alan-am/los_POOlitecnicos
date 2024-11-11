@@ -1,12 +1,13 @@
 class Carta:
     def __init__(self, id,nombre,descripcion,deck):
         self._id = id
-        self._nombre = nombre
+        self.__nombre = nombre
         self._descripcion = descripcion
         self._deck = deck
     def mostrar_info(self):
         return f"Nombre {self._nombre}\nDescripcion: {self._descripcion}"
-
+    def getNombre(self):
+        return self.__nombre
     def ponerBocaArriba():
         pass
     def ponerBocaAbajo():
