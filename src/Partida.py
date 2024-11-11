@@ -2,10 +2,10 @@ class Partida:
 
     #Constructor
     def __init__(self, id, jugador1, jugador2):
-        self.id = id;
-        self.jugador1 = jugador1;
-        self.jugador2 = jugador2;
-        turno = 1;
+        self.__id = id;
+        self.__jugador1 = jugador1;
+        self.__jugador2 = jugador2;
+        __turno = 1;
 
     #Metodos
     def sorteoInicio(j1, j2):

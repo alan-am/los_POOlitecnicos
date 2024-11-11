@@ -2,9 +2,9 @@ class Tablero:
 
     #Constructor
     def __init__(self, id):
-        self.id = id;
-        cartasMonstruo = [];
-        cartasEspeciales = [];
+        self.__id = id;
+        __cartasMonstruo = [];
+        __cartasEspeciales = [];
 
 
     #Metodos

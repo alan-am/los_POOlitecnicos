@@ -1,11 +1,11 @@
 class Jugador:
 
     def __init__(self, id, puntosVida, deck, tablero):
-        self.id = id;
-        self.puntosVida = puntosVida;
-        self.deck = deck;
-        cartasEnMano = [];
-        self.tablero = tablero;
+        self.__id = id;
+        self.__puntosVida = puntosVida;
+        self.__deck = deck;
+        __cartasEnMano = [];
+        self.__tablero = tablero;
     
     def tomar5Cartas():
         '''Metodo que toma las 5 cartas de la deck al inicio del juego'''
