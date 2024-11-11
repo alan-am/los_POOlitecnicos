@@ -1,11 +1,11 @@
 class Jugador:
 
-    def __init__(self, id, puntosVida, deck, tablero):
-        self.id = id;
-        self.puntosVida = puntosVida;
-        self.deck = deck;
+    def __init__(self, id, puntosVida, Deck, tablero):
+        self.__id = id;
+        self.__puntosVida = puntosVida;
+        self.__deck = Deck;
         cartasEnMano = [];
-        self.tablero = tablero;
+        self.__tablero = tablero;
     
     #Getters y setters 
     def getId(self):

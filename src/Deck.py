@@ -2,6 +2,7 @@ class Deck:
     
     def __init__(self,rutaArchivo):
         listaCartas = self.cargarCartas(rutaArchivo);
+<<<<<<< HEAD
         self.baraja = self.asignarCartas(self.barajear(listaCartas));
     
     #Getters y setters 
@@ -9,6 +10,9 @@ class Deck:
         return self.__baraja
     def setBaraja(self, nueva_baraja):
          self.__baraja = nueva_baraja
+=======
+        self.__baraja = self.asignarCartas(self.barajear(listaCartas));
+>>>>>>> 146ad1144b6b19ce1be32051269bb52cd6533012
 
     def getListaCartas(self):
         return self.__listaCartas
