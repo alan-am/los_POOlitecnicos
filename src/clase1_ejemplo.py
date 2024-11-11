@@ -2,6 +2,8 @@ class Carta:
     def __init__(self, nombre,descripcion):
         self.__nombre = nombre
         self.__descripcion = descripcion
+        
+    #Getters y setters
     def getNombre(self):
         return self.__nombre
     def getDescripcion(self):
@@ -10,4 +12,6 @@ class Carta:
         self.__nombre = nombrenuevo
     def setDescripcion(self,descrnueva):
         self.__descripcion = descrnueva
+
+
 #un commit
