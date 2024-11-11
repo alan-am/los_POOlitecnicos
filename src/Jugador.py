@@ -7,6 +7,7 @@ class Jugador:
         __cartasEnMano = [];
         self.__tablero = tablero;
     
+    #Metodos
     def tomar5Cartas():
         '''Metodo que toma las 5 cartas de la deck al inicio del juego'''
         pass;
@@ -22,3 +23,29 @@ class Jugador:
         '''Metodo para iniciar batalla entre cartas,
         se asocia con atacar() de CartaMonstruo'''
         pass;
+
+    #Getters y setters 
+    def getId(self):
+        return self.__id
+    def setId(self, nuevo_id):
+        self.__id = nuevo_id
+ 
+    def getPuntosVida(self):
+        return self.__puntosVida
+    def setPuntosVida(self, nuevos_puntosVida):
+        self.__puntosVida = nuevos_puntosVida
+
+    def getDeck(self):
+        return self.__deck
+    def setDeck(self, nuevo_deck):
+        self.__deck = nuevo_deck
+  
+    def getCartasEnMano(self):
+        return self.__cartasEnMano
+    def setCartasEnMano(self, nuevas_cartas):
+        self.__cartasEnMano = nuevas_cartas
+
+    def getTablero(self):
+        return self.__tablero
+    def setTablero(self, nuevo_tablero):
+        self.__tablero = nuevo_tablero

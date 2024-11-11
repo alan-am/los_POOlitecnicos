@@ -3,7 +3,11 @@ class Deck:
     def __init__(self,rutaArchivo):
         listaCartas = self.cargarCartas(rutaArchivo);
         self.__baraja = self.asignarCartas(self.barajear(listaCartas));
-
+    
+    #Getters y setters 
+    def getBaraja(self):
+        return self.__baraja
+    
     def cargarCartas(self,rutaArchivo):
         '''Crea cartas y las aniade a una lista de cartas sacadas a partir de un
         archivo, luego la retorna'''
