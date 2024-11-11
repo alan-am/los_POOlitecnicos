@@ -1,9 +1,12 @@
 class Carta:
-    def __init__(self, id,nombre,descripcion,Deck):
+    def __init__(self, id,nombre,descripcion,deck):
         self._id = id
         self._nombre = nombre
         self._descripcion = descripcion
-        self._deck = Deck
+        self._deck = deck
+    def mostrar_info(self):
+        return f"Nombre {self._nombre}\nDescripcion: {self._descripcion}"
+
     def ponerBocaArriba():
         pass
     def ponerBocaAbajo():
@@ -24,6 +27,8 @@ class CartaMonstruo(Carta):
         self.__tipomonstruo = TipoMonstruo
         self.__tipoatributo = TipoAtributo
         self.__tipoPosicion = TipoPosicion
+    def mostrar_info(self):
+        return f"Nombre {self._nombre}\nDescr {self._descripcion}\nataque {self.__ataque}\nTipo de Atributo :{self.__tipoatributo}"
 
 class CartaTrampa(Carta):
     def __init__(self,id,nombre, descripcion,deck,bocaAbajo,TipoAtributo):
