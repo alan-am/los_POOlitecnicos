@@ -1,11 +1,10 @@
 class Jugador:
 
-    def __init__(self, id, puntosVida, deck, tablero):
+    def __init__(self, id, puntosVida, deck):
         self.__id = id;
         self.__puntosVida = puntosVida;
         self.__deck = deck;
-        __cartasEnMano = [];
-        self.__tablero = tablero;
+        self.__cartasEnMano = [];
     
     #Metodos
     def tomar5Cartas():
@@ -23,7 +22,10 @@ class Jugador:
         '''Metodo para iniciar batalla entre cartas,
         se asocia con atacar() de CartaMonstruo'''
         pass;
-
+    def jugarComoMaquina():
+        '''Metodo para la instancia Maquina'''
+        pass;
+    
     #Getters y setters 
     def getId(self):
         return self.__id
@@ -45,7 +47,3 @@ class Jugador:
     def setCartasEnMano(self, nuevas_cartas):
         self.__cartasEnMano = nuevas_cartas
 
-    def getTablero(self):
-        return self.__tablero
-    def setTablero(self, nuevo_tablero):
-        self.__tablero = nuevo_tablero

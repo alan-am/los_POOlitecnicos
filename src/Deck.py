@@ -1,12 +1,9 @@
 class Deck:
     
-    def __init__(self,rutaArchivo):
+    def __init__(self,rutaArchivo, jugador):
         listaCartas = self.cargarCartas(rutaArchivo);
         self.__baraja = self.asignarCartas(self.barajear(listaCartas));
-    
-    #Getters y setters 
-    def getBaraja(self):
-        return self.__baraja
+        self.__jugador = jugador;
     
     def cargarCartas(self,rutaArchivo):
         '''Crea cartas y las aniade a una lista de cartas sacadas a partir de un
@@ -23,3 +20,14 @@ class Deck:
         '''devuelve un carta para el jugador traida de la baraja y la borra
         de la baraja'''
         pass
+
+    #Getters y setters 
+    def getBaraja(self):
+        return self.__baraja;
+    def setBaraja(self, nuevaBaraja):
+        self.__baraja = nuevaBaraja;
+
+    def getJugador(self):
+        return self.__jugador;
+    def setJugador(self, nuevo_jugador):
+        self.__jugador = nuevo_jugador;

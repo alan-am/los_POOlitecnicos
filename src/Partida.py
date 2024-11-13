@@ -1,11 +1,11 @@
 class Partida:
 
     #Constructor
-    def __init__(self, id, jugador1, jugador2):
+    def __init__(self, id,tablero):
         self.__id = id;
-        self.__jugador1 = jugador1;
-        self.__jugador2 = jugador2;
-        __turno = 1;
+        self.__turno = 1;
+        self.__tablero = tablero;
+        self.__idTablero = tablero.getId();
 
     #Metodos
     def sorteoInicio(j1, j2):
@@ -23,15 +23,10 @@ class Partida:
     def setId(self, nuevo_id):
         self.__id = nuevo_id
 
-    def getJugador1(self):
-        return self.__jugador1
-    def setJugador1(self, nuevo_jugador1):
-        self.__jugador1 = nuevo_jugador1
-
-    def getJugador2(self):
-        return self.__jugador2
-    def setJugador2(self, nuevo_jugador2):
-        self.__jugador2 = nuevo_jugador2
+    def getTablero(self):
+        return self.__tablero;
+    def setTablero(self, nuevo_tablero):
+        self.__tablero = nuevo_tablero;
 
     def getTurno(self):
         return self.__turno

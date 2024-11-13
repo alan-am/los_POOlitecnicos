@@ -70,10 +70,12 @@ class CartaMonstruo(Carta):
 
 #SUB-CLASE
 class CartaTrampa(Carta):
+
     def __init__(self,id,nombre, descripcion,deck,bocaAbajo,TipoAtributo):
         super().__init__(id,nombre, descripcion,deck)
         self.__bocaAbajo = bocaAbajo
         self.__TipoAtributo = TipoAtributo
+        
     def mostrar_info(self):
         return f"{super().mostrar_info()}\nTipo de Atributo: {self.__TipoAtributo.value}"
 
