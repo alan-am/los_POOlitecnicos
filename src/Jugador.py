@@ -1,9 +1,17 @@
+
 class Jugador:
 
-    def __init__(self, id, puntosVida, deck):
-        self.__id = id;
-        self.__puntosVida = puntosVida;
-        self.__deck = deck;
+    #Atributo estatico
+    jugadores = 0
+
+    #Constructor
+    def __init__(self,nombre, deck):
+
+        Jugador.jugadores += 1;
+        self.__id = Jugador.jugadores;
+        self.__puntosVida = 4000;
+        self.__nombre = nombre;
+        self.__deck = deck; #es una lista de cartas
         self.__cartasEnMano = [];
     
     #Metodos
@@ -12,23 +20,30 @@ class Jugador:
         pass;
     
     def robarCartaEnTurno():
-        '''Metodo para que hace q el jugador tome una carta,
+        '''Metodo donde  el jugador tome una carta del Deck suyo,
         se asocia con el metodo robarCarta() de Deck'''
 
         pass;
     def jugarCarta():
         '''Metodo para jugar una carta en el tablero,
-        se asocia con el metodo aniadirCarta() de Tablero'''
+        se asocia con el metodo aniadirCarta() de Tablero y luego de validar
+        quita la carta de la mano del jugador'''
         pass;
     
     def declararBatalla():
         '''Metodo para iniciar batalla entre cartas,
         se asocia con atacar() de CartaMonstruo'''
         pass;
+<<<<<<< HEAD
     
+=======
+    def imprimirMano(self):
+        '''Imprime por consola las cartas en mano que tiene el jugador'''
+>>>>>>> fa1cc80d8d056b7a2d0c5fdf354aa8665c342853
     def jugarComoMaquina():
         '''Metodo para la instancia Maquina'''
         pass;
+        
     
     #Getters y setters 
     def getId(self):
@@ -50,4 +65,21 @@ class Jugador:
         return self.__cartasEnMano
     def setCartasEnMano(self, nuevas_cartas):
         self.__cartasEnMano = nuevas_cartas
+    
+    def getNombre(self):
+        return self.__nombre;
+    def setNombre(self, nuevo_nombre):
+        self.__nombre = nuevo_nombre;
+
+    #String of
+    def stringOf(self):
+        return f''' Datos Jugador {self.__nombre} \n
+        Id: {self.__id} \n
+        Puntos de vida: {self.__puntosVida} \n
+        --------------------------------- \n
+        Baraja: {self.__deck} \n
+        ---------------------------------- \n
+        Cartas en mano: {self.__cartasEnMano} \n
+        -----------------------------------
+        '''
 

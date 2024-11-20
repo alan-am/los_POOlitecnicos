@@ -1,11 +1,11 @@
+from Tablero import Tablero
 class Partida:
 
     #Constructor
-    def __init__(self, id,tablero):
-        self.__id = id;
+    def __init__(self):
+        self.__id = 1;
         self.__turno = 1;
-        self.__tablero = tablero;
-        self.__idTablero = tablero.getId();
+        self.__tablero = Tablero();
 
     #Metodos
     def sorteoInicio(j1, j2):
