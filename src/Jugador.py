@@ -1,3 +1,4 @@
+from Deck import Deck
 
 class Jugador:
 
@@ -66,13 +67,12 @@ class Jugador:
 
     #String of
     def stringOf(self):
-        return f''' Datos Jugador {self.__nombre}
-        Id: {self.__id}
-        Puntos de vida: {self.__puntosVida}
-        --------------------------------- 
-        Baraja: {self.__deck}
-        ---------------------------------- 
-        Cartas en mano: {self.__cartasEnMano}
-        -----------------------------------
-        '''
+        return f'''Datos Jugador - {self.__nombre} -
+Id: {self.__id}
+Puntos de vida: {self.__puntosVida}
+{" Baraja ".center(25, "-")}
+{self.__deck.stringOf()}
+{" Cartas en Mano ".center(25, "-")}
+{self.__cartasEnMano}
+-----------------------------------'''
 

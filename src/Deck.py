@@ -104,3 +104,11 @@ class Deck:
 
     def getId(self):
         return self.__id;
+
+    #String Of
+    def stringOf(self):
+        lst_aMostrar = [];
+        for Carta in self.__baraja:
+            nombreCarta = Carta.getNombre();
+            lst_aMostrar.append(nombreCarta);
+        return lst_aMostrar;

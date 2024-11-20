@@ -10,10 +10,6 @@ class Carta:
         self.__descripcion = descripcion
         #self.__deck = deck
 
-    def mostrar_info(self):
-        return f"Nombre: {self._nombre}\nDescripcion: {self._descripcion}"
-
-
 
      #GETTER Y SETTERS
     def getNombre(self):
@@ -36,9 +32,19 @@ class CartaMagica(Carta):
         self.__incrementoAtaque = incrementoAtaque
         self.__incrementoDefensa = incrementoDefensa
         self.__tipoMonstruo = TipoMonstruo
+
+    #Getters y Setters
+
+    #String Of
+    def stringOf(self):
+        return f'''{self.__nombre.center(40, "~")}
+        ~   Tipo: {self.__tipoMonstruo.value}                   ~
+        ~   Incremento Ataque: {self.__incrementoAtaque}        ~
+        ~   Incremento Defensa: {self.__incrementoDefensa}      ~
+        ~  {"Descripcion".center(40, "~")}
+        ~{self.__descripcion}
+        {"~".center(40, "~")}'''   
     
-    def mostrar_info(self):
-        return f"{super().mostrar_info()}\nIncremento Ataque: {self.__incrementoAtaque}\nIncremento Defensa: {self.__incrementoDefensa}\nTipo de Monstruo: {self.__tipoMonstruo.value}"
 
 #SUB-CLASE
 class CartaMonstruo(Carta):
@@ -58,7 +64,7 @@ class CartaMonstruo(Carta):
     def atacar(Carta):
         #ataque a otra carta
         pass
-
+    
 
     #GETTER Y SETTERS
     def getAtaque(self):
@@ -86,7 +92,10 @@ class CartaMonstruo(Carta):
         return self.__puedeAtacar;
     def setPuedeAtacar(self, valor_booleano):
         self.__puedeAtacar = valor_booleano;
-        
+    
+    #String Of
+    def stringOf():
+        pass;
 
 
 #SUB-CLASE
@@ -107,3 +116,7 @@ class CartaTrampa(Carta):
         return self.__isBocaArriba;
     def setIsBocaArriba(self, valor_Booleano):
         self.__isBocaArriba = valor_Booleano;
+
+    #String Of
+    def stringOf():
+        pass;
