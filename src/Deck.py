@@ -1,3 +1,4 @@
+import random
 class Deck:
     
     def __init__(self,rutaArchivo, jugador):
@@ -8,18 +9,30 @@ class Deck:
     def cargarCartas(self,rutaArchivo):
         '''Crea cartas y las aniade a una lista de cartas sacadas a partir de un
         archivo, luego la retorna'''
+        cartasNuevas = []
+        with open(rutaArchivo, "r") as archivo:
+            for linea in archivo:
+                linea = linea.rstrip()
+                cartasNuevas.append(linea)
+        return cartasNuevas
         pass;
+    
     def barajear(self, listaCartas):
         '''desordena una lista de cartas'''
-        pass
+        random.shuffle(listaCartas)
+        return listaCartas
+        pass;
+
     def asignarCartas(self, listaCartas):
         '''De una lista de cartas, retorna una nueva lista con 
         20 cartas monstruo, 5 magicas y 5 trampas'''
-        pass
+
+        pass;
+
     def robarCarta(self):
         '''devuelve un carta para el jugador traida de la baraja y la borra
         de la baraja'''
-        pass
+        pass;
 
     #Getters y setters 
     def getBaraja(self):
