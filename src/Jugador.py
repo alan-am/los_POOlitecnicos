@@ -66,13 +66,13 @@ class Jugador:
 
     #String of
     def stringOf(self):
-        return f''' Datos Jugador {self.__nombre} \n
-        Id: {self.__id} \n
-        Puntos de vida: {self.__puntosVida} \n
-        --------------------------------- \n
-        Baraja: {self.__deck} \n
-        ---------------------------------- \n
-        Cartas en mano: {self.__cartasEnMano} \n
+        return f''' Datos Jugador {self.__nombre}
+        Id: {self.__id}
+        Puntos de vida: {self.__puntosVida}
+        --------------------------------- 
+        Baraja: {self.__deck}
+        ---------------------------------- 
+        Cartas en mano: {self.__cartasEnMano}
         -----------------------------------
         '''
 
