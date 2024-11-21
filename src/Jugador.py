@@ -34,12 +34,9 @@ class Jugador:
         '''Metodo para iniciar batalla entre cartas,
         se asocia con atacar() de CartaMonstruo'''
         pass;
-<<<<<<< HEAD
     
-=======
     def imprimirMano(self):
         '''Imprime por consola las cartas en mano que tiene el jugador'''
->>>>>>> fa1cc80d8d056b7a2d0c5fdf354aa8665c342853
     def jugarComoMaquina():
         '''Metodo para la instancia Maquina'''
         pass;
