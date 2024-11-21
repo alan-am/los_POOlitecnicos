@@ -11,6 +11,7 @@ class Deck:
         self.__id = Deck.decks
         self.__baraja = self.cargarCartas();
     
+    #Metodos
     def cargarCartas(self):
         '''Crea cartas de Monstruos, Trampas y Magicas apartir de varios archivos;
           y las aniade a una lista de cartas, luego la retorna'''
@@ -86,10 +87,10 @@ class Deck:
         '''desordena una lista de cartas'''
         random.shuffle(listaCartas)
 
-    def robarCarta():
-        '''devuelve un carta para el jugador traida de la baraja y la borra
+    def robarCarta(self):
+        '''devuelve una carta para el jugador traida de la baraja y la borra
         de la baraja'''
-        pass;
+        return self.__baraja.pop(0) #elimina y devuelve la carta
 
     #Getters y setters 
     def getBaraja(self):
@@ -105,8 +106,8 @@ class Deck:
     def getId(self):
         return self.__id;
 
-    #String Of
-    def stringOf(self):
+    #toString
+    def toString(self):
         lst_aMostrar = [];
         for Carta in self.__baraja:
             nombreCarta = Carta.getNombre();

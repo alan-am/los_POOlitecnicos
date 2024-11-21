@@ -35,15 +35,16 @@ class CartaMagica(Carta):
 
     #Getters y Setters
 
-    #String Of
-    def stringOf(self):
-        return f'''{self.__nombre.center(40, "~")}
-        ~   Tipo: {self.__tipoMonstruo.value}                   ~
-        ~   Incremento Ataque: {self.__incrementoAtaque}        ~
-        ~   Incremento Defensa: {self.__incrementoDefensa}      ~
-        ~  {"Descripcion".center(40, "~")}
-        ~{self.__descripcion}
-        {"~".center(40, "~")}'''   
+    #to String
+    def toString(self):
+        return f'''{"CARTA MAGICA".center(55,"~")}
+{super().getNombre().center(55, "~")}
+    Tipo: {self.__tipoMonstruo.value}
+    Incremento Ataque: {self.__incrementoAtaque}
+    Incremento Defensa: {self.__incrementoDefensa}
+{"Descripcion".center(55, "~")}
+{super().getDescripcion().center(55)}
+{"~".center(55, "~")}'''   
     
 
 #SUB-CLASE
@@ -57,9 +58,6 @@ class CartaMonstruo(Carta):
         self.__isInAtaque = True; #* por defecto
         self.__isBocaArriba = True; #* por defecto
         self.__puedeAtacar = True; #* por defecto
-    
-    def mostrar_info(self):
-        return f"{super().mostrar_info()}\nAtaque: {self.__ataque}\nDefensa: {self.__defensa}\nTipo de Monstruo:{self.__tipoMonstruo.value}\nTipo de atributo: {self.__tipoAtributo.value}\n ModoAtaque: {self.__isInAtaque}"
     
     def atacar(Carta):
         #ataque a otra carta
@@ -93,9 +91,16 @@ class CartaMonstruo(Carta):
     def setPuedeAtacar(self, valor_booleano):
         self.__puedeAtacar = valor_booleano;
     
-    #String Of
-    def stringOf():
-        pass;
+    #to String
+    def toString(self):
+        return f'''{"CARTA MONSTRUO".center(55, "-")}
+{super().getNombre().center(55, "-")}
+    Tipo: {self.__tipoMonstruo.value}   Atributo: {self.__tipoAtributo.value}
+    ATK: {self.__ataque}                DEF: {self.__defensa}
+    MODO DE ATAQUE: {self.__isInAtaque}
+{"Descripcion".center(55, "-")}
+{super().getDescripcion().center(55)}
+{"-".center(55, "-")}'''  
 
 
 #SUB-CLASE
@@ -104,10 +109,10 @@ class CartaTrampa(Carta):
     def __init__(self,nombre, descripcion,TipoAtributo):
         super().__init__(nombre, descripcion)
         self.__isBocaArriba = True; #* por defecto
-        self.__TipoAtributo = TipoAtributo
+        self.__tipoAtributo = TipoAtributo
         
     def mostrar_info(self):
-        return f"{super().mostrar_info()}\nTipo de Atributo: {self.__TipoAtributo.value}"
+        return f"{super().mostrar_info()}\nTipo de Atributo: {self.__tipoAtributo.value}"
 
 
     #Getters and Setters
@@ -117,6 +122,11 @@ class CartaTrampa(Carta):
     def setIsBocaArriba(self, valor_Booleano):
         self.__isBocaArriba = valor_Booleano;
 
-    #String Of
-    def stringOf():
-        pass;
+    #to String
+    def toString(self):
+        return f'''{"CARTA TRAMPA".center(55, ".")}
+{super().getNombre().center(55, ".")}
+    Atributo: {self.__tipoAtributo.value}
+{"Descripcion".center(55, ".")}
+{super().getDescripcion().center(55)}
+{".".center(55, ".")}'''   

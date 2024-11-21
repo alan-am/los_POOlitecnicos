@@ -23,11 +23,11 @@ class Tablero:
         #Creacion y retorno del jugador
         return Jugador(nombre, deck);
 
-    def aniadirCarta(c):
+    def aniadirCarta(self):
         '''metodo para aniadir cartas al tablero, a las listas'''
         pass;
 
-    def quitarCarta():
+    def quitarCarta(self):
         '''metodo para quitar cartas del tablero, 
         eliminar de las listas'''
         pass;

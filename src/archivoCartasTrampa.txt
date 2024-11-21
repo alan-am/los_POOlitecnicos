@@ -1,4 +1,4 @@
-Nombre, Descripción, Atributo
+Nombre, Descripción, Atributo(ignorar las descripciones xd, deben ser corregidas de acuerdo al juego)
 Tornado de Polvo, Detiene el ataque de un monstruo con el atributo VIENTO, VIENTO
 Ciclón Mágico, Destruye una carta mágica o trampa en el campo, LUZ
 Rayo Trampa, Detiene el ataque de un monstruo con el atributo AGUA, AGUA
