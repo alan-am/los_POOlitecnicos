@@ -35,20 +35,20 @@ class CartaMagica(Carta):
     #getters 
     def getTipoMonstruo(self):
         return self.__tipoMonstruo
-    def getincrementoAtaque(self):
+    def getIncrementoAtaque(self):
         return self.__incrementoAtaque
-    def getincrementoDefensa(self):
+    def getIncrementoDefensa(self):
         return self.__incrementoDefensa
     #setters
-    def setincrementoDefensa(self,n_incrementodefensa):
+    def setIncrementoDefensa(self,n_incrementodefensa):
         self.__incrementoDefensa = n_incrementodefensa
-    def setincrementoAtaque(self,n_incrementoataque):
+    def setIncrementoAtaque(self,n_incrementoataque):
         self.__incrementoAtaque = n_incrementoataque
     def setTipoMonstruo(self,tipoMonstruo):
         self.__tipoMonstruo = tipoMonstruo
 
 
-    #to String
+    ###to String
     def toString(self):
         return f'''{"CARTA MAGICA".center(55,"~")}
 {super().getNombre().center(55, "~")}
@@ -114,16 +114,16 @@ class CartaMonstruo(Carta):
         '''Debe atacar a otra cara '''
         pass
 
-    #to String
+    ###to String
     def toString(self):
         return f'''{"CARTA MONSTRUO".center(55, "-")}
 {super().getNombre().center(55, "-")}
-    Tipo: {self.__tipoMonstruo.value}{f"Atributo: {self.__tipoAtributo.value}":>22}
-    ATK: {self.__ataque}{f"DEF: {self.__defensa}":>27} 
+    Tipo: {self.__tipoMonstruo.value}   Atributo: {self.__tipoAtributo.value}
+    ATK: {self.__ataque}                DEF: {self.__defensa}
     MODO DE ATAQUE: {self.__isInAtaque}
 {"Descripcion".center(55, "-")}
 {super().getDescripcion().center(55)}
-{"-".center(55, "-")}'''  
+{"-".center(55, "-")}'''
 
 #lo de :> era para intentar darle mejor aspecto pero no se logró
 
@@ -142,22 +142,22 @@ class CartaTrampa(Carta):
     def setIsInAtaque(self, valor_booleano):
         self.__isBocaArriba = valor_booleano;
 
-    def getIsTipoAtributo(self):
+    def getTipoAtributo(self):
         return self.__tipoAtributo
-    def setIsTipoAtributo(self, nuevoTipoAtributo):
+    def setTipoAtributo(self, nuevoTipoAtributo):
         self.__tipoAtributo=nuevoTipoAtributo
 
         
 
 
-    #to String
+    ###to String
     def toString(self):
         return f'''{"CARTA TRAMPA".center(55, ".")}
 {super().getNombre().center(55, ".")}
     Atributo: {self.__tipoAtributo.value}
 {"Descripcion".center(55, ".")}
 {super().getDescripcion().center(55)}
-{".".center(55, ".")}'''   
+{".".center(55, ".")}''' 
 
 
 
