@@ -14,34 +14,6 @@ class Jugador:
         self.__deck = deck; #es una lista de cartas
         self.__cartasEnMano = [];
     
-    #Metodos
-    def tomar5Cartas():
-        '''Metodo que toma las 5 cartas de la deck al inicio del juego'''
-        pass;
-    
-    def robarCartaEnTurno():
-        '''Metodo donde  el jugador tome una carta del Deck suyo,
-        se asocia con el metodo robarCarta() de Deck'''
-
-        pass;
-    def jugarCarta():
-        '''Metodo para jugar una carta en el tablero,
-        se asocia con el metodo aniadirCarta() de Tablero y luego de validar
-        quita la carta de la mano del jugador'''
-        pass;
-    
-    def declararBatalla():
-        '''Metodo para iniciar batalla entre cartas,
-        se asocia con atacar() de CartaMonstruo'''
-        pass;
-    
-    def imprimirMano(self):
-        '''Imprime por consola las cartas en mano que tiene el jugador'''
-    def jugarComoMaquina():
-        '''Metodo para la instancia Maquina'''
-        pass;
-        
-    
     #Getters y setters 
     def getId(self):
         return self.__id
@@ -67,7 +39,52 @@ class Jugador:
         return self.__nombre;
     def setNombre(self, nuevo_nombre):
         self.__nombre = nuevo_nombre;
+    
 
+    #Metodos
+    
+    def tomar5Cartas(self):
+        ###Metodo donde  el jugador tome una carta del Deck suyo,se asocia con el metodo robarCarta() de Deck'''
+        i = 0;
+        for i in range(5):
+            self.tomarCartaEnTurno();
+            i += 1;
+
+    def tomarCartaEnTurno(self):
+        ###Metodo donde  el jugador tome una carta del Deck suyo, se asocia con el metodo robarCarta() de Deck'''
+        cartaTomada = self.__deck.robarCarta();
+        self.__cartasEnMano.append(cartaTomada);
+        
+    def jugarCarta():
+        '''Metodo para jugar una carta en el tablero,
+        se asocia con el metodo aniadirCarta() de Tablero y luego de validar
+        quita la carta de la mano del jugador'''
+        pass;
+    
+    def declararBatalla():
+        '''Metodo para iniciar batalla entre cartas,
+        se asocia con atacar() de CartaMonstruo'''
+        pass;
+    
+    def imprimirMano(self):
+        ###Imprime por consola las cartas en mano que tiene el jugador'''
+        for Carta in self.__cartasEnMano:
+            print(Carta.toString())
+
+    def listarCartasEnMano(self):
+        ###Metodo hecho por Alan, escribe su funcionalidad xd
+        cartas = []
+        for Carta in self.__cartasEnMano:
+                     cartas.append(Carta.getNombre())
+        return cartas
+
+
+    def jugarComoMaquina():
+        '''Metodo para la instancia Maquina'''
+        pass;
+    
+    
+         
     #String of
     def stringOf(self):
         return f''' Datos Jugador {self.__nombre} \n
