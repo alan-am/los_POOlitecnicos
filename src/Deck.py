@@ -70,7 +70,7 @@ class Deck:
                 nombre = lst_datos[0];
                 descripcion = lst_datos[1];
                 atributo = lst_datos[2].strip();
-                cartas_trampas.append(CartaTrampa(nombre, descripcion, TipoAtributo[atributo]));
+                cartas_trampas.append(CartaTrampa(nombre, descripcion, TipoAtributo[atributo]))
         #barajeamos las cartas trampas
         self.barajear(cartas_trampas);
         #guardamos 5 cartas trampa en la baraja final
@@ -112,4 +112,10 @@ class Deck:
         for Carta in self.__baraja:
             nombreCarta = Carta.getNombre();
             lst_aMostrar.append(nombreCarta);
-        return lst_aMostrar;
+        return lst_aMostrar
+
+def main():
+    deck = Deck()
+    print(deck.getBaraja()[1].toString())
+main()
+
