@@ -11,7 +11,7 @@ class Carta:
         #self.__deck = deck
 
 
-     #GETTER Y SETTERS
+     #Getters y setters 
     def getNombre(self):
         return self.__nombre
     def setNombre(self, nuevoNombre):
@@ -33,7 +33,7 @@ class CartaMagica(Carta):
         self.__incrementoDefensa = incrementoDefensa
         self.__tipoMonstruo = TipoMonstruo
 
-    #Getters y Setters
+  
 
     #to String
     def toString(self):
@@ -47,29 +47,23 @@ class CartaMagica(Carta):
 {"~".center(55, "~")}'''   
     
 
-#SUB-CLASE
+#SUB-CLASE 
 class CartaMonstruo(Carta):
     def __init__(self,nombre,descripcion,ataque,defensa,TipoMonstruo,TipoAtributo):
         super().__init__(nombre, descripcion)
         self.__ataque = ataque
         self.__defensa = defensa
-        self.__tipoMonstruo = TipoMonstruo #falta getter y setter
-        self.__tipoAtributo = TipoAtributo #falta getter y setter
+        self.__tipoMonstruo = TipoMonstruo 
+        self.__tipoAtributo = TipoAtributo 
         self.__isInAtaque = True; #* por defecto
         self.__isBocaArriba = True; #* por defecto
         self.__puedeAtacar = True; #* por defecto
-    
-    def atacar(Carta):
-        #ataque a otra carta
-        pass
-    
 
-    #GETTER Y SETTERS
+    #Getters y setters 
     def getAtaque(self):
         return self.__ataque
     def setAtaque(self, nuevoAtaque):
         self.__ataque = nuevoAtaque
-
     
     def getDefensa(self):
         return self.__defensa
@@ -91,6 +85,22 @@ class CartaMonstruo(Carta):
     def setPuedeAtacar(self, valor_booleano):
         self.__puedeAtacar = valor_booleano;
     
+    def getTipoMounstro(self):
+        return self.__tipoMonstruo
+    def setTipoMounstro(self, nuevoTipoMounstro):
+        self.__tipoMonstruo=nuevoTipoMounstro
+
+    def getTipoAtributo(self):
+        return self.__tipoAtributo
+    def setTipoAtributo(self, nuevoTipoAtributo):
+        self.__tipoAtributo=nuevoTipoAtributo
+    
+
+    #Metodos
+    def atacar(Carta):
+        '''Debe atacar a otra cara '''
+        pass
+
     #to String
     def toString(self):
         return f'''{"CARTA MONSTRUO".center(55, "-")}
@@ -103,24 +113,31 @@ class CartaMonstruo(Carta):
 {"-".center(55, "-")}'''  
 
 
+
+
 #SUB-CLASE
 class CartaTrampa(Carta):
-
     def __init__(self,nombre, descripcion,TipoAtributo):
         super().__init__(nombre, descripcion)
         self.__isBocaArriba = True; #* por defecto
         self.__tipoAtributo = TipoAtributo
+                                                        #Estos atributos y gettersysetters son los mismos que los de la clase de arriba, no pasa nada
+                                                        #que vayan con los mismos nombres o deben ir con diferentes nombres?????
+                                                    
+    #Getters y setters
+    def getIsBocaArriba(self):
+        return self.__isBocaArriba
+    def setIsInAtaque(self, valor_booleano):
+        self.__isBocaArriba = valor_booleano;
+
+    def getIsTipoAtributo(self):
+        return self.__tipoAtributo
+    def setIsTipoAtributo(self, nuevoTipoAtributo):
+        self.__tipoAtributo=nuevoTipoAtributo
+
         
     def mostrar_info(self):
         return f"{super().mostrar_info()}\nTipo de Atributo: {self.__tipoAtributo.value}"
-
-
-    #Getters and Setters
-
-    def getIsBocaArriba(self):
-        return self.__isBocaArriba;
-    def setIsBocaArriba(self, valor_Booleano):
-        self.__isBocaArriba = valor_Booleano;
 
     #to String
     def toString(self):
