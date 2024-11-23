@@ -1,6 +1,6 @@
 from Jugador import Jugador
 from Deck import Deck
-
+from Cartas import *
 
 class Tablero:
 
@@ -23,14 +23,23 @@ class Tablero:
         #Creacion y retorno del jugador
         return Jugador(nombre, deck);
 
-    def aniadirCarta(self):
+    def aniadirCarta(self,Carta): #debería recibir como parámetro la carta a añadir? y el self corresponde al tablero
         '''metodo para aniadir cartas al tablero, a las listas'''
-        pass;
+        if len(self.__cartasMonstruo)<3 and isinstance(Carta,CartaMonstruo): #compara el tipo de carta y la cantidad
+            self.__cartasMonstruo.append(Carta)
+        elif (len(self.__cartasEspeciales)<3 and (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa))):
+            self.__cartasEspeciales.append(Carta)
+        else:
+            print(f"No se pudo incluir esa carta, espacio lleno") ## para avisarle al jugador que alcanzó el límite¿?no estoy segura de esto
 
-    def quitarCarta(self):
+    def quitarCarta(self,Carta): #parametro carta añadido
         '''metodo para quitar cartas del tablero, 
         eliminar de las listas'''
-        pass;
+        if isinstance(Carta,CartaMonstruo): #isintance es como instanceof de java
+            self.__cartasMonstruo.remove(Carta)
+        else:
+            self.__cartasEspeciales.remove(Carta)
+
 
     #Getters y setters
     def getId(self):
