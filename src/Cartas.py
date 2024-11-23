@@ -8,7 +8,7 @@ class Carta:
         self.__id = Carta.cartas;  
         self.__nombre = nombre
         self.__descripcion = descripcion
-        #self.__deck = deck
+
 
 
      #Getters y setters 
@@ -32,8 +32,21 @@ class CartaMagica(Carta):
         self.__incrementoAtaque = incrementoAtaque
         self.__incrementoDefensa = incrementoDefensa
         self.__tipoMonstruo = TipoMonstruo
+    #getters 
+    def getTipoMonstruo(self):
+        return self.__tipoMonstruo
+    def getincrementoAtaque(self):
+        return self.__incrementoAtaque
+    def getincrementoDefensa(self):
+        return self.__incrementoDefensa
+    #setters
+    def setincrementoDefensa(self,n_incrementodefensa):
+        self.__incrementoDefensa = n_incrementodefensa
+    def setincrementoAtaque(self,n_incrementoataque):
+        self.__incrementoAtaque = n_incrementoataque
+    def setTipoMonstruo(self,tipoMonstruo):
+        self.__tipoMonstruo = tipoMonstruo
 
-  
 
     #to String
     def toString(self):
@@ -44,7 +57,7 @@ class CartaMagica(Carta):
     Incremento Defensa: {self.__incrementoDefensa}
 {"Descripcion".center(55, "~")}
 {super().getDescripcion().center(55)}
-{"~".center(55, "~")}'''   
+{"~".center(55, "~")}'''
     
 
 #SUB-CLASE 
@@ -105,14 +118,14 @@ class CartaMonstruo(Carta):
     def toString(self):
         return f'''{"CARTA MONSTRUO".center(55, "-")}
 {super().getNombre().center(55, "-")}
-    Tipo: {self.__tipoMonstruo.value}   Atributo: {self.__tipoAtributo.value}
-    ATK: {self.__ataque}                DEF: {self.__defensa}
+    Tipo: {self.__tipoMonstruo.value}{f"Atributo: {self.__tipoAtributo.value}":>22}
+    ATK: {self.__ataque}{f"DEF: {self.__defensa}":>27} 
     MODO DE ATAQUE: {self.__isInAtaque}
 {"Descripcion".center(55, "-")}
 {super().getDescripcion().center(55)}
 {"-".center(55, "-")}'''  
 
-
+#lo de :> era para intentar darle mejor aspecto pero no se logró
 
 
 #SUB-CLASE
@@ -121,8 +134,7 @@ class CartaTrampa(Carta):
         super().__init__(nombre, descripcion)
         self.__isBocaArriba = True; #* por defecto
         self.__tipoAtributo = TipoAtributo
-                                                        #Estos atributos y gettersysetters son los mismos que los de la clase de arriba, no pasa nada
-                                                        #que vayan con los mismos nombres o deben ir con diferentes nombres?????
+
                                                     
     #Getters y setters
     def getIsBocaArriba(self):
@@ -136,8 +148,7 @@ class CartaTrampa(Carta):
         self.__tipoAtributo=nuevoTipoAtributo
 
         
-    def mostrar_info(self):
-        return f"{super().mostrar_info()}\nTipo de Atributo: {self.__tipoAtributo.value}"
+
 
     #to String
     def toString(self):
@@ -147,3 +158,6 @@ class CartaTrampa(Carta):
 {"Descripcion".center(55, ".")}
 {super().getDescripcion().center(55)}
 {".".center(55, ".")}'''   
+
+
+
