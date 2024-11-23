@@ -11,7 +11,7 @@ class Jugador:
         self.__id = Jugador.jugadores;
         self.__puntosVida = 4000;
         self.__nombre = nombre;
-        self.__deck = deck; #es una lista de cartas
+        self.__deck = deck; #es una lista de Cartas
         self.__cartasEnMano = [];
     
     #Getters y setters 
@@ -75,7 +75,7 @@ class Jugador:
         ###Metodo hecho por Alan, escribe su funcionalidad xd
         cartas = []
         for Carta in self.__cartasEnMano:
-                     cartas.append(Carta.getNombre())
+            cartas.append(Carta.getNombre())
         return cartas
 
 
@@ -85,15 +85,14 @@ class Jugador:
     
     
          
-    #String of
-    def stringOf(self):
-        return f''' Datos Jugador {self.__nombre} \n
-        Id: {self.__id} \n
-        Puntos de vida: {self.__puntosVida} \n
-        --------------------------------- \n
-        Baraja: {self.__deck} \n
-        ---------------------------------- \n
-        Cartas en mano: {self.__cartasEnMano} \n
-        -----------------------------------
-        '''
+    #toString
+    def toString(self):
+         return f'''Datos Jugador - {self.__nombre} -
+Id: {self.__id}
+Puntos de vida: {self.__puntosVida}
+{" Baraja ".center(25, "-")}
+{self.__deck.toString()}
+{" Cartas en Mano ".center(26, "-")}
+{self.listarCartasEnMano()}
+-----------------------------------'''
 

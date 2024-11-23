@@ -12,6 +12,8 @@ class Deck:
         self.__baraja = self.cargarCartas();
     
     #Metodos
+
+    ###
     def cargarCartas(self):
         '''Crea cartas de Monstruos, Trampas y Magicas apartir de varios archivos;
           y las aniade a una lista de cartas, luego la retorna'''
@@ -114,8 +116,4 @@ class Deck:
             lst_aMostrar.append(nombreCarta);
         return lst_aMostrar
 
-def main():
-    deck = Deck()
-    print(deck.getBaraja()[1].toString())
-main()
 
