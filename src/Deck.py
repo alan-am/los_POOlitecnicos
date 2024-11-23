@@ -94,28 +94,25 @@ class Deck:
 
     #Getters y setters 
     def getBaraja(self):
-        return self.__baraja;
+        return self.__baraja
     def setBaraja(self, nuevaBaraja):
-        self.__baraja = nuevaBaraja;
+        self.__baraja = nuevaBaraja
 
     def getJugador(self):
         return self.__jugador;
     def setJugador(self, nuevo_jugador):
-        self.__jugador = nuevo_jugador;
+        self.__jugador = nuevo_jugador
 
     def getId(self):
-        return self.__id;
+        return self.__id
 
     #toString
     def toString(self):
-        lst_aMostrar = [];
+        lst_aMostrar = []
         for Carta in self.__baraja:
             nombreCarta = Carta.getNombre();
             lst_aMostrar.append(nombreCarta);
         return lst_aMostrar
 
-def main():
-    deck = Deck()
-    print(deck.getBaraja()[1].toString())
-main()
+
 

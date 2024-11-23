@@ -39,9 +39,12 @@ class Jugador:
         '''Imprime por consola las cartas en mano que tiene el jugador'''
     def jugarComoMaquina():
         '''Metodo para la instancia Maquina'''
-        pass;
         
-    
+        pass;
+    #verifica que el jugador fue derrotado
+    def esDerrotado(self):
+        return self.getPuntosVida <=0 #devuelve true si esderrotado
+
     #Getters y setters 
     def getId(self):
         return self.__id
