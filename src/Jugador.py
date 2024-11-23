@@ -14,37 +14,6 @@ class Jugador:
         self.__deck = deck; #es una lista de Cartas
         self.__cartasEnMano = [];
     
-    #Metodos
-    def tomar5Cartas():
-        '''Metodo que toma las 5 cartas de la deck al inicio del juego'''
-        pass;
-    
-    def robarCartaEnTurno():
-        '''Metodo donde  el jugador tome una carta del Deck suyo,
-        se asocia con el metodo robarCarta() de Deck'''
-
-        pass;
-    def jugarCarta():
-        '''Metodo para jugar una carta en el tablero,
-        se asocia con el metodo aniadirCarta() de Tablero y luego de validar
-        quita la carta de la mano del jugador'''
-        pass;
-    
-    def declararBatalla():
-        '''Metodo para iniciar batalla entre cartas,
-        se asocia con atacar() de CartaMonstruo'''
-        pass;
-    
-    def imprimirMano(self):
-        '''Imprime por consola las cartas en mano que tiene el jugador'''
-    def jugarComoMaquina():
-        '''Metodo para la instancia Maquina'''
-        
-        pass;
-    #verifica que el jugador fue derrotado
-    def esDerrotado(self):
-        return self.getPuntosVida <=0 #devuelve true si esderrotado
-
     #Getters y setters 
     def getId(self):
         return self.__id
@@ -114,6 +83,10 @@ class Jugador:
         '''Metodo para la instancia Maquina'''
         pass;
     
+        
+    def esDerrotado(self):
+        ##verifica que el jugador fue derrotado
+        return self.getPuntosVida <=0 #devuelve true si esderrotado
     
          
     #toString
