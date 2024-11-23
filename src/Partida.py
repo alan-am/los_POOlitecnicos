@@ -1,4 +1,5 @@
 from Tablero import Tablero
+import random
 class Partida:
 
     #Constructor
@@ -7,17 +8,7 @@ class Partida:
         self.__turno = 1;
         self.__tablero = Tablero();
 
-    #Metodos
-    def sorteoInicio(j1, j2):
-        '''Realiza el sorteo de quien empieza la partida'''
-        pass;
-    
-    def resetearEstadoCartas(jugador):
-        '''Despues de cada turno , resetea el estado "puedeAtacar"
-        de las cartasMonstruo en el tablero de un jugador'''
-        pass;
-
-    #Getters y setters
+   #Getters y setters
     def getId(self):
         return self.__id
     def setId(self, nuevo_id):
@@ -32,4 +23,16 @@ class Partida:
         return self.__turno
     def setTurno(self, nuevo_turno):
         self.__turno = nuevo_turno
+
+   
+    #Metodos
+    def sorteoInicio(j1, j2):
+        JugadoresIniciales = [j1,j2]
+        JugadorEmpieza = random.choice(JugadoresIniciales)
+        return JugadorEmpieza
+        
     
+    def resetearEstadoCartas(jugador):
+        '''Despues de cada turno , resetea el estado "puedeAtacar"
+        de las cartasMonstruo en el tablero de un jugador'''
+        pass;
