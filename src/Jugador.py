@@ -91,7 +91,7 @@ class Jugador:
         
     def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        return self.getPuntosVida <=0 #devuelve true si esderrotado
+        return self.getPuntosVida() <=0 #devuelve true si esderrotado
     
          
     #toString

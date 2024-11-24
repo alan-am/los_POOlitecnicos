@@ -33,12 +33,18 @@ class Partida:
         print("La partida esta por comenzar")
         JugadoresIniciales = [j1,j2]
         JugadorEmpieza = random.choice(JugadoresIniciales)
-        print(f"El jugador que empieza es: {JugadorEmpieza}")
+        self.__turno = JugadorEmpieza.getId() #con esto ya modifiqué el turno por primera vez
+        print(f"El jugador que empieza es: {JugadorEmpieza.getNombre()} -Id: {JugadorEmpieza.getId()}")
         
-    def cambiarTurno(self, jugadores):
+    def cambiarTurno(self):
         ###Cambia el turno al siguiente jugador."""
-        self.__turno = (self.__turno % len(jugadores)) + 1
-        print(f"Es el turno del Jugador {self.__turno}.") ##AUN NO ESTA COMPLETO CREO
+        if self.__turno == 1:
+            self.__turno+=1
+        else: #como solo hay dos jugadores solo hay dos posibilidades
+            self.__turno-=1
+        #self.__turno = (self.__turno % len(jugadores)) + 1
+        #print(f"Es el turno del Jugador {self.__turno}.") ##AUN NO ESTA COMPLETO CREO
+        #intenté acomodar este método
 
 
     def resetearEstadoCartasMounstro(self, jugador):
