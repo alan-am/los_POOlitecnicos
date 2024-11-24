@@ -7,6 +7,8 @@ from Cartas import *
 
 def main():
     '''
+    TEST 1 -- probando la base 
+
     partida = Partida();
     # Referenciamos el espacio de memoria de jugador 1 y jugador 2 para guardalos
     #Partida tiene un tablero y ese tablero tiene 2 jugadores, de ahi los referenciamos
