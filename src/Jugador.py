@@ -117,7 +117,7 @@ class Jugador:
                 #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
                 #boca arriba damos permiso de atacar;
                 for cartaMonstruo in espacioCartasMonstruoJ:
-                    print(f'{i}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF
+                    print(f'{i}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF 
                     i += 1;
                 seleccion = input("> ")
                 # validacion por si el usuario pone letras  o se pasa del rango-_-
@@ -141,7 +141,9 @@ class Jugador:
                             print("| Se ha atacado directamente! pero una carta Trampa se interpuso")
                             #eliminamos la carta trampa q se interpuso
                             cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
-                            tablero.quitarCarta(cartaTrampa, enemigo.getId())
+                            print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo().value}")
+                            print("Carta Trampa eliminada del tablero")
+                            tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
 
                             
                         #caso en el que no tenga

@@ -72,9 +72,15 @@ def main():
     #se ejecuta
     while not usuario.esDerrotado() and not maquina.esDerrotado():
         '''toda la jugada del main'''
-        print("El turno fue cambiado a:") #estas lineas solo es para probar si funciona el cambio
-        partida.cambiarTurno() #el número corresponder al Id del jugador que le toca jugar
-        print(partida.getTurno())
+        #intentaré llenar las manos de maquina y usuario
+        partida.faseTomarCarta()
+        partida.cambiarTurno()
+        partida.faseTomarCarta()
+        partida.cambiarTurno()
+        partida.faseTomarCarta()
+        print(usuario.toString())
+        print(maquina.toString()) #imprimí a ambos para verificar que se habían llenado, solo son pruebas
+
         break #es pq no hay cuerpo xd, solo queria probar, no me funen
     #termina
     partida.finalizarPartida(usuario,maquina)
