@@ -1,11 +1,12 @@
 from Tablero import Tablero
 import random
 class Partida:
-
+    
+    #Atributo estatico
+    turno = 1;
     #Constructor
     def __init__(self):
         self.__id = 1;
-        self.__turno = 1;
         self.__tablero = Tablero();
 
    #Getters y setters

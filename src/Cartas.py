@@ -34,7 +34,7 @@ class CartaMagica(Carta):
         self.__tipoMonstruo = TipoMonstruo
     #getters 
     def getTipoMonstruo(self):
-        return self.__tipoMonstruo
+        return self.__tipoMonstruo.value
     def getIncrementoAtaque(self):
         return self.__incrementoAtaque
     def getIncrementoDefensa(self):
@@ -68,7 +68,7 @@ class CartaMonstruo(Carta):
         self.__defensa = defensa
         self.__tipoMonstruo = TipoMonstruo 
         self.__tipoAtributo = TipoAtributo 
-        self.__isInAtaque = True; #* por defecto
+        self.__isInAtaque = True; #* por defecto #! si se pone en defensa se coloca boca abajo
         self.__isBocaArriba = True; #* por defecto
         self.__puedeAtacar = True; #* por defecto
 
@@ -98,21 +98,22 @@ class CartaMonstruo(Carta):
     def setPuedeAtacar(self, valor_booleano):
         self.__puedeAtacar = valor_booleano;
     
-    def getTipoMounstro(self):
-        return self.__tipoMonstruo
-    def setTipoMounstro(self, nuevoTipoMounstro):
+    def getTipoMonstruo(self):
+        return self.__tipoMonstruo.value
+    def setTipoMonstruo(self, nuevoTipoMounstro):
         self.__tipoMonstruo=nuevoTipoMounstro
 
     def getTipoAtributo(self):
-        return self.__tipoAtributo
+        return self.__tipoAtributo.value #->
     def setTipoAtributo(self, nuevoTipoAtributo):
         self.__tipoAtributo=nuevoTipoAtributo
     
 
     #Metodos
-    def atacar(Carta):
-        '''Debe atacar a otra cara '''
-        pass
+    def atacar(self, cartaEnemiga):
+        '''Debe atacar a otra carta ''' 
+        
+
 
     ###to String
     def toString(self):
@@ -132,7 +133,7 @@ class CartaMonstruo(Carta):
 class CartaTrampa(Carta):
     def __init__(self,nombre, descripcion,TipoAtributo):
         super().__init__(nombre, descripcion)
-        self.__isBocaArriba = True; #* por defecto
+        self.__isBocaArriba = False; #* por defecto
         self.__tipoAtributo = TipoAtributo
 
                                                     
@@ -143,7 +144,7 @@ class CartaTrampa(Carta):
         self.__isBocaArriba = valor_booleano;
 
     def getTipoAtributo(self):
-        return self.__tipoAtributo
+        return self.__tipoAtributo.value    #Ojo debe ponerse .value
     def setTipoAtributo(self, nuevoTipoAtributo):
         self.__tipoAtributo=nuevoTipoAtributo
 
