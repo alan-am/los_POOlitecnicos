@@ -55,11 +55,12 @@ class Jugador:
         cartaTomada = self.__deck.robarCarta();
         self.__cartasEnMano.append(cartaTomada);
         
-    def jugarCarta():
+    def quitarcartaMano(self):
         '''Metodo para jugar una carta en el tablero,
         se asocia con el metodo aniadirCarta() de Tablero y luego de validar
         quita la carta de la mano del jugador'''
-        pass;
+        #quita la carta puesta en el tablero de la mano del jugador
+        self.__cartasEnMano.pop()
     
     def declararBatalla():
         '''Metodo para iniciar batalla entre cartas,

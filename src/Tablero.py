@@ -27,24 +27,36 @@ class Tablero:
         #Creacion y retorno del jugador
         return Jugador(nombre, deck);
 
-    def aniadirCarta(self,Carta,id_jugador): #debería recibir como parámetro la carta a añadir? y el self corresponde al tablero
-        '''metodo para aniadir cartas al tablero, a las listas'''
+    def aniadirCartaTablero(self,Carta,id_jugador): #debería recibir como parámetro la carta a añadir? y el self corresponde al tablero
+        '''metodo para aniadir cartas al tablero, se especifica de qué jugador es la carta'''
         #al añadir o quitar cartas en el main es necesario poner el id del jugador como parámetro
-        
+
         if isinstance(Carta,CartaMonstruo) and len(self.tablerocompartido[id_jugador]["CartasMonstruo"])<3: #compara el tipo de carta y la cantidad
             self.tablerocompartido[id_jugador]["CartasMonstruo"].append(Carta)
+            self.quitarCarta_Mano(id_jugador,Carta)
+            
         elif (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa)) and len(self.tablerocompartido[id_jugador]["CartasEspeciales"])<3:
             self.tablerocompartido[id_jugador]["CartasEspeciales"].append(Carta)
+            self.quitarCarta_Mano(id_jugador,Carta)
         else:
             print(f"No se pudo incluir esa carta, espacio lleno") ## para avisarle al jugador que alcanzó el límite¿?no estoy segura de esto
 
-    def quitarCarta(self,Carta,id_jugador): #parametro carta añadido, id_jugador
+
+    def quitarCartaTablero(self,Carta,id_jugador): #parametro carta añadido, id_jugador
         '''metodo para quitar cartas del tablero, 
         eliminar de las listas'''
         if isinstance(Carta,CartaMonstruo): #isintance es como instanceof de java
             self.__tablerocompartido[id_jugador]["CartasMonstruo"].remove(Carta)
         else:
             self.__tablerocompartido[id_jugador]["CartasEspeciales"].remove(Carta)
+    
+    def quitarCarta_Mano(self,id_jugador,Carta):
+            '''funcion que me ayuda a quitar la carta de la mano del jugador una vez que se coloca en el tablero'''
+            if id_jugador==1:
+                self.__jugador1.getCartasEnMano().remove(Carta)
+            elif id_jugador ==2:
+                self.__jugador2.getCartasEnMano().remove(Carta)
+    
 
     #Getters y setters
     def getId(self):
