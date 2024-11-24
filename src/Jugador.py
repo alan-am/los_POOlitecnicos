@@ -211,9 +211,14 @@ class Jugador:
         return cartas
 
 
-    def jugarComoMaquina():
-        '''Metodo para la instancia Maquina'''
+    def declararBatallaComoMaquina():
+        '''Metodo para la instancia Maquina
+        es la forma predeterminada en la que declarará batalla
+        ayudarse de declararbatalla de jugador'''
         pass;
+    def llenarTableroMaquina():
+        '''llena el tablero de la maquina, puede ayudarse de algo parecido a Jugarcarta()'''
+        pass
     
         
     def esDerrotado(self):

@@ -35,10 +35,12 @@ class Tablero:
 
         if isinstance(Carta,CartaMonstruo) and len(self.tablerocompartido[id_jugador]["CartasMonstruo"])<3: #compara el tipo de carta y la cantidad
             self.tablerocompartido[id_jugador]["CartasMonstruo"].append(Carta)
+            print(f"Carta {Carta.getNombre()} añadida")
             self.quitarCarta_Mano(id_jugador,Carta)
             
         elif (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa)) and len(self.tablerocompartido[id_jugador]["CartasEspeciales"])<3:
             self.tablerocompartido[id_jugador]["CartasEspeciales"].append(Carta)
+            print(f"Carta {Carta.getNombre()} añadida")
             self.quitarCarta_Mano(id_jugador,Carta)
         else:
             print(f"No se pudo incluir esa carta, espacio lleno") ## para avisarle al jugador que alcanzó el límite¿?no estoy segura de esto

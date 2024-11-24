@@ -41,15 +41,22 @@ class Partida:
     #una "ronda" es un turno por jugador (2 en total), en la primera ronda no se puede declarar batalla
     def ronda(self):
         '''dentro de la ronda, pueden ejecutarse las funciones de fases,cada jugador tiene que pasar por todas
-        las fases en cada ronda, se llamaría a cada fase por cada jugador (3 y 3)¿?'''
+        las fases en cada ronda,¿?'''
+        j1 = self.getTablero().getJugador1()
+        maquina = self.getTablero().getJugador2()
         if self.__ronda ==1:
             #no se puede declarar batalla
             pass
         else: 
             #se ejecutan las 3 fases de forma normal
             pass
+        #por cada ronda se hace esto:
+        self.resetearEstadoCartasMounstro() 
+        self.getTablero().destruirCartaMagica() 
         self.__ronda+=1
-        pass
+
+
+
     def faseTomarCarta(self):
         """Es la fase en la cual un jugador roba una carta de su deck, si es su primer turno, toma 5 cartas"""
         j1= self.__tablero.getJugador1()
@@ -66,12 +73,22 @@ class Partida:
                 j2.tomarCartaEnTurno()
  
 
-    def fasePrincipal(self):
+    def fasePrincipal(self,j1,maquina):
         
-        pass;
+        j1 = self.getTablero().getJugador1()
+        if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
+                pass
+        else: #si es el turno de la maquina, se llama a 
+            maquina.llenarTableroMaquina()
     
-    def faseBatalla(self):
-        pass;
+    def faseBatalla(self,j1,maquina):
+        #verifica quien va a declarar batalla, de quien es el turno
+        if self.getJugadorActual() ==1:
+            j1.declararBatalla(maquina,self)
+        else: #es decir si el turno es de la maquina
+            maquina.declararBatallaComoMaquina()
+
+       
     
 
 
