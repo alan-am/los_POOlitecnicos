@@ -1,5 +1,8 @@
 from Tablero import Tablero
+from Cartas import CartaMonstruo
 import random
+from Jugador import *
+
 class Partida:
     
     #Atributo estatico
@@ -27,13 +30,45 @@ class Partida:
 
    
     #Metodos
-    def sorteoInicio(j1, j2):
+    def sorteoInicios(self,j1, j2):
+        print("La partida esta por comenzar")
         JugadoresIniciales = [j1,j2]
         JugadorEmpieza = random.choice(JugadoresIniciales)
-        return JugadorEmpieza
+        self.__turno = JugadorEmpieza.getId() #con esto ya modifiqué el turno por primera vez
+        print(f"El jugador que empieza es: {JugadorEmpieza.getNombre()} -Id: {JugadorEmpieza.getId()}")
         
+    def cambiarTurno(self):
+        ###Cambia el turno al siguiente jugador."""
+        if self.__turno == 1:
+            self.__turno+=1
+        else: #como solo hay dos jugadores solo hay dos posibilidades
+            self.__turno-=1
+        #self.__turno = (self.__turno % len(jugadores)) + 1
+        #print(f"Es el turno del Jugador {self.__turno}.") ##AUN NO ESTA COMPLETO CREO
+        #intenté acomodar este método
+
+
+    def resetearEstadoCartasMounstro(self, jugador):
+        """Después de cada turno, resetear el estado de las cartas monstruo"""
+        for carta in jugador.getCartasEnMano():
+            if isinstance(carta, CartaMonstruo):
+                carta.setPuedeAtacar(True)
+                carta.setIsInAtaque(True)
     
-    def resetearEstadoCartas(jugador):
-        '''Despues de cada turno , resetea el estado "puedeAtacar"
-        de las cartasMonstruo en el tablero de un jugador'''
-        pass;
+    
+    def finalizarPartida(self, j1, j2):
+        """Finaliza la partida determinando el ganador."""
+        if j1.esDerrotado():
+            print(f"El jugador{j1.getNombre()} ha sido derrotado.")
+            print(f"El ganador es {j2.getNombre()}!")
+        elif j2.esDerrotado():
+            print(f"El jugador {j2.getNombre()} ha sido derrotado.")
+            print(f"El ganador es {j1.getNombre()}!")
+        else:
+            print("La partida se acabo, terminaron en empate !!")
+
+
+    
+
+
+        

@@ -58,11 +58,7 @@ class Jugador:
         cartaTomada = self.__deck.robarCarta();
         self.__cartasEnMano.append(cartaTomada);
         
-    def jugarCarta():
-        '''Metodo para jugar una carta en el tablero,
-        se asocia con el metodo aniadirCarta() de Tablero y luego de validar
-        quita la carta de la mano del jugador'''
-        pass;
+
     
     #En jugarCarta una vez finalizado todo el proceso se debe hacer un print de como queda el tablero?
     def cambiarPosicionAtaque(self, partida):
@@ -211,6 +207,15 @@ class Jugador:
         for Carta in self.__cartasEnMano:
             cartas.append(Carta.getNombre())
         return cartas
+    
+    def Carta_apartir_Nombre(self,nombre):
+        '''retorna objeto Carta a partir del nombre, la busca en la mano y en el tablero
+        ayuda cuando vas a atacar a otra carta,etc. sirve para obtener la carta que será usada
+        en el método atacarMonstruo() de CartaMonstruo
+        '''
+        for carta in self.__cartasEnMano:
+            if nombre == carta.getNombre():
+                return carta
 
 
     def jugarComoMaquina():
@@ -220,7 +225,7 @@ class Jugador:
         
     def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        return self.getPuntosVida <=0 #devuelve true si esderrotado
+        return self.getPuntosVida() <=0 #devuelve true si esderrotado
     
          
     #toString
