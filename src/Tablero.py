@@ -9,8 +9,12 @@ class Tablero:
         self.__id = 1;
         self.__jugador1 = self.aniadirJugador(); #se deberia poner en una lista los 2 jugadores?
         self.__jugador2 = self.aniadirJugador(); #para poder controlar mejor los turnos?
-        self.__cartasMonstruo = [];
-        self.__cartasEspeciales = [];
+        self.tablerocompartido = {self.__jugador1.getId():{"CartasMonstruo":[],"CartasEspeciales":[]},
+                                    self.__jugador2.getId():{"CartasMonstruo":[],"CartasEspeciales":[]}} 
+        
+        #self.__cartasMonstruo = [];
+        #self.__cartasEspeciales = [];
+        
 
     #Metodos
     def aniadirJugador(self):
@@ -23,23 +27,24 @@ class Tablero:
         #Creacion y retorno del jugador
         return Jugador(nombre, deck);
 
-    def aniadirCarta(self,Carta): #debería recibir como parámetro la carta a añadir? y el self corresponde al tablero
+    def aniadirCarta(self,Carta,id_jugador): #debería recibir como parámetro la carta a añadir? y el self corresponde al tablero
         '''metodo para aniadir cartas al tablero, a las listas'''
-        if len(self.__cartasMonstruo)<3 and isinstance(Carta,CartaMonstruo): #compara el tipo de carta y la cantidad
-            self.__cartasMonstruo.append(Carta)
-        elif (len(self.__cartasEspeciales)<3 and (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa))):
-            self.__cartasEspeciales.append(Carta)
+        #al añadir o quitar cartas en el main es necesario poner el id del jugador como parámetro
+        
+        if isinstance(Carta,CartaMonstruo) and len(self.tablerocompartido[id_jugador]["CartasMonstruo"])<3: #compara el tipo de carta y la cantidad
+            self.tablerocompartido[id_jugador]["CartasMonstruo"].append(Carta)
+        elif (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa)) and len(self.tablerocompartido[id_jugador]["CartasEspeciales"])<3:
+            self.tablerocompartido[id_jugador]["CartasEspeciales"].append(Carta)
         else:
             print(f"No se pudo incluir esa carta, espacio lleno") ## para avisarle al jugador que alcanzó el límite¿?no estoy segura de esto
 
-    def quitarCarta(self,Carta): #parametro carta añadido
+    def quitarCarta(self,Carta,id_jugador): #parametro carta añadido, id_jugador
         '''metodo para quitar cartas del tablero, 
         eliminar de las listas'''
         if isinstance(Carta,CartaMonstruo): #isintance es como instanceof de java
-            self.__cartasMonstruo.remove(Carta)
+            self.__tablerocompartido[id_jugador]["CartasMonstruo"].remove(Carta)
         else:
-            self.__cartasEspeciales.remove(Carta)
-
+            self.__tablerocompartido[id_jugador]["CartasEspeciales"].remove(Carta)
 
     #Getters y setters
     def getId(self):
@@ -67,11 +72,17 @@ class Tablero:
     def setCartasMonstruo(self, nuevas_cartas):
         self.__cartasMonstruo = nuevas_cartas
 
-    def getCartasEspeciales(self):
-        return self.__cartasEspeciales
-    def setCartasEspeciales(self, nuevas_cartas):
-        self.__cartasEspeciales = nuevas_cartas
 
+
+    
+    def toString(self):
+        cartas_j1 = self.tablerocompartido[1]
+        cartas_j2= self.tablerocompartido[2]
+        return f'''{"TABLERO".center(55,"-")}
+J1 = {cartas_j1}
+J2 = {cartas_j2}
+
+'''
 
 
 

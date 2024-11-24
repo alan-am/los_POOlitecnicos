@@ -31,6 +31,10 @@ def main():
     print("------Verificando q las cartas q se aniaderon a la mano se eliminar del deck------- \n")
     print(j1.toString())
 
+    print("___________pruebas con el tablero__________")
+    tablero = partida.getTablero().toString() #aquí directamente se llama al método toString de la clase Tablero
+    print(tablero)
+
 #llamado de la funcion maine
 main()
 
