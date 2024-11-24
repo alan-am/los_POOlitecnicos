@@ -207,15 +207,6 @@ class Jugador:
         for Carta in self.__cartasEnMano:
             cartas.append(Carta.getNombre())
         return cartas
-    
-    def Carta_apartir_Nombre(self,nombre):
-        '''retorna objeto Carta a partir del nombre, la busca en la mano y en el tablero
-        ayuda cuando vas a atacar a otra carta,etc. sirve para obtener la carta que será usada
-        en el método atacarMonstruo() de CartaMonstruo
-        '''
-        for carta in self.__cartasEnMano:
-            if nombre == carta.getNombre():
-                return carta
 
 
     def jugarComoMaquina():

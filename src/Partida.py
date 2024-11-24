@@ -65,8 +65,7 @@ class Partida:
             self.__turno+=1
         else: #como solo hay dos jugadores solo hay dos posibilidades
             self.__turno-=1
-        #self.__turno = (self.__turno % len(jugadores)) + 1
-        #print(f"Es el turno del Jugador {self.__turno}.") ##AUN NO ESTA COMPLETO CREO
+
         #intenté acomodar este método
 
 

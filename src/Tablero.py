@@ -112,6 +112,24 @@ class Tablero:
         '''Verifica si existen cartasMonstruo en el tablero con igual atributos de
         cartas magicas en el tablero, carta magica que no encuentra coincidencias es eliminada
         del tablero.'''
+        #puede ser usada cuando un monstruo muera en batalla
+        espacioEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
+        espacioMonstruosJ = self.tablerocompartido[jugador.getId()]["CartasMonstruo"]
+        CartasMagicas = []
+        Tip_Monstruo=[]
+        #hace una lista de solo cartas magicas
+        for cartaEspecial in espacioEspecialesJ:
+            if isinstance(cartaEspecial, CartaMagica):
+                CartasMagicas.append(cartaEspecial)
+        #recoge los atributos de las cartasmosntruos del tablero
+        for cartaMonstruo in espacioMonstruosJ:
+            Tip_Monstruo.append(cartaMonstruo.getTipoMonstruo().value)
+        #si no hay monstruos de igual tipo que la carta, esta se elimina del tablero
+        for cartita in CartasMagicas:
+            if cartita.getTipoMonstruo().value not in Tip_Monstruo:
+                espacioEspecialesJ.remove(cartita)
+  
+
 
 
         
