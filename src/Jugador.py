@@ -55,12 +55,7 @@ class Jugador:
         cartaTomada = self.__deck.robarCarta();
         self.__cartasEnMano.append(cartaTomada);
         
-    def quitarcartaMano(self):
-        '''Metodo para jugar una carta en el tablero,
-        se asocia con el metodo aniadirCarta() de Tablero y luego de validar
-        quita la carta de la mano del jugador'''
-        #quita la carta puesta en el tablero de la mano del jugador
-        self.__cartasEnMano.pop()
+
     
     def declararBatalla():
         '''Metodo para iniciar batalla entre cartas,
@@ -78,6 +73,15 @@ class Jugador:
         for Carta in self.__cartasEnMano:
             cartas.append(Carta.getNombre())
         return cartas
+    
+    def Carta_apartir_Nombre(self,nombre):
+        '''retorna objeto Carta a partir del nombre, la busca en la mano y en el tablero
+        ayuda cuando vas a atacar a otra carta,etc. sirve para obtener la carta que será usada
+        en el método atacarMonstruo() de CartaMonstruo
+        '''
+        for carta in self.__cartasEnMano:
+            if nombre == carta.getNombre():
+                return carta
 
 
     def jugarComoMaquina():
