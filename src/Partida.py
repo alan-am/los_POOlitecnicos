@@ -1,4 +1,5 @@
 from Tablero import Tablero
+from Cartas import CartaMonstruo
 import random
 class Partida:
 
@@ -32,7 +33,11 @@ class Partida:
         return JugadorEmpieza
         
     
-    def resetearEstadoCartas(jugador):
-        '''Despues de cada turno , resetea el estado "puedeAtacar"
-        de las cartasMonstruo en el tablero de un jugador'''
-        pass;
+    def resetearEstadoCartasMounstro(self, jugador):
+        ###Despues de cada turno , resetea el estado "puedeAtacar" de las cartasMonstruo en el tablero de un jugador      
+            for carta in self.__tablero.tablerocompartido[jugador]["CartasMounstro"]:
+                if isinstance(carta,CartaMonstruo): 
+                    carta.setPuedeAtacar(True)
+                
+
+        
