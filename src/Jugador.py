@@ -195,6 +195,72 @@ class Jugador:
             # primero verifica si tiene cartas mosntruo en el tablero, sino ataca directamente CHECK
             # actualiz la vida del jugador CHECK
             # se cambia el atributo  de la carta elegida puedeAtacar a False CHECK
+    def jugarCarta(self, partida: Partida):
+        '''Funcion que muestra las cartas en mano del jugador y le da a elegir
+            que carta aniadir al tablero, luego de este haberlo seleccionado se la debe validar
+            para confirmar que es una carta q se puede poner en tablero
+            '''
+        #PASOS
+        #1 preguntar si desea jugar alguna carta de su mano, en caso de que si, llamar a esta funcion
+        #1.5 complementar con un while para q el jugador pueda aniadir cuantas veces quiera
+        #2 se complementa con la llamada de la funcion cambiarPosicionDeAtaque, luego de ejecutarse jugarCarta()
+        #(lo de arriba iria en la funcion de fases de partida o directamente en el main)
+        #3 mostrar las cartas en mano del jugador
+
+        #guardamos la referencia de tablero a traves de partida
+        tablero: Tablero = partida.getTablero();
+
+        i = 1
+
+        print("Cartas en mano".center(40, "-"))
+        for carta in self.__cartasEnMano():
+            #debo hacer un toString2 de cartas menos descriptivo
+            print(f'{i}. {carta.toString2()} ')
+            i += 1
+        seleccion = input("Selecciona la carta a añadir: \n > ")
+        # validacion por si el usuario pone letras  o se pasa del rango-_-
+        while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+            print("Por favor, ingresa un número válido.")
+            seleccion = input("> ")
+        cartaSeleccionada = self.__cartasEnMano[int(i)-1]
+        #antes de aniadirla verificamos q tipo de carta es, validamos que 
+        # tenga suficiente espacio para ese tipo y preguntamos(en el caso de cartas mosntruo q tipo de posicion)
+        #Si es un carta monstruo
+        if(isinstance(cartaSeleccionada, CartaMonstruo)):
+            #validamos q haya espacio
+            if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
+                #preguntamos en que modo pone la carta
+                print("Elige el modo de la carta: ")
+                eleccion = input("1. Ataque \n 2. Defensa \n");
+                while eleccion != "1"  and eleccion != "2":
+                    print("Elige un numero entre 1 y 2")
+                    eleccion = input("> ");
+                if eleccion == "1": 
+                    #Si esta en ataque la carta debe quedar boca arriba
+                    cartaSeleccionada.setIsInAtaque(True)
+                    cartaSeleccionada.setIsBocaArriba(True)
+                elif eleccion == "2": 
+                    #Si esta en defensa la carta debe quedar boca abajo
+                    cartaSeleccionada.setIsInAtaque(False)
+                    cartaSeleccionada.setIsBocaArriba(False)
+                
+                #Aniadimos la carta a tablero
+                tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
+            else:
+                print("Ya no puedes colocar mas cartas Monstruo")
+        #Caso si la cartas es Magica o trampa
+        elif isinstance(cartaSeleccionada, CartaMagica) or isinstance(cartaSeleccionada, CartaTrampa):
+            #validamos que haya espacio
+            if len(tablero.tablerocompartido[self.__id]["CartasEspeciales"])<3:
+                #Aniadimos la carta a tablero
+                tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
+            else:
+                print("No se puede agregar mas cartas Magicas o Trampa")
+
+
+
+
+
     
     def imprimirMano(self):
         ###Imprime por consola las cartas en mano que tiene el jugador'''

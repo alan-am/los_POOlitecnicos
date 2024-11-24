@@ -32,6 +32,7 @@ class CartaMagica(Carta):
         self.__incrementoAtaque = incrementoAtaque
         self.__incrementoDefensa = incrementoDefensa
         self.__tipoMonstruo = TipoMonstruo
+        self.__isBocaArriba = True; #* por defecto
     #getters 
     def getTipoMonstruo(self):
         return self.__tipoMonstruo.value
@@ -39,6 +40,9 @@ class CartaMagica(Carta):
         return self.__incrementoAtaque
     def getIncrementoDefensa(self):
         return self.__incrementoDefensa
+    def getIsBocaArriba(self):
+        return self.__isBocaArriba;
+
     #setters
     def setIncrementoDefensa(self,n_incrementodefensa):
         self.__incrementoDefensa = n_incrementodefensa
@@ -46,6 +50,8 @@ class CartaMagica(Carta):
         self.__incrementoAtaque = n_incrementoataque
     def setTipoMonstruo(self,tipoMonstruo):
         self.__tipoMonstruo = tipoMonstruo
+    def setIsBocaArriba(self, valor_Booleano):
+        self.__isBocaArriba = valor_Booleano;
 
 
     ###to String
@@ -58,6 +64,10 @@ class CartaMagica(Carta):
 {"Descripcion".center(55, "~")}
 {super().getDescripcion().center(55)}
 {"~".center(55, "~")}'''
+    
+    #Segundo to String, menos descriptivo y mas conciso
+    def toString2(self):
+        return f'''CARTA MAGICA|| Tipo: {self.__tipoMonstruo.value} [INC ATK: {self.__incrementoAtaque}, INC DEF: {self.__incrementoDefensa}]'''
     
 
 #SUB-CLASE 
@@ -125,6 +135,15 @@ class CartaMonstruo(Carta):
 {"Descripcion".center(55, "-")}
 {super().getDescripcion().center(55)}
 {"-".center(55, "-")}'''
+    
+    #Segundo to String, menos descriptivo y mas conciso
+    def toString2(self):
+        var = "Defensa"
+        if self.__isInAtaque:
+            var = "Ataque"
+
+        return f'''CARTA MONSTRUO|| Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}, MODO: {var} [ATK: {self.__ataque}, DEF: {self.__defensa}]'''
+
 
 #lo de :> era para intentar darle mejor aspecto pero no se logró
 
@@ -159,6 +178,11 @@ class CartaTrampa(Carta):
 {"Descripcion".center(55, ".")}
 {super().getDescripcion().center(55)}
 {".".center(55, ".")}''' 
+    
+    #Segundo to String, menos descriptivo y mas conciso
+    def toString2(self):
+        return f'''CARTA TRAMPA|| Atributo: {self.__tipoAtributo.value}'''
+
 
 
 
