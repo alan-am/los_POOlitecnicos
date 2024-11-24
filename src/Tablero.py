@@ -90,9 +90,26 @@ class Tablero:
     def toString(self):
         cartas_j1 = self.tablerocompartido[1]
         cartas_j2= self.tablerocompartido[2]
+        car_monstruos_j1 = []
+        car_especiales_j1=[]
+        car_monstruos_j2=[]
+        car_especiales_j2=[]
+        def llenarlistas(listavacia1,listavacia2,diccionario): #listavacia1 sera de monstruos y lista2 de especiales
+            for carta in diccionario["CartasMonstruo"]:
+                nombreCarta = carta.getNombre();
+                listavacia1.append(nombreCarta);
+            for carta in diccionario["CartasEspeciales"]:
+                nombre = carta.getNombre();
+                listavacia2.append(nombre)
+        llenarlistas(car_monstruos_j1,car_especiales_j1,cartas_j1)
+        llenarlistas(car_monstruos_j2,car_especiales_j2,cartas_j2)
         return f'''{"TABLERO".center(55,"-")}
-J1 = {cartas_j1}
-J2 = {cartas_j2}
+{"Jugador 1".center(70,"=")}
+Monstruo: {car_monstruos_j1}
+Especiales: {car_especiales_j1}
+{"Jugador 2".center(70,"=")}
+Monstruo: {car_monstruos_j2}
+Especiales: {car_especiales_j2}
 
 '''
 

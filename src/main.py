@@ -31,11 +31,10 @@ def main():
     print("------Verificando q las cartas q se aniaderon a la mano se eliminar del deck------- \n")
     print(j1.toString())
 
-    print("___________pruebas con el tablero__________")
+    print("___________pruebas con el tablero______________________________________________________")
     tablero = partida.getTablero()
     tablero.aniadirCartaTablero(j1.getCartasEnMano()[0],1) #aquí directamente se llama al método toString de la clase Tablero
-    #creo que solo imprime las direcciones de memoria de las cartas #igual se supone que algunas cartas quedarían
-    #volteadas xd pero ya luego se ve bien esto
+
     print(tablero.toString())
     print(j1.toString())
 
