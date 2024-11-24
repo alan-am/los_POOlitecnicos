@@ -1,4 +1,4 @@
-from Partida import Partida;
+import Partida;
 from Tablero import Tablero;
 from Cartas import *;
 
@@ -66,7 +66,7 @@ class Jugador:
         tablero = partida.getTablero();
         espacioCartasMonstruo = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
-        print("Deseas camiar la posicion de una carta?")
+        print("Deseas cambiar la posicion de una carta?")
         eleccion = input("1. Si \n 2. No \n");
         while eleccion != "1"  and eleccion != "2":
             print("Elige un numero entre 1 y 2")
@@ -82,7 +82,7 @@ class Jugador:
             
             seleccion = input("> ")
             # validacion por si el usuario pone letras  o se pasa del rango-_-
-            while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+            while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
                 print("Por favor, ingresa un número válido.")
                 seleccion = input("> ")
             
