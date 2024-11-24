@@ -4,13 +4,13 @@ import random
 from Jugador import *
 
 class Partida:
-    
-    #Atributo estatico
-    turno = 1;
+
     #Constructor
-    def __init__(self):
+    def __init__(self,jugador1,jugador2):
         self.__id = 1;
+        self.__turno = 1;
         self.__tablero = Tablero();
+        self.__jugadores = [jugador1,jugador2]
 
    #Getters y setters
     def getId(self):
@@ -28,10 +28,32 @@ class Partida:
     def setTurno(self, nuevo_turno):
         self.__turno = nuevo_turno
 
+    def getJugadorActual(self):
+        return self.__jugadores[self.__turno]
    
     #Metodos
+    def faseTomarCarta(self):
+        """Es la fase en la cual un jugador roba una carta de su deck"""
+        jugadorActual = self.getJugadorActual()
+        if jugadorActual == self.__jugadores[0]: 
+            print(f"{jugadorActual.getNombre()} está robando una carta")
+            jugadorActual.tomarCartaEnTurno()
+        else:
+            print(f"{jugadorActual.getNombre()} está robando 5 cartas...")
+            jugadorActual.tomar5Cartas()
+
+
+    def fasePrincipal(self):
+        pass;
+    
+    def faseBatalla(self):
+        pass;
+    
+
+
+
     def sorteoInicios(self,j1, j2):
-        print("La partida esta por comenzar")
+        print("¡Bienvenido al juego de YuGiOH!")
         JugadoresIniciales = [j1,j2]
         JugadorEmpieza = random.choice(JugadoresIniciales)
         self.__turno = JugadorEmpieza.getId() #con esto ya modifiqué el turno por primera vez
