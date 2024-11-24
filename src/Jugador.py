@@ -1,4 +1,4 @@
-from Partida import Partida;
+import Partida;
 from Tablero import Tablero;
 from Cartas import *;
 
@@ -66,7 +66,7 @@ class Jugador:
         tablero = partida.getTablero();
         espacioCartasMonstruo = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
-        print("Deseas camiar la posicion de una carta?")
+        print("Deseas cambiar la posicion de una carta?")
         eleccion = input("1. Si \n 2. No \n");
         while eleccion != "1"  and eleccion != "2":
             print("Elige un numero entre 1 y 2")
@@ -82,7 +82,7 @@ class Jugador:
             
             seleccion = input("> ")
             # validacion por si el usuario pone letras  o se pasa del rango-_-
-            while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+            while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
                 print("Por favor, ingresa un número válido.")
                 seleccion = input("> ")
             
@@ -117,7 +117,7 @@ class Jugador:
                 #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
                 #boca arriba damos permiso de atacar;
                 for cartaMonstruo in espacioCartasMonstruoJ:
-                    print(f'{i}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF
+                    print(f'{i}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF 
                     i += 1;
                 seleccion = input("> ")
                 # validacion por si el usuario pone letras  o se pasa del rango-_-
@@ -141,7 +141,9 @@ class Jugador:
                             print("| Se ha atacado directamente! pero una carta Trampa se interpuso")
                             #eliminamos la carta trampa q se interpuso
                             cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
-                            tablero.quitarCarta(cartaTrampa, enemigo.getId())
+                            print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo().value}")
+                            print("Carta Trampa eliminada del tablero")
+                            tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
 
                             
                         #caso en el que no tenga
@@ -273,20 +275,16 @@ class Jugador:
         for Carta in self.__cartasEnMano:
             cartas.append(Carta.getNombre())
         return cartas
-    
-    def Carta_apartir_Nombre(self,nombre):
-        '''retorna objeto Carta a partir del nombre, la busca en la mano y en el tablero
-        ayuda cuando vas a atacar a otra carta,etc. sirve para obtener la carta que será usada
-        en el método atacarMonstruo() de CartaMonstruo
-        '''
-        for carta in self.__cartasEnMano:
-            if nombre == carta.getNombre():
-                return carta
 
 
-    def jugarComoMaquina():
-        '''Metodo para la instancia Maquina'''
+    def declararBatallaComoMaquina():
+        '''Metodo para la instancia Maquina
+        es la forma predeterminada en la que declarará batalla
+        ayudarse de declararbatalla de jugador'''
         pass;
+    def llenarTableroMaquina():
+        '''llena el tablero de la maquina, puede ayudarse de algo parecido a Jugarcarta()'''
+        pass
     
         
     def esDerrotado(self):

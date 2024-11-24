@@ -35,10 +35,12 @@ class Tablero:
 
         if isinstance(Carta,CartaMonstruo) and len(self.tablerocompartido[id_jugador]["CartasMonstruo"])<3: #compara el tipo de carta y la cantidad
             self.tablerocompartido[id_jugador]["CartasMonstruo"].append(Carta)
+            print(f"Carta {Carta.getNombre()} añadida")
             self.quitarCarta_Mano(id_jugador,Carta)
             
         elif (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa)) and len(self.tablerocompartido[id_jugador]["CartasEspeciales"])<3:
             self.tablerocompartido[id_jugador]["CartasEspeciales"].append(Carta)
+            print(f"Carta {Carta.getNombre()} añadida")
             self.quitarCarta_Mano(id_jugador,Carta)
         else:
             print(f"No se pudo incluir esa carta, espacio lleno") ## para avisarle al jugador que alcanzó el límite¿?no estoy segura de esto
@@ -112,6 +114,24 @@ class Tablero:
         '''Verifica si existen cartasMonstruo en el tablero con igual atributos de
         cartas magicas en el tablero, carta magica que no encuentra coincidencias es eliminada
         del tablero.'''
+        #puede ser usada cuando un monstruo muera en batalla
+        espacioEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
+        espacioMonstruosJ = self.tablerocompartido[jugador.getId()]["CartasMonstruo"]
+        CartasMagicas = []
+        Tip_Monstruo=[]
+        #hace una lista de solo cartas magicas
+        for cartaEspecial in espacioEspecialesJ:
+            if isinstance(cartaEspecial, CartaMagica):
+                CartasMagicas.append(cartaEspecial)
+        #recoge los atributos de las cartasmosntruos del tablero
+        for cartaMonstruo in espacioMonstruosJ:
+            Tip_Monstruo.append(cartaMonstruo.getTipoMonstruo().value)
+        #si no hay monstruos de igual tipo que la carta, esta se elimina del tablero
+        for cartita in CartasMagicas:
+            if cartita.getTipoMonstruo().value not in Tip_Monstruo:
+                espacioEspecialesJ.remove(cartita)
+  
+
 
 
         
