@@ -4,13 +4,15 @@ import random
 from Jugador import *
 
 class Partida:
-
+    
     #Constructor
     def __init__(self):
         self.__id = 1;
         self.__turno = 1;
         self.__tablero = Tablero();
         self.__jugadoractual = 1; #por defecto es 1, es el id del jugador actual
+        self.__ronda = 0; 
+    
 
    #Getters y setters
     def getId(self):
@@ -30,13 +32,23 @@ class Partida:
 
     def getJugadorActual(self):
         return self.__jugadoractual
+    def getRonda(self):
+        return self.__ronda
    
     #Metodos
 
 
     #una "ronda" es un turno por jugador (2 en total), en la primera ronda no se puede declarar batalla
-    def ronda():
-        '''dentro de la ronda, pueden ejecutarse las funciones de fases'''
+    def ronda(self):
+        '''dentro de la ronda, pueden ejecutarse las funciones de fases,cada jugador tiene que pasar por todas
+        las fases en cada ronda, se llamaría a cada fase por cada jugador (3 y 3)¿?'''
+        if self.__ronda ==1:
+            #no se puede declarar batalla
+            pass
+        else: 
+            #se ejecutan las 3 fases de forma normal
+            pass
+        self.__ronda+=1
         pass
     def faseTomarCarta(self):
         """Es la fase en la cual un jugador roba una carta de su deck, si es su primer turno, toma 5 cartas"""
@@ -55,6 +67,7 @@ class Partida:
  
 
     def fasePrincipal(self):
+        
         pass;
     
     def faseBatalla(self):
