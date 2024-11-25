@@ -70,16 +70,27 @@ def main():
     #     print("---> Nombre de jugador cambiado con éxito")
     #     print(f"> {usuario.getNombre()}")
     #     print("")
-    #comienza algoritmo de partida
-    print("Presiona enter para seguir")
+
+
+
+    #iNICIO DEL JUEGO
+    print("Presiona enter para continuar")
     input("Loading...")
     print("")
-    #inicia
+
+
+
+    #Inicio con sorteo de quien empieza
     partida.sorteoInicios(usuario,maquina)
-    #se ejecuta
+
+
+    #Ciclo de turnos
     while not usuario.esDerrotado() and not maquina.esDerrotado():
         partida.ronda()
-        #verifiquen en cada función qué desean que imprima para que el usuario lo pueda ver
+         #verifiquen en cada función qué desean que imprima para que el usuario lo pueda ver
+    
+    
+    #Final del juego
     #luego de que uno es derrotado:
     partida.finalizarPartida(usuario,maquina)
     

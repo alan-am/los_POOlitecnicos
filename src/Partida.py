@@ -83,13 +83,16 @@ class Partida:
             if self.__jugadoractual ==1:
                 j1.tomarCartaEnTurno()
             else:
+                print("Turno de la maquina") #!Print para test, luego eliminar
                 j2.tomarCartaEnTurno()
  
 
     def fasePrincipal(self,j1:Jugador,maquina:Jugador):
         
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
+            #!Logica aniadida para para que el jugador elija cuantas quiera ...
             j1.jugarCarta(self)
+
         else: #si es el turno de la maquina, se llama a 
             maquina.llenarTableroMaquina()
     
