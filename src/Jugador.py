@@ -277,14 +277,67 @@ class Jugador:
         return cartas
 
 
-    def declararBatallaComoMaquina(self):
-        '''Metodo para la instancia Maquina
-        es la forma predeterminada en la que declarará batalla
-        ayudarse de declararbatalla de jugador'''
-        pass;
-    def llenarTableroMaquina(self):
-        '''llena el tablero de la maquina, puede ayudarse de algo parecido a Jugarcarta()'''
-        pass
+    #Metodos de la maquina
+
+    def declararBatallaComoMaquina(self, tablero: Tablero, oponente):
+    
+        print(f"{self.getNombre()} (la máquina) te va a declarar batalla. ¡Prepárate!")
+
+        # Obtener monstruos en ataque que pueden atacar
+        monstruosAtacantes = []
+        for carta in tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]:
+            if CartaMonstruo.getIsInAtaque() and CartaMonstruo.getPuedeAtacar():
+                monstruosAtacantes.append(carta)
+
+        # Si no hay monstruos en ataque, cambiar a modo defensa
+        if len(monstruosAtacantes) == 0:
+            print(f"{self.getNombre()} no tiene monstruos disponibles para atacar. Se coloca a la defensiva.")
+            for carta in tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]:
+                if CartaMonstruo.getIsInAtaque():
+                    CartaMonstruo.setIsInAtaque(False)
+                    CartaMonstruo.setIsBocaArriba(False)
+                    print(f"{self.getNombre()} pone al monstruo {CartaMonstruo.getNombre()} en defensa.")
+            return
+
+        # Obtener monstruos del oponente
+        monstruosOponente = tablero.getTableroCompartido()[oponente.getId()]["CartasMonstruo"]
+        # Aca ataca con cada mounstro disponible 
+        for cartaAtacante in monstruosAtacantes:
+            if len(monstruosOponente) > 0:
+                cartaDefensora = monstruosOponente[0]
+                print(f"{cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
+                tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
+            else:
+                print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
+                oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
+            cartaAtacante.setPuedeAtacar(False)
+
+            print(f"{self.getNombre()} (la maquina) ha terminado su fase de batalla.")
+
+
+    def llenarTableroMaquina(self, tablero: Tablero):
+        print(f"{self.getNombre()} (la máquina) está organizando su tablero.")
+        mano_maquina = self.getCartasEnMano()
+
+        # Colocar cartas de monstruo
+        for carta in mano_maquina[:]:
+            if isinstance(carta, CartaMonstruo):
+                if len(tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]) < 3:
+                    tablero.aniadirCartaTablero(carta, self.getId())
+                    self.getCartasEnMano().remove(carta)
+                    print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
+
+        # Colocar cartas mágicas o trampas
+        for carta in mano_maquina[:]:
+            if isinstance(carta, (CartaMagica, CartaTrampa)):
+                if len(tablero.getTableroCompartido()[self.getId()]["CartasEspeciales"]) < 3:
+                    tablero.aniadirCartaTablero(carta, self.getId())
+                    self.getCartasEnMano().remove(carta)
+                    print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
+
+        print(f"{self.getNombre()} ha terminado de organizar su tablero.")
+
+        ### FIN DE LAS FUNCIONES DE MAQUINA
     
         
     def esDerrotado(self):
