@@ -67,10 +67,10 @@ class Jugador:
         espacioCartasMonstruo = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
         print("Deseas cambiar la posicion de una carta?")
-        eleccion = input("1. Si \n 2. No \n");
+        eleccion = input("1. Si \n2. No \n");
         while eleccion != "1"  and eleccion != "2":
             print("Elige un numero entre 1 y 2")
-            eleccion = input("1. Si \n 2. No \n");
+            eleccion = input("> ");
 
         if eleccion == "1" and tablero.hayCartasMonstruoBocaArriba(self.__id):
             #Mostramos las cartas mosntruo en el tablero:
@@ -109,7 +109,7 @@ class Jugador:
             #validamos su seleccion
             while eleccion != "1"  and eleccion != "2":
                 print("Elige un numero entre 1 y 2")
-                eleccion = input(">");
+                eleccion = input("> ");
             #entramos en los casos de seleccion
             if eleccion == "1":
                 print("Elige tu carta de ataque: ")
@@ -234,7 +234,7 @@ class Jugador:
             if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
                 #preguntamos en que modo pone la carta
                 print("Elige el modo de la carta: ")
-                eleccion = input("1. Ataque \n 2. Defensa \n");
+                eleccion = input("1. Ataque \n2. Defensa \n");
                 while eleccion != "1"  and eleccion != "2":
                     print("Elige un numero entre 1 y 2")
                     eleccion = input("> ");
