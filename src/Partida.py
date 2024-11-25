@@ -1,5 +1,5 @@
 from Tablero import Tablero
-from Cartas import CartaMonstruo
+from Cartas import *
 import random
 import Jugador
 
@@ -94,14 +94,14 @@ class Partida:
             j1.jugarCarta(self)
 
         else: #si es el turno de la maquina, se llama a 
-            maquina.llenarTableroMaquina()
+            maquina.llenarTableroMaquina(self.getTablero())
     
     def faseBatalla(self,j1:Jugador,maquina:Jugador):
         #verifica quien va a declarar batalla, de quien es el turno
         if self.getJugadorActual() ==1:
             j1.declararBatalla(maquina,self)
         else: #es decir si el turno es de la maquina
-            maquina.declararBatallaComoMaquina()
+            maquina.declararBatallaComoMaquina(self, self.getTablero(), j1)
 
        
     
