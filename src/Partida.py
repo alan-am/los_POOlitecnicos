@@ -70,7 +70,8 @@ class Partida:
 
         self.__ronda+=1
         print("Comenzará una nueva ronda")
-        print(f"{"=="*40}")
+        print(f"{'=='*40}")
+
 
 
 
