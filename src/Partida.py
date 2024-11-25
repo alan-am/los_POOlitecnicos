@@ -69,6 +69,8 @@ class Partida:
         #por cada ronda se hace esto:
 
         self.__ronda+=1
+        print("Comenzará una nueva ronda")
+        print(f"{"=="*40}")
 
 
 
@@ -138,8 +140,13 @@ class Partida:
         #intenté acomodar este método
 
 
-    def resetearEstadoCartasMounstro(self, jugador):
+    def resetearEstadoCartasMounstro(self, id_jugador):
         """Después de cada turno, resetear el estado de las cartas monstruo"""
+        jugador = None
+        if id_jugador == 1:
+            jugador = self.getTablero().getJugador1()
+        else:
+            jugador = self.getTablero().getJugador2()
         for carta in jugador.getCartasEnMano():
             if isinstance(carta, CartaMonstruo):
                 carta.setPuedeAtacar(True)

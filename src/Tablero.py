@@ -129,7 +129,7 @@ class Tablero:
             Tip_Monstruo.append(cartaMonstruo.getTipoMonstruo())
         #si no hay monstruos de igual tipo que la carta, esta se elimina del tablero
         for cartita in CartasMagicas:
-            if cartita.getTipoMonstruo().value not in Tip_Monstruo:
+            if cartita.getTipoMonstruo() not in Tip_Monstruo:
                 espacioEspecialesJ.remove(cartita)
   
 
