@@ -88,7 +88,7 @@ class Partida:
             if self.__jugadoractual ==1:
                 j1.tomarCartaEnTurno()
             else:
-                print(f"{"Turno de la maquina".center(30,"-")}") #!Print para test, luego eliminar
+                print(f'{"Turno de la maquina".center(30,"-")}') #!Print para test, luego eliminar
                 j2.tomarCartaEnTurno()
         
  
