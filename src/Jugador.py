@@ -102,7 +102,7 @@ class Jugador:
         espacioCartasMonstruoJ = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
         #Validacion existan cartas monstruo
-        while tablero.hayCartasMonstruoEnAtaque(self.__id): #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
+        while tablero.hayCartasMonstruoEnAtaque(self): #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #preguntamos si desea atacar
             print("Deseas atacar?")
             eleccion = input("1. Si \n 2. No \n");
@@ -213,51 +213,59 @@ class Jugador:
         tablero: Tablero = partida.getTablero();
 
         i = 0
+        a =0
 
         print("Cartas en mano".center(40, "-"))
         for carta in self.getCartasEnMano():
             #debo hacer un toString2 de cartas menos descriptivo
             print(f'{i+1}. {carta.toString2()} ')
             i += 1
-        seleccion = input("Selecciona la carta a añadir: \n > ")
+        jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
+        while jugar.isdigit() or (jugar not in ["si","no"]):
+            jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
+
+        while jugar == "si" and a<len(self.getCartasEnMano()):
+            
+            seleccion = input("Selecciona la carta a añadir: \n > ")
         # validacion por si el usuario pone letras  o se pasa del rango-_-
-        while  (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
-            print("Por favor, ingresa un número válido.")
-            seleccion = input("> ")
-        cartaSeleccionada = self.__cartasEnMano[int(seleccion)-1]
+            while  (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
+                print("Por favor, ingresa un número válido.")
+                seleccion = input("> ")
+            cartaSeleccionada = self.__cartasEnMano[int(seleccion)-1]
         #antes de aniadirla verificamos q tipo de carta es, validamos que 
         # tenga suficiente espacio para ese tipo y preguntamos(en el caso de cartas mosntruo q tipo de posicion)
         #Si es un carta monstruo
-        if(isinstance(cartaSeleccionada, CartaMonstruo)):
-            #validamos q haya espacio
-            if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
-                #preguntamos en que modo pone la carta
-                print("Elige el modo de la carta: ")
-                eleccion = input("1. Ataque \n 2. Defensa \n");
-                while eleccion != "1"  and eleccion != "2":
-                    print("Elige un numero entre 1 y 2")
-                    eleccion = input("> ");
-                if eleccion == "1": 
-                    #Si esta en ataque la carta debe quedar boca arriba
-                    cartaSeleccionada.setIsInAtaque(True)
-                    cartaSeleccionada.setIsBocaArriba(True)
-                elif eleccion == "2": 
-                    #Si esta en defensa la carta debe quedar boca abajo
-                    cartaSeleccionada.setIsInAtaque(False)
-                    cartaSeleccionada.setIsBocaArriba(False)
-                
-                #Aniadimos la carta a tablero
-                tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
-            else:
-                print("Ya no puedes colocar mas cartas Monstruo")
-        #Caso si la cartas es Magica o trampa
-        elif isinstance(cartaSeleccionada, CartaMagica) or isinstance(cartaSeleccionada, CartaTrampa):
-            #validamos que haya espacio
-            if len(tablero.tablerocompartido[self.__id]["CartasEspeciales"])<3:
-                #Aniadimos la carta a tablero
-                tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
-            else:
-                print("No se puede agregar mas cartas Magicas o Trampa")
+            if(isinstance(cartaSeleccionada, CartaMonstruo)):
+                #validamos q haya espacio
+                if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
+                    #preguntamos en que modo pone la carta
+                    print("Elige el modo de la carta: ")
+                    eleccion = input("1. Ataque \n 2. Defensa \n");
+                    while eleccion != "1"  and eleccion != "2":
+                        print("Elige un numero entre 1 y 2")
+                        eleccion = input("> ");
+                    if eleccion == "1": 
+                        #Si esta en ataque la carta debe quedar boca arriba
+                        cartaSeleccionada.setIsInAtaque(True)
+                        cartaSeleccionada.setIsBocaArriba(True)
+                    elif eleccion == "2": 
+                        #Si esta en defensa la carta debe quedar boca abajo
+                        cartaSeleccionada.setIsInAtaque(False)
+                        cartaSeleccionada.setIsBocaArriba(False)
+                    
+                    #Aniadimos la carta a tablero
+                    tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
+                else:
+                    print("Ya no puedes colocar mas cartas Monstruo")
+            #Caso si la cartas es Magica o trampa
+            elif isinstance(cartaSeleccionada, CartaMagica) or isinstance(cartaSeleccionada, CartaTrampa):
+                #validamos que haya espacio
+                if len(tablero.tablerocompartido[self.__id]["CartasEspeciales"])<3:
+                    #Aniadimos la carta a tablero
+                    tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
+                else:
+                    print("No se puede agregar mas cartas Magicas o Trampa")
+            jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
 
 
 
@@ -320,19 +328,17 @@ class Jugador:
         mano_maquina = self.getCartasEnMano()
 
         # Colocar cartas de monstruo
-        for carta in mano_maquina[:]:
+        for carta in mano_maquina:
             if isinstance(carta, CartaMonstruo):
                 if len(tablero.tablerocompartido[self.getId()]["CartasMonstruo"]) < 3:
-                    tablero.aniadirCartaTablero(carta, self.getId())
-                    self.getCartasEnMano().remove(carta)
+                    tablero.aniadirCartaTablero(carta, self.getId()) #quita automat la carta de la mano
                     print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
 
         # Colocar cartas mágicas o trampas
-        for carta in mano_maquina[:]:
+        for carta in mano_maquina:
             if isinstance(carta, (CartaMagica, CartaTrampa)):
                 if len(tablero.tablerocompartido[self.getId()]["CartasEspeciales"]) < 3:
                     tablero.aniadirCartaTablero(carta, self.getId())
-                    self.getCartasEnMano().remove(carta)
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
 
         print(f"{self.getNombre()} ha terminado de organizar su tablero.")
