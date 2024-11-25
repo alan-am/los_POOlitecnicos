@@ -91,7 +91,13 @@ class Partida:
         
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
             #!Logica aniadida para para que el jugador elija cuantas quiera ...
-            j1.jugarCarta(self)
+            jugar = input("--> Desea añadir una carta en su tablero? (si/no) ").lower()
+            #while jugar not in ["si","no"]:
+            #    jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
+            while jugar == "si":
+                j1.jugarCarta(self)
+                jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
+
 
         else: #si es el turno de la maquina, se llama a 
             maquina.llenarTableroMaquina(self.getTablero())
@@ -101,7 +107,7 @@ class Partida:
         if self.getJugadorActual() ==1:
             j1.declararBatalla(maquina,self)
         else: #es decir si el turno es de la maquina
-            maquina.declararBatallaComoMaquina(self, self.getTablero(), j1)
+            maquina.declararBatallaComoMaquina(self.getTablero(), j1)
 
        
     
