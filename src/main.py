@@ -14,12 +14,11 @@ def main():
     usuario = partida.getTablero().getJugador1()
     maquina = partida.getTablero().getJugador2() #j2 es la maquina
     
-
-    input("Mostrando la informacion de ambos jugadores" ) 
+    #TEST
+    print("Mostrando la informacion de ambos jugadores" ) 
     #Luego cuando ya este todo testeado eliminar esto de mostrar nombre, pq se supone
     #que el jugador no deberia ver su baraja xd, solo sus cartas en mano
     print("")
-
     print(usuario.toString())
     print(maquina.toString())
     print("")
@@ -37,6 +36,7 @@ def main():
 
     #IGNORAR TO DO LO ANTERIOR
     #iNICIO DEL JUEGO
+    print("\n \n \nEmpieza el juego!")
     print("Presiona enter para continuar")
     input("Loading...")
     print("")

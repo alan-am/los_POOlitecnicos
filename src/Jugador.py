@@ -189,7 +189,7 @@ class Jugador:
                 else:
                     print("La carta seleccionada no esta en modo Ataque o ya ha atacado en este turno.")
             #cambiamos el estado de la carta  seleccionada para que ya no se pueda utilizar en el turno. OJO
-            cartaSeleccionada.setPuedeAtacar(False);
+                cartaSeleccionada.setPuedeAtacar(False);
             #Especificaciones funcion:
             # verificar si no es el primer turno -> se lo valida en otra funcion de partida o del main
             #Da a elegir al jugador con q carta Monstruo de su tablero quiere atacar y a cual de la otras quiere atacar CHECK
