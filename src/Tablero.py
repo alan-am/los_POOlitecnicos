@@ -5,9 +5,10 @@ class Tablero:
 
     #Constructor
     def __init__(self):
+        from Jugador import Jugador
         self.__id = 1;
-        self.__jugador1 = self.aniadirJugador(); #se deberia poner en una lista los 2 jugadores?
-        self.__jugador2 = self.aniadirJugador(); #para poder controlar mejor los turnos?
+        self.__jugador1 = self.aniadirJugador();
+        self.__jugador2 = Jugador("Maquina", Deck());            
         self.tablerocompartido = {self.__jugador1.getId():{"CartasMonstruo":[],"CartasEspeciales":[]},
                                     self.__jugador2.getId():{"CartasMonstruo":[],"CartasEspeciales":[]}} 
         

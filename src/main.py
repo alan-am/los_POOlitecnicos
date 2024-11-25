@@ -44,27 +44,32 @@ def main():
 
     #cuerpo de la partida
 
-    
+
     partida = Partida()
+    #Nuevo Cambio, modifique partida para que se crear con un jugador "maquina' automaticamente
+    #asi ya no hay q estarle dando nombre, la maquina sera el jugador 2
     print("---+ Jugador 2 corresponde a la máquina")
     usuario = partida.getTablero().getJugador1()
-    maquina = partida.getTablero().getJugador2() #j2 puede ser máquina
-    maquina.setNombre("Maquina") #para que se entienda mejor quien juega
+    maquina = partida.getTablero().getJugador2() #j2 es la maquina
+    # maquina.setNombre("Maquina") #para que se entienda mejor quien juega
 
-    input("Da enter para mostrar tu información " )
+    input("Mostrando la informacion de ambos jugadores" ) 
+    #Luego cuando ya este todo testeado eliminar esto de mostrar nombre, pq se supone
+    #que el jugador no deberia ver su baraja xd, solo sus cartas en mano
     print("")
 
     print(usuario.toString())
+    print(maquina.toString())
     print("")
-    cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()
-    while cambio_nom not in ["si","no"]:
-        cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()
-    if cambio_nom == "si":
-        nombre= input("Ingrese el nuevo nombre: ")
-        usuario.setNombre(nombre)
-        print("---> Nombre de jugador cambiado con éxito")
-        print(f"> {usuario.getNombre()}")
-        print("")
+    # cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()
+    # while cambio_nom not in ["si","no"]:
+    #     cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()
+    # if cambio_nom == "si":
+    #     nombre= input("Ingrese el nuevo nombre: ")
+    #     usuario.setNombre(nombre)
+    #     print("---> Nombre de jugador cambiado con éxito")
+    #     print(f"> {usuario.getNombre()}")
+    #     print("")
     #comienza algoritmo de partida
     print("Presiona enter para seguir")
     input("Loading...")

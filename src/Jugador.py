@@ -75,14 +75,14 @@ class Jugador:
         if eleccion == "1" and tablero.hayCartasMonstruoBocaArriba(self.__id):
             #Mostramos las cartas mosntruo en el tablero:
             print("Selecciona la carta monstruo a cambiar: ");
-            i = 1;
+            i = 0;
             for carta in espacioCartasMonstruo:
-                print(f'{i}. {carta.getNombre()}')
+                print(f'{i+1}. {carta.getNombre()}')
                 i += 1;
             
             seleccion = input("Selecciona la carta a añadir: \n > ")
             # validacion por si el usuario pone letras  o se pasa del rango-_-
-            while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
+            while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                 print("Por favor, ingresa un número válido.")
                 seleccion = input("> ")
             
@@ -113,15 +113,15 @@ class Jugador:
             #entramos en los casos de seleccion
             if eleccion == "1":
                 print("Elige tu carta de ataque: ")
-                i = 1;
+                i = 0;
                 #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
                 #boca arriba damos permiso de atacar;
                 for cartaMonstruo in espacioCartasMonstruoJ:
-                    print(f'{i}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF 
+                    print(f'{i+1}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF 
                     i += 1;
                 seleccion = input("> ")
                 # validacion por si el usuario pone letras  o se pasa del rango-_-
-                while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
+                while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                     print("Por favor, ingresa un número válido.")
                     seleccion = input("> ")
 
@@ -165,13 +165,13 @@ class Jugador:
                         for cartaMonstruo in espacioEnemigo:
                             #mostramos los datos de la carta solo si esta boca arriba
                             if cartaMonstruo.getIsBocaArriba():
-                                print(f'{i}. {cartaMonstruo.getNombre()}') #? aniadir ATK y DEF?
+                                print(f'{i+1}. {cartaMonstruo.getNombre()}') #? aniadir ATK y DEF?
                             else: 
-                                print(f'{i}. Carta sin desvelar')
+                                print(f'{i+1}. Carta sin desvelar')
                             i+=1
                         seleccion = input("> ")
                         # validacion por si el usuario pone letras  o se pasa del rango-_-
-                        while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+                        while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                             print("Por favor, ingresa un número válido.")
                             seleccion = input("> ")
                         
@@ -212,16 +212,16 @@ class Jugador:
         #guardamos la referencia de tablero a traves de partida
         tablero: Tablero = partida.getTablero();
 
-        i = 1
+        i = 0
 
         print("Cartas en mano".center(40, "-"))
         for carta in self.getCartasEnMano():
             #debo hacer un toString2 de cartas menos descriptivo
-            print(f'{i}. {carta.toString2()} ')
+            print(f'{i+1}. {carta.toString2()} ')
             i += 1
         seleccion = input("Selecciona la carta a añadir: \n > ")
         # validacion por si el usuario pone letras  o se pasa del rango-_-
-        while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
+        while  (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
             print("Por favor, ingresa un número válido.")
             seleccion = input("> ")
         cartaSeleccionada = self.__cartasEnMano[int(seleccion)-1]

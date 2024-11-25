@@ -44,11 +44,13 @@ class Partida:
         j1 = self.getTablero().getJugador1()
         maquina = self.getTablero().getJugador2()
         jugador_actual = self.getJugadorActual()
-        if self.__ronda ==1:
+        if self.__ronda == 1:
             #no se puede declarar batalla
             for i in range(2):
                 self.faseTomarCarta(j1,maquina)
                 self.fasePrincipal(j1,maquina)
+                #print del tablero para que el jugador vea como queda
+                print(self.getTablero().toString()) #Aniadido Alan
                 self.cambiarTurno()
             print("Es su primer turno, no puede declarar batalla")
         else: 
@@ -58,11 +60,14 @@ class Partida:
                 self.faseBatalla(j1,maquina)
                 #luego de la batalla, busca las cartas inservibles y chao
                 self.getTablero().destruirCartaMagica(jugador_actual)
+                #print del tablero para que el jugador vea como queda
+                self.getTablero().toString() #Aniadido Alan 
                 #reestablece el estado de las cartas para el siguiente turno
                 self.resetearEstadoCartasMounstro(jugador_actual)
                 #cambia de un jugador a otro, cambia turno
                 self.cambiarTurno()  
         #por cada ronda se hace esto:
+
         self.__ronda+=1
 
 
@@ -129,7 +134,8 @@ class Partida:
         for carta in jugador.getCartasEnMano():
             if isinstance(carta, CartaMonstruo):
                 carta.setPuedeAtacar(True)
-                carta.setIsInAtaque(True)
+                #by Alan, lo de abajo no va, solo se resetea el PuedeAtacar 
+                #carta.setIsInAtaque(True)
     
     
     def finalizarPartida(self, j1, j2):
