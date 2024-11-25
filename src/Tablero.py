@@ -126,7 +126,7 @@ class Tablero:
                 CartasMagicas.append(cartaEspecial)
         #recoge los atributos de las cartasmosntruos del tablero
         for cartaMonstruo in espacioMonstruosJ:
-            Tip_Monstruo.append(cartaMonstruo.getTipoMonstruo().value)
+            Tip_Monstruo.append(cartaMonstruo.getTipoMonstruo())
         #si no hay monstruos de igual tipo que la carta, esta se elimina del tablero
         for cartita in CartasMagicas:
             if cartita.getTipoMonstruo().value not in Tip_Monstruo:
