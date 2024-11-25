@@ -73,6 +73,7 @@ def main():
 
 
 
+    #IGNORAR TO DO LO ANTERIOR
     #iNICIO DEL JUEGO
     print("Presiona enter para continuar")
     input("Loading...")

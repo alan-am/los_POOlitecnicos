@@ -58,7 +58,7 @@ class Partida:
                 self.faseTomarCarta(j1,maquina)
                 
                 self.fasePrincipal(j1,maquina)
-                print(f"{"-"*30}")
+                print(f'{"-"*30}')
                 self.faseBatalla(j1,maquina)
                 #luego de la batalla, busca las cartas inservibles y chao
                 self.getTablero().destruirCartaMagica(jugador_actual)
