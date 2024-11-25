@@ -144,6 +144,8 @@ class Jugador:
                             print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo().value}")
                             print("Carta Trampa eliminada del tablero")
                             tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
+                            cartaSeleccionada.setPuedeAtacar(False);
+
 
                             
                         #caso en el que no tenga
@@ -157,6 +159,8 @@ class Jugador:
                             #Se actualiza la vida del enemigo
                             n_vidaenemigo = enemigo.getPuntosVida() - danio;
                             enemigo.setPuntosVida(n_vidaenemigo);
+                            cartaSeleccionada.setPuedeAtacar(False);
+
 
                     else:
                         # damos a elegir que carta quiere atacar
@@ -185,11 +189,11 @@ class Jugador:
                         #!comprobar si se puede acceder directamente
                         self.__puntosVida = self.__puntosVida - danioAJugador;
                         enemigo.__puntosVida =  enemigo.__puntosVida - danioAEnemigo;
+                        cartaSeleccionada.setPuedeAtacar(False);
 
                 else:
                     print("La carta seleccionada no esta en modo Ataque o ya ha atacado en este turno.")
             #cambiamos el estado de la carta  seleccionada para que ya no se pueda utilizar en el turno. OJO
-                cartaSeleccionada.setPuedeAtacar(False);
             #Especificaciones funcion:
             # verificar si no es el primer turno -> se lo valida en otra funcion de partida o del main
             #Da a elegir al jugador con q carta Monstruo de su tablero quiere atacar y a cual de la otras quiere atacar CHECK
@@ -197,6 +201,7 @@ class Jugador:
             # primero verifica si tiene cartas mosntruo en el tablero, sino ataca directamente CHECK
             # actualiz la vida del jugador CHECK
             # se cambia el atributo  de la carta elegida puedeAtacar a False CHECK
+            elif eleccion == "2": break;
     def jugarCarta(self, partida: Partida):
         '''Funcion que muestra las cartas en mano del jugador y le da a elegir
             que carta aniadir al tablero, luego de este haberlo seleccionado se la debe validar
