@@ -292,7 +292,7 @@ class Jugador:
         # Si no hay monstruos en ataque, cambiar a modo defensa
         if len(monstruosAtacantes) == 0:
             print(f"{self.getNombre()} no tiene monstruos disponibles para atacar. Se coloca a la defensiva.")
-            for carta in tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]:
+            for carta in tablero.tablerocompartido[self.getId()]["CartasMonstruo"]:
                 if CartaMonstruo.getIsInAtaque():
                     CartaMonstruo.setIsInAtaque(False)
                     CartaMonstruo.setIsBocaArriba(False)
@@ -300,7 +300,7 @@ class Jugador:
             return
 
         # Obtener monstruos del oponente
-        monstruosOponente = tablero.getTableroCompartido()[oponente.getId()]["CartasMonstruo"]
+        monstruosOponente = tablero.tablerocompartido[oponente.getId()]["CartasMonstruo"]
         # Aca ataca con cada mounstro disponible 
         for cartaAtacante in monstruosAtacantes:
             if len(monstruosOponente) > 0:
@@ -322,7 +322,7 @@ class Jugador:
         # Colocar cartas de monstruo
         for carta in mano_maquina[:]:
             if isinstance(carta, CartaMonstruo):
-                if len(tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]) < 3:
+                if len(tablero.tablerocompartido[self.getId()]["CartasMonstruo"]) < 3:
                     tablero.aniadirCartaTablero(carta, self.getId())
                     self.getCartasEnMano().remove(carta)
                     print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
@@ -330,7 +330,7 @@ class Jugador:
         # Colocar cartas mágicas o trampas
         for carta in mano_maquina[:]:
             if isinstance(carta, (CartaMagica, CartaTrampa)):
-                if len(tablero.getTableroCompartido()[self.getId()]["CartasEspeciales"]) < 3:
+                if len(tablero.tablerocompartido[self.getId()]["CartasEspeciales"]) < 3:
                     tablero.aniadirCartaTablero(carta, self.getId())
                     self.getCartasEnMano().remove(carta)
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
