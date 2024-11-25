@@ -319,7 +319,7 @@ class Jugador:
 
     def llenarTableroMaquina(self, tablero: Tablero):
         print(f"{self.getNombre()} (la máquina) está organizando su tablero.")
-        print(self.imprimirMano())
+        #print(self.imprimirMano()) solo fue para encontrar el error
         mano_maquina = self.getCartasEnMano().copy()
 
         # Colocar cartas de monstruo
