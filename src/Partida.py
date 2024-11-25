@@ -56,7 +56,9 @@ class Partida:
         else: 
             for i in range(2):#por cada jugador
                 self.faseTomarCarta(j1,maquina)
+                
                 self.fasePrincipal(j1,maquina)
+                print(f"{"-"*30}")
                 self.faseBatalla(j1,maquina)
                 #luego de la batalla, busca las cartas inservibles y chao
                 self.getTablero().destruirCartaMagica(jugador_actual)
@@ -69,7 +71,7 @@ class Partida:
         #por cada ronda se hace esto:
 
         self.__ronda+=1
-        print("Comenzará una nueva ronda")
+        print(f"{"Comenzará una nueva ronda".center(40)}")
         print(f"{"=="*40}")
 
 
@@ -85,8 +87,9 @@ class Partida:
             if self.__jugadoractual ==1:
                 j1.tomarCartaEnTurno()
             else:
-                print("Turno de la maquina") #!Print para test, luego eliminar
+                print(f"{"Turno de la maquina".center(30,"-")}") #!Print para test, luego eliminar
                 j2.tomarCartaEnTurno()
+        
  
 
     def fasePrincipal(self,j1:Jugador,maquina:Jugador):
