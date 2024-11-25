@@ -298,7 +298,7 @@ class Jugador:
                 if carta.getIsInAtaque():
                     carta.setIsInAtaque(False)
                     carta.setIsBocaArriba(False)
-                    print(f"{self.getNombre()} pone al monstruo {CartaMonstruo.getNombre()} en defensa.")
+                    print(f"{self.getNombre()} pone al monstruo {carta.getNombre()} en defensa.")
             return
 
         # Obtener monstruos del oponente
