@@ -71,14 +71,9 @@ class Partida:
         #por cada ronda se hace esto:
 
         self.__ronda+=1
-<<<<<<< HEAD
-        print(f"{"Comenzará una nueva ronda".center(40)}")
-        print(f"{"=="*40}")
-=======
         print("Comenzará una nueva ronda")
         print(f"{'=='*40}")
 
->>>>>>> 694cd5f418392c7e8786f262fc0beaa9b75c7229
 
 
 
