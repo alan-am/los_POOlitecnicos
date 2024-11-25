@@ -1,7 +1,7 @@
 from Tablero import Tablero
 from Cartas import CartaMonstruo
 import random
-from Jugador import *
+import Jugador
 
 class Partida:
     
@@ -11,7 +11,7 @@ class Partida:
         self.__turno = 1;
         self.__tablero = Tablero();
         self.__jugadoractual = 1; #por defecto es 1, es el id del jugador actual
-        self.__ronda = 0; 
+        self.__ronda = 1; 
     
 
    #Getters y setters
@@ -40,27 +40,35 @@ class Partida:
 
     #una "ronda" es un turno por jugador (2 en total), en la primera ronda no se puede declarar batalla
     def ronda(self):
-        '''dentro de la ronda, pueden ejecutarse las funciones de fases,cada jugador tiene que pasar por todas
-        las fases en cada ronda,¿?'''
+        '''se encarga de que el juego tenga secuencia'''
         j1 = self.getTablero().getJugador1()
         maquina = self.getTablero().getJugador2()
+        jugador_actual = self.getJugadorActual()
         if self.__ronda ==1:
             #no se puede declarar batalla
-            pass
+            for i in range(2):
+                self.faseTomarCarta(j1,maquina)
+                self.fasePrincipal(j1,maquina)
+                self.cambiarTurno()
+            print("Es su primer turno, no puede declarar batalla")
         else: 
-            #se ejecutan las 3 fases de forma normal
-            pass
+            for i in range(2):#por cada jugador
+                self.faseTomarCarta(j1,maquina)
+                self.fasePrincipal(j1,maquina)
+                self.faseBatalla(j1,maquina)
+                #luego de la batalla, busca las cartas inservibles y chao
+                self.getTablero().destruirCartaMagica(jugador_actual)
+                #reestablece el estado de las cartas para el siguiente turno
+                self.resetearEstadoCartasMounstro(jugador_actual)
+                #cambia de un jugador a otro, cambia turno
+                self.cambiarTurno()  
         #por cada ronda se hace esto:
-        self.resetearEstadoCartasMounstro() 
-        self.getTablero().destruirCartaMagica() 
         self.__ronda+=1
 
 
 
-    def faseTomarCarta(self):
+    def faseTomarCarta(self,j1,j2):
         """Es la fase en la cual un jugador roba una carta de su deck, si es su primer turno, toma 5 cartas"""
-        j1= self.__tablero.getJugador1()
-        j2 = self.__tablero.getJugador2()
         if self.__turno <=3 and (len(j1.getCartasEnMano())==0 or len(j2.getCartasEnMano())==0): #verifica que sea el primer turno de cada jugador
             if j1.getId() == self.__jugadoractual:
                 j1.tomar5Cartas()
@@ -73,15 +81,14 @@ class Partida:
                 j2.tomarCartaEnTurno()
  
 
-    def fasePrincipal(self,j1,maquina):
+    def fasePrincipal(self,j1:Jugador,maquina:Jugador):
         
-        j1 = self.getTablero().getJugador1()
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
-                pass
+            j1.jugarCarta(self)
         else: #si es el turno de la maquina, se llama a 
             maquina.llenarTableroMaquina()
     
-    def faseBatalla(self,j1,maquina):
+    def faseBatalla(self,j1:Jugador,maquina:Jugador):
         #verifica quien va a declarar batalla, de quien es el turno
         if self.getJugadorActual() ==1:
             j1.declararBatalla(maquina,self)

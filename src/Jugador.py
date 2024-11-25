@@ -1,4 +1,4 @@
-import Partida;
+import Partida
 from Tablero import Tablero;
 from Cartas import *;
 
@@ -215,16 +215,16 @@ class Jugador:
         i = 1
 
         print("Cartas en mano".center(40, "-"))
-        for carta in self.__cartasEnMano():
+        for carta in self.getCartasEnMano():
             #debo hacer un toString2 de cartas menos descriptivo
             print(f'{i}. {carta.toString2()} ')
             i += 1
         seleccion = input("Selecciona la carta a añadir: \n > ")
         # validacion por si el usuario pone letras  o se pasa del rango-_-
-        while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+        while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
             print("Por favor, ingresa un número válido.")
             seleccion = input("> ")
-        cartaSeleccionada = self.__cartasEnMano[int(i)-1]
+        cartaSeleccionada = self.__cartasEnMano[int(seleccion)-1]
         #antes de aniadirla verificamos q tipo de carta es, validamos que 
         # tenga suficiente espacio para ese tipo y preguntamos(en el caso de cartas mosntruo q tipo de posicion)
         #Si es un carta monstruo
@@ -277,12 +277,12 @@ class Jugador:
         return cartas
 
 
-    def declararBatallaComoMaquina():
+    def declararBatallaComoMaquina(self):
         '''Metodo para la instancia Maquina
         es la forma predeterminada en la que declarará batalla
         ayudarse de declararbatalla de jugador'''
         pass;
-    def llenarTableroMaquina():
+    def llenarTableroMaquina(self):
         '''llena el tablero de la maquina, puede ayudarse de algo parecido a Jugarcarta()'''
         pass
     

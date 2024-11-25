@@ -71,18 +71,9 @@ def main():
     partida.sorteoInicios(usuario,maquina)
     #se ejecuta
     while not usuario.esDerrotado() and not maquina.esDerrotado():
-        '''toda la jugada del main'''
-        #intentaré llenar las manos de maquina y usuario
-        partida.faseTomarCarta()
-        partida.cambiarTurno()
-        partida.faseTomarCarta()
-        partida.cambiarTurno()
-        partida.faseTomarCarta()
-        print(usuario.toString())
-        print(maquina.toString()) #imprimí a ambos para verificar que se habían llenado, solo son pruebas
-
-        break #es pq no hay cuerpo xd, solo queria probar, no me funen
-    #termina
+        partida.ronda()
+        #verifiquen en cada función qué desean que imprima para que el usuario lo pueda ver
+    #luego de que uno es derrotado:
     partida.finalizarPartida(usuario,maquina)
     
 
