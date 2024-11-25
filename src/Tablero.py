@@ -51,9 +51,9 @@ class Tablero:
         '''metodo para quitar cartas del tablero, 
         eliminar de las listas'''
         if isinstance(Carta,CartaMonstruo): #isintance es como instanceof de java
-            self.__tablerocompartido[id_jugador]["CartasMonstruo"].remove(Carta)
+            self.tablerocompartido[id_jugador]["CartasMonstruo"].remove(Carta)
         else:
-            self.__tablerocompartido[id_jugador]["CartasEspeciales"].remove(Carta)
+            self.tablerocompartido[id_jugador]["CartasEspeciales"].remove(Carta)
     
     def quitarCarta_Mano(self,id_jugador,Carta):
             '''funcion que me ayuda a quitar la carta de la mano del jugador una vez que se coloca en el tablero'''
@@ -111,13 +111,13 @@ class Tablero:
 
         return incAtk, incDef; 
 
-    def destruirCartaMagica(self, jugador):
+    def destruirCartaMagica(self, id_jugador):
         '''Verifica si existen cartasMonstruo en el tablero con igual atributos de
         cartas magicas en el tablero, carta magica que no encuentra coincidencias es eliminada
         del tablero.'''
         #puede ser usada cuando un monstruo muera en batalla
-        espacioEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
-        espacioMonstruosJ = self.tablerocompartido[jugador.getId()]["CartasMonstruo"]
+        espacioEspecialesJ = self.tablerocompartido[id_jugador]["CartasEspeciales"]
+        espacioMonstruosJ = self.tablerocompartido[id_jugador]["CartasMonstruo"]
         CartasMagicas = []
         Tip_Monstruo=[]
         #hace una lista de solo cartas magicas
@@ -247,7 +247,8 @@ class Tablero:
         return self.__cartasMonstruo
     def setCartasMonstruo(self, nuevas_cartas):
         self.__cartasMonstruo = nuevas_cartas
-
+    def getTableroCompartido(self):
+        return self.tablerocompartido
 
 
     
