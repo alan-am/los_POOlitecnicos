@@ -43,6 +43,8 @@ def main():
 '''
 
     #cuerpo de la partida
+
+    
     partida = Partida()
     print("---+ Jugador 2 corresponde a la máquina")
     usuario = partida.getTablero().getJugador1()

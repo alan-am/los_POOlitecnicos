@@ -80,7 +80,7 @@ class Jugador:
                 print(f'{i}. {carta.getNombre()}')
                 i += 1;
             
-            seleccion = input("> ")
+            seleccion = input("Selecciona la carta a añadir: \n > ")
             # validacion por si el usuario pone letras  o se pasa del rango-_-
             while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
                 print("Por favor, ingresa un número válido.")
@@ -121,7 +121,7 @@ class Jugador:
                     i += 1;
                 seleccion = input("> ")
                 # validacion por si el usuario pone letras  o se pasa del rango-_-
-                while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+                while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
                     print("Por favor, ingresa un número válido.")
                     seleccion = input("> ")
 
@@ -221,7 +221,7 @@ class Jugador:
             i += 1
         seleccion = input("Selecciona la carta a añadir: \n > ")
         # validacion por si el usuario pone letras  o se pasa del rango-_-
-        while not (seleccion.isdigit()) or seleccion > i or seleccion <= 0:
+        while not (seleccion.isdigit()) or int(seleccion) > i or int(seleccion) <= 0:
             print("Por favor, ingresa un número válido.")
             seleccion = input("> ")
         cartaSeleccionada = self.__cartasEnMano[int(i)-1]
