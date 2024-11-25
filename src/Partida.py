@@ -91,12 +91,21 @@ class Partida:
         
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
             #!Logica aniadida para para que el jugador elija cuantas quiera ...
-            jugar = input("--> Desea añadir una carta en su tablero? (si/no) ").lower()
+            print("Desea añadir una carta en su tablero??")
+            eleccion = input("1. Si \n2. No \n");
+            #validamos su seleccion
+            while eleccion != "1"  and eleccion != "2":
+                print("Elige un numero entre 1 y 2")
+                eleccion = input("> ");
             #while jugar not in ["si","no"]:
             #    jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
-            while jugar == "si":
+            while eleccion == "1":
                 j1.jugarCarta(self)
-                jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
+                print("Desea añadir una carta en su tablero??")
+                eleccion = input("1. Si \n2. No \n");
+                while eleccion != "1"  and eleccion != "2":
+                    print("Elige un numero entre 1 y 2")
+                    eleccion = input("> ");
 
 
         else: #si es el turno de la maquina, se llama a 
