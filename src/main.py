@@ -98,7 +98,7 @@ def main():
 
 
 
-    
+    #ayuda como lo ejecuto
 
 #llamado de la funcion maine
 main()

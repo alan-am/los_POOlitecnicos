@@ -162,7 +162,7 @@ class Tablero:
                     print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getAtaque()} + {incAtkEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
-                    self.quitarCarta(cartaEnemigo,enemigoID)
+                    self.quitarCartaTablero(cartaEnemigo,enemigoID)
                     return danioRealAEnemigo, danioRealAJugador;
             
                 elif (cartaJugador.getAtaque() + incAtkJugador ) == (cartaEnemigo.getAtaque()+incAtkEnemigo):
@@ -172,8 +172,8 @@ class Tablero:
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getAtaque()} + {incAtkEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
                     print(f"| {cartaEnemigo.getNombre()} destruyó a {cartaJugador.getNombre()} en batalla!")
-                    self.quitarCarta(cartaEnemigo,enemigoID)
-                    self.quitarCarta(cartaJugador,jugadorID)
+                    self.quitarCartaTablero(cartaEnemigo,enemigoID)
+                    self.quitarCartaTablero(cartaJugador,jugadorID)
 
                     return danioRealAEnemigo, danioRealAJugador;
             
@@ -183,7 +183,7 @@ class Tablero:
                     print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getAtaque()} + {incAtkEnemigo}")
                     print(f"| {cartaEnemigo.getNombre()} destruyó a {cartaJugador.getNombre()} en batalla!")
-                    self.quitarCarta(cartaJugador,jugadorID);
+                    self.quitarCartaTablero(cartaJugador,jugadorID);
 
                     return danioRealAEnemigo, danioRealAJugador;
             
@@ -192,7 +192,7 @@ class Tablero:
                     print(f"| Ataque y Defensa | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getDefensa()} + {incDefEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
-                    self.quitarCarta(cartaEnemigo,enemigoID)
+                    self.quitarCartaTablero(cartaEnemigo,enemigoID)
                     #la carta en defensa debe cambiar a boca arriba
                     cartaEnemigo.setIsBocaArriba(True)
 
@@ -216,7 +216,7 @@ class Tablero:
             cartaTrampa = self.verificarCartaTrampa(enemigo, cartaJugador);
             print(f"| La carta trampa {cartaTrampa.getNombre()} detuvo el Ataque!")
             #eliminamos la carta trampa ya utilizada del tablero del enemigo
-            self.quitarCarta(cartaTrampa, enemigoID);
+            self.quitarCartaTablero(cartaTrampa, enemigoID);
             return 0, 0
 
 

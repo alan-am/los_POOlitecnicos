@@ -105,11 +105,11 @@ class Jugador:
         while tablero.hayCartasMonstruoEnAtaque(self): #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #preguntamos si desea atacar
             print("Deseas atacar?")
-            eleccion = input("1. Si \n 2. No \n");
+            eleccion = input("1. Si \n2. No \n");
             #validamos su seleccion
             while eleccion != "1"  and eleccion != "2":
                 print("Elige un numero entre 1 y 2")
-                eleccion = input("1. Si \n 2. No \n");
+                eleccion = input(">");
             #entramos en los casos de seleccion
             if eleccion == "1":
                 print("Elige tu carta de ataque: ")
@@ -212,19 +212,19 @@ class Jugador:
         #guardamos la referencia de tablero a traves de partida
         tablero: Tablero = partida.getTablero();
 
-        i = 0
         a =0
-
-        print("Cartas en mano".center(40, "-"))
-        for carta in self.getCartasEnMano():
-            #debo hacer un toString2 de cartas menos descriptivo
-            print(f'{i+1}. {carta.toString2()} ')
-            i += 1
         jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
         while jugar.isdigit() or (jugar not in ["si","no"]):
             jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
-
         while jugar == "si" and a<len(self.getCartasEnMano()):
+            i = 0
+
+            print("Cartas en mano".center(40, "-"))
+            for carta in self.getCartasEnMano():
+                #debo hacer un toString2 de cartas menos descriptivo
+                print(f'{i+1}. {carta.toString2()} ')
+                i += 1
+
             
             seleccion = input("Selecciona la carta a añadir: \n > ")
         # validacion por si el usuario pone letras  o se pasa del rango-_-
@@ -240,7 +240,7 @@ class Jugador:
                 if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
                     #preguntamos en que modo pone la carta
                     print("Elige el modo de la carta: ")
-                    eleccion = input("1. Ataque \n 2. Defensa \n");
+                    eleccion = input("1. Ataque\n2. Defensa \n");
                     while eleccion != "1"  and eleccion != "2":
                         print("Elige un numero entre 1 y 2")
                         eleccion = input("> ");
