@@ -288,16 +288,16 @@ class Jugador:
         # Obtener monstruos en ataque que pueden atacar
         monstruosAtacantes = []
         for carta in tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]:
-            if CartaMonstruo.getIsInAtaque() and CartaMonstruo.getPuedeAtacar():
+            if carta.getIsInAtaque() and carta.getPuedeAtacar():
                 monstruosAtacantes.append(carta)
 
         # Si no hay monstruos en ataque, cambiar a modo defensa
         if len(monstruosAtacantes) == 0:
             print(f"{self.getNombre()} no tiene monstruos disponibles para atacar. Se coloca a la defensiva.")
             for carta in tablero.tablerocompartido[self.getId()]["CartasMonstruo"]:
-                if CartaMonstruo.getIsInAtaque():
-                    CartaMonstruo.setIsInAtaque(False)
-                    CartaMonstruo.setIsBocaArriba(False)
+                if carta.getIsInAtaque():
+                    carta.setIsInAtaque(False)
+                    carta.setIsBocaArriba(False)
                     print(f"{self.getNombre()} pone al monstruo {CartaMonstruo.getNombre()} en defensa.")
             return
 
@@ -323,14 +323,12 @@ class Jugador:
 
         # Colocar cartas de monstruo
         for carta in mano_maquina:
-            if isinstance(carta, CartaMonstruo):
-                if len(tablero.tablerocompartido[self.getId()]["CartasMonstruo"]) < 3:
+            if isinstance(carta, CartaMonstruo) and len(tablero.tablerocompartido[self.getId()]["CartasMonstruo"]) < 3:
                     tablero.aniadirCartaTablero(carta, self.getId()) #quita automat la carta de la mano
                     print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
 
         # Colocar cartas mágicas o trampas
-        for carta in mano_maquina:
-            if isinstance(carta, (CartaMagica, CartaTrampa)):
+            else: #si no es monstruo será cualquier otra
                 if len(tablero.tablerocompartido[self.getId()]["CartasEspeciales"]) < 3:
                     tablero.aniadirCartaTablero(carta, self.getId())
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
