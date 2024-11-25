@@ -319,18 +319,20 @@ class Jugador:
 
     def llenarTableroMaquina(self, tablero: Tablero):
         print(f"{self.getNombre()} (la máquina) está organizando su tablero.")
-        mano_maquina = self.getCartasEnMano()
+        #print(self.imprimirMano()) solo fue para encontrar el error
+        mano_maquina = self.getCartasEnMano().copy()
 
         # Colocar cartas de monstruo
         for carta in mano_maquina:
-            if isinstance(carta, CartaMonstruo) and len(tablero.tablerocompartido[self.getId()]["CartasMonstruo"]) < 3:
-                    tablero.aniadirCartaTablero(carta, self.getId()) #quita automat la carta de la mano
+            if isinstance(carta, CartaMonstruo):
+                if len(tablero.tablerocompartido[2]["CartasMonstruo"]) < 3:
+                    tablero.aniadirCartaTablero(carta, 2) #quita automat la carta de la mano
                     print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
 
         # Colocar cartas mágicas o trampas
             else: #si no es monstruo será cualquier otra
-                if len(tablero.tablerocompartido[self.getId()]["CartasEspeciales"]) < 3:
-                    tablero.aniadirCartaTablero(carta, self.getId())
+                if len(tablero.tablerocompartido[2]["CartasEspeciales"]) < 3:
+                    tablero.aniadirCartaTablero(carta, 2)
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
 
         print(f"{self.getNombre()} ha terminado de organizar su tablero.")
