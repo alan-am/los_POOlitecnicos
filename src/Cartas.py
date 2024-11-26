@@ -147,7 +147,7 @@ class CartaMonstruo(Carta):
         Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}, MODO: {var}'''
 
 
-#lo de :> era para intentar darle mejor aspecto pero no se logró
+
 
 
 #SUB-CLASE

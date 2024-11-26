@@ -175,9 +175,6 @@ class Partida:
         elif j2.esDerrotado():
             print(f"El jugador {j2.getNombre()} ha sido derrotado.")
             print(f"El ganador es {j1.getNombre()}!")
-        else:
-            print("La partida se acabo, terminaron en empate !!")
-
 
     
 

@@ -266,14 +266,9 @@ class Jugador:
                 #Aniadimos la carta a tablero
                 tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
             else:
-                print("No se puede agregar mas cartas Magicas o Trampa")
+                print("No se puede agregar mas cartas Magicas o Trampa") 
        
 
-
-
-
-
-    
     def imprimirMano(self):
         ###Imprime por consola las cartas en mano que tiene el jugador'''
         for Carta in self.__cartasEnMano:
@@ -291,7 +286,7 @@ class Jugador:
 
     def declararBatallaComoMaquina(self, tablero: Tablero, oponente):
     
-        print(f"{self.getNombre()} (la máquina) te va a declarar batalla. ¡Prepárate!")
+        print(f"{self.getNombre()} te va a declarar batalla. ¡Prepárate!")
 
         # Obtener monstruos en ataque que pueden atacar
         monstruosAtacantes = []
@@ -322,11 +317,11 @@ class Jugador:
                 oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
             cartaAtacante.setPuedeAtacar(False)
 
-            print(f"{self.getNombre()} (la maquina) ha terminado su fase de batalla.")
+            print(f"{self.getNombre()} ha terminado su fase de batalla.")
 
 
     def llenarTableroMaquina(self, tablero: Tablero):
-        print(f"{self.getNombre()} (la máquina) está organizando su tablero.")
+        print(f"{self.getNombre()} está organizando su tablero.")
         #print(self.imprimirMano()) solo fue para encontrar el error
         mano_maquina = self.getCartasEnMano().copy()
 
@@ -348,9 +343,11 @@ class Jugador:
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
         
-    def esDerrotado(self):
+    def esDerrotado(self,id_jugador):
         ##verifica que el jugador fue derrotado
-        return self.getPuntosVida() <=0 #devuelve true si esderrotado
+        NoTieneCartas= len(self.getCartasMano(id_jugador))==0 and len(self.getBaraja(id_jugador))==0
+        if  self.getPuntosVida(id_jugador)<=0 or NoTieneCartas:
+            return True #devuelve true si esderrotado
     
          
     #toString

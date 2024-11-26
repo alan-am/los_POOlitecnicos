@@ -34,7 +34,7 @@ def main():
 
 
 
-    #IGNORAR TO DO LO ANTERIOR
+ 
     #iNICIO DEL JUEGO
     print("\n \n \nEmpieza el juego!")
     print("Presiona enter para continuar")
