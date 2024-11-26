@@ -177,7 +177,9 @@ class Tablero:
 
                     return danioRealAEnemigo, danioRealAJugador;
             
-                elif (cartaJugador.getAtaque() + incAtkJugador ) < (cartaEnemigo.getAtaque()+incAtkEnemigo):
+                #elif (cartaJugador.getAtaque() + incAtkJugador ) < (cartaEnemigo.getAtaque()+incAtkEnemigo):
+                else: #si no es mayor y no es igual, el último caso es que será menor
+                    #hice esto porque tiraba error, ya que no todos los caminos tenían un return válido
                     danioRealAEnemigo = 0
                     danioRealAJugador = (cartaEnemigo.getAtaque()+incAtkEnemigo) - (cartaJugador.getAtaque() + incAtkJugador )
                     print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
@@ -188,14 +190,14 @@ class Tablero:
                     return danioRealAEnemigo, danioRealAJugador;
             
             else:
-                if (cartaJugador.getAtaque() + incAtkJugador ) > (cartaEnemigo.getDefensa() + incDefEnemigo):
+                if (cartaJugador.getAtaque() + incAtkJugador ) >= (cartaEnemigo.getDefensa() + incDefEnemigo):
                     print(f"| Ataque y Defensa | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getDefensa()} + {incDefEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
                     self.quitarCartaTablero(cartaEnemigo,enemigoID)
                     #la carta en defensa debe cambiar a boca arriba
                     cartaEnemigo.setIsBocaArriba(True)
-
+                    #aunque no lo dice el juego, puse >= para que no dé error
                     #no se realiza danio ni al atacante ni al defensor
                     return 0, 0
 
