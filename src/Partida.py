@@ -170,10 +170,10 @@ class Partida:
     def finalizarPartida(self, j1, j2):
         """Finaliza la partida determinando el ganador."""
         if j1.esDerrotado():
-            print(f"El jugador{j1.getNombre()} ha sido derrotado.")
-            print(f"El ganador es {j2.getNombre()}!")
+            print(f"El jugador {j1.getNombre()} ha sido derrotado.")
+            print(f"La ganadora es la {j2.getNombre()}!")
         elif j2.esDerrotado():
-            print(f"El jugador {j2.getNombre()} ha sido derrotado.")
+            print(f"La {j2.getNombre()} ha sido derrotada.")
             print(f"El ganador es {j1.getNombre()}!")
 
     
