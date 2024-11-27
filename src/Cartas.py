@@ -67,8 +67,7 @@ class CartaMagica(Carta):
     
     #Segundo to String, menos descriptivo y mas conciso
     def toString2(self):
-        return f'''CARTA MAGICA|| {self.getNombre()} [INC ATK: {self.__incrementoAtaque}, INC DEF: {self.__incrementoDefensa}]
-        Tipo: {self.__tipoMonstruo.value} '''
+        return f'''CARTA MAGICA|| {self.getNombre()} [INC ATK: {self.__incrementoAtaque}, INC DEF: {self.__incrementoDefensa}]  Tipo: {self.__tipoMonstruo.value} '''
     
 
 #SUB-CLASE 
@@ -143,8 +142,7 @@ class CartaMonstruo(Carta):
         if self.__isInAtaque:
             var = "Ataque"
 
-        return f'''CARTA MONSTRUO|| {self.getNombre()} [ATK: {self.__ataque}, DEF: {self.__defensa}]
-        Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}, MODO: {var}'''
+        return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque}, DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}'''
 
 
 

@@ -67,10 +67,10 @@ class Jugador:
         espacioCartasMonstruo = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
         print("Deseas cambiar la posicion de una carta?")
-        eleccion = input("1. Si \n2. No \n");
+        eleccion = input("1. Si \n2. No \n > ");
         while eleccion != "1"  and eleccion != "2":
             print("Elige un numero entre 1 y 2")
-            eleccion = input("> ");
+            eleccion = input(" > ");
 
         if eleccion == "1" and tablero.hayCartasMonstruoBocaArriba(self.__id):
             #Mostramos las cartas mosntruo en el tablero:
@@ -84,13 +84,13 @@ class Jugador:
             # validacion por si el usuario pone letras  o se pasa del rango-_-
             while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                 print("Por favor, ingresa un número válido.")
-                seleccion = input("> ")
+                seleccion = input(" > ")
             
             cartaSeleccionada = espacioCartasMonstruo[int(seleccion) - 1];
             cartaSeleccionada.setIsInAtaque(not(cartaSeleccionada.getIsInAtaque()));
             
         else:
-            print("No exiten cartas Monstruo boca Arriba para cambiar su posicion")
+            print("WARNING| No existen cartas Monstruo boca Arriba para cambiar su posicion")
             
             
     
@@ -100,12 +100,16 @@ class Jugador:
                 #TypeHint para evitar confusiones
         tablero : Tablero = partida.getTablero();
         espacioCartasMonstruoJ = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
-        print("Deseas atacar?")
-        eleccion = input("1. Si \n2. No \n");
-        #validamos su seleccion
-        while eleccion != "1"  and eleccion != "2":
+
+        #Validacion existan cartas monstruo
+        while tablero.hayCartasMonstruoEnAtaque(self): #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
+            #preguntamos si desea atacar
+            print("|    Ejecutar ataque?")
+            eleccion = input("1. Si \n2. No \n > ");
+            #validamos su seleccion
+            while eleccion != "1"  and eleccion != "2":
                 print("Elige un numero entre 1 y 2")
-                eleccion = input("> ");
+                eleccion = input(" > ");
         #Validacion existan cartas monstruo
         while tablero.hayCartasMonstruoEnAtaque(self) and eleccion == "1": #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #si enetró en el while es porque quiere atacar
@@ -114,9 +118,9 @@ class Jugador:
             #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
             #boca arriba damos permiso de atacar;
             for cartaMonstruo in espacioCartasMonstruoJ:
-                print(f'{i+1}. {cartaMonstruo.getNombre()}') #A lomejor tambien mostrar ATK y DEF 
+                print(f'{i+1}. {cartaMonstruo.toString2()}') #A lomejor tambien mostrar ATK y DEF 
                 i += 1;
-            seleccion = input("> ")
+            seleccion = input(" > ")
             # validacion por si el usuario pone letras  o se pasa del rango-_-
             while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                 print("Por favor, ingresa un número válido.")
@@ -166,15 +170,15 @@ class Jugador:
                     for cartaMonstruo in espacioEnemigo:
                         #mostramos los datos de la carta solo si esta boca arriba
                         if cartaMonstruo.getIsBocaArriba():
-                            print(f'{i+1}. {cartaMonstruo.getNombre()}') #? aniadir ATK y DEF?
+                            print(f'{i+1}. {cartaMonstruo.toString2()}')
                         else: 
-                            print(f'{i+1}. Carta sin desvelar')
+                            print(f'{i+1}. CARTA MONSTRUO|| *** Carta boca abajo ***')
                         i+=1
                     seleccion = input("> ")
                     # validacion por si el usuario pone letras  o se pasa del rango-_-
                     while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                         print("Por favor, ingresa un número válido.")
-                        seleccion = input("> ")
+                        seleccion = input(" > ")
                     
                     cartaEnemigaSeleccionada = espacioEnemigo[int(seleccion)-1]
 
@@ -189,8 +193,11 @@ class Jugador:
                     cartaSeleccionada.setPuedeAtacar(False);
 
             else:
-                print("La carta seleccionada no esta en modo Ataque o ya ha atacado en este turno.")
-            #cambiamos el estado de la carta  seleccionada para que ya no se pueda utilizar en el turno. OJO
+                    #dividimos en un if para ser mas especifico con la advertencia al usuario
+                if cartaSeleccionada.getIsInAtaque():
+                    print("WARNING| La carta seleccionada ya ha atacado en este Turno.")
+                elif cartaSeleccionada.getPuedeAtacar():
+                    print("WARNING| La carta seleccionada no esta en modo de ataque")            #cambiamos el estado de la carta  seleccionada para que ya no se pueda utilizar en el turno. OJO
             #Especificaciones funcion:
             # verificar si no es el primer turno -> se lo valida en otra funcion de partida o del main CHEC (en "ronda")
             #Da a elegir al jugador con q carta Monstruo de su tablero quiere atacar y a cual de la otras quiere atacar CHECK
@@ -258,7 +265,7 @@ class Jugador:
                 #Aniadimos la carta a tablero
                 tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
             else:
-                print("Ya no puedes colocar mas cartas Monstruo")
+                print("WARNING| Ya no puedes colocar más cartas Monstruo")
         #Caso si la cartas es Magica o trampa
         elif isinstance(cartaSeleccionada, CartaMagica) or isinstance(cartaSeleccionada, CartaTrampa):
             #validamos que haya espacio
