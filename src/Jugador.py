@@ -146,7 +146,7 @@ class Jugador:
                         print("| Se ha atacado directamente! pero una carta Trampa se interpuso")
                         #eliminamos la carta trampa q se interpuso
                         cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
-                        print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo().value}")
+                        print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo()}")
                         print("Carta Trampa eliminada del tablero")
                         tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
                         cartaSeleccionada.setPuedeAtacar(False);
@@ -248,6 +248,7 @@ class Jugador:
     #antes de aniadirla verificamos q tipo de carta es, validamos que 
     # tenga suficiente espacio para ese tipo y preguntamos(en el caso de cartas mosntruo q tipo de posicion)
     #Si es un carta monstruo
+
         if(isinstance(cartaSeleccionada, CartaMonstruo)):
             #validamos q haya espacio
             if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3 and self.__noagregoMonstruo:

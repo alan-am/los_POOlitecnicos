@@ -64,7 +64,7 @@ class Partida:
                 self.getTablero().destruirCartaMagica(jugador_actual)
                 #print del tablero para que el jugador vea como queda
                 input("> Da enter para mostrar el tablero actualizado ")
-                self.getTablero().toString() #Aniadido Alan 
+                print(self.getTablero().toString()) #Aniadido Alan 
                 #reestablece el estado de las cartas para el siguiente turno
                 self.resetearEstadoCartasMounstro(jugador_actual)
                 #cambia de un jugador a otro, cambia turno
@@ -106,6 +106,7 @@ class Partida:
         
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
             #!Logica aniadida para para que el jugador elija cuantas quiera ...
+            j1.setNoAgregoMonstruo(True)
             input("|--> Presiona enter para visualizar tus cartas en mano ")
             j1.imprimirMano()
             print("Desea añadir una carta en su tablero??")
