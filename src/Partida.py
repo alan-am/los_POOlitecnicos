@@ -95,7 +95,9 @@ class Partida:
                 input("Presiona enter para tomar la carta del Deck... ")
                 j1.tomarCartaEnTurno()
             else:
-                print(f'{"Turno de la maquina".center(30,"-")}') #!Print para test, luego eliminar
+                print(f'{"Turno de la maquina".center(30,"-")}')
+                 #!Print para test, luego eliminar
+                print("La máquina ya ha robado su carta")
                 j2.tomarCartaEnTurno()
         
  

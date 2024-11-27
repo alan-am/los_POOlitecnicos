@@ -106,14 +106,14 @@ class Jugador:
         espacioCartasMonstruoJ = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
         #Validacion existan cartas monstruo
-        while tablero.hayCartasMonstruoEnAtaque(self): #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
+        #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #preguntamos si desea atacar
-            print("|    Ejecutar ataque?")
-            eleccion = input("1. Si \n2. No \n > ");
-            #validamos su seleccion
-            while eleccion != "1"  and eleccion != "2":
-                print("Elige un numero entre 1 y 2")
-                eleccion = input(" > ");
+        print("|    Ejecutar ataque?")
+        eleccion = input("1. Si \n2. No \n > ");
+        #validamos su seleccion
+        while eleccion != "1"  and eleccion != "2":
+            print("Elige un numero entre 1 y 2")
+            eleccion = input(" > ");
         #Validacion existan cartas monstruo
         while tablero.hayCartasMonstruoEnAtaque(self) and eleccion == "1": #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #si enetró en el while es porque quiere atacar
@@ -210,7 +210,7 @@ class Jugador:
             # actualiz la vida del jugador CHECK
             # se cambia el atributo  de la carta elegida puedeAtacar a False CHECK
             '''vuelve a preguntar y eleccion se actualiza'''
-            print("Deseas atacar?")
+            print("|    Ejecutar ataque?")
             eleccion = input("1. Si \n2. No \n");
             #validamos su seleccion
             while eleccion != "1"  and eleccion != "2":
@@ -353,7 +353,7 @@ class Jugador:
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
 
         print(f"{self.getNombre()} ha terminado de organizar su tablero.")
-        input("Presiona enter para seguir  ")
+        input("Da enter si deseas continurar:  ")
 
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
