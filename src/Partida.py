@@ -87,8 +87,10 @@ class Partida:
         if self.__turno <=3 and (len(j1.getCartasEnMano())==0 or len(j2.getCartasEnMano())==0): #verifica que sea el primer turno de cada jugador
             if j1.getId() == self.__jugadoractual:
                 j1.tomar5Cartas()
+                print(f"{j1.getNombre()} ha tomado 5 cartas del deck")
             else:
                 self.__tablero.getJugador2().tomar5Cartas()
+                print(f"{j2.getNombre()} ha tomado 5 cartas del deck")
         else: #cuando haya pasado la primera ronda, se toma una sola carta por turno
             if self.__jugadoractual ==1:
                 print("-Es tu turno de robar una carta-")
@@ -127,6 +129,7 @@ class Partida:
 
 
         else: #si es el turno de la maquina, se llama a 
+            maquina.setNoAgregoMonstruo(True)
             maquina.llenarTableroMaquina(self.getTablero())
     
     def faseBatalla(self,j1:Jugador,maquina:Jugador):

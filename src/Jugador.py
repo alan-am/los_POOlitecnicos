@@ -343,9 +343,11 @@ class Jugador:
         # Colocar cartas de monstruo
         for carta in mano_maquina:
             if isinstance(carta, CartaMonstruo):
-                if len(tablero.tablerocompartido[2]["CartasMonstruo"]) < 3:
-                    tablero.aniadirCartaTablero(carta, 2) #quita automat la carta de la mano
-                    print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
+                if self.__noagregoMonstruo: #si no se ha agregadomonstruo en ese turno #seactualiza en fase (Partida())
+                    if len(tablero.tablerocompartido[2]["CartasMonstruo"]) < 3:
+                        tablero.aniadirCartaTablero(carta, 2) #quita automat la carta de la mano
+                        print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
+                        self.setNoAgregoMonstruo(False)#yatieneun monstruo agregado
 
         # Colocar cartas mágicas o trampas
             else: #si no es monstruo será cualquier otra
@@ -354,7 +356,7 @@ class Jugador:
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
 
         print(f"{self.getNombre()} ha terminado de organizar su tablero.")
-        input("Da enter si deseas continurar:  ")
+        input("Enter para seguir  ")
 
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
