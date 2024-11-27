@@ -343,10 +343,10 @@ class Jugador:
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
         
-    def esDerrotado(self,id_jugador):
+    def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        NoTieneCartas= len(self.getCartasMano(id_jugador))==0 and len(self.getBaraja(id_jugador))==0
-        if  self.getPuntosVida(id_jugador)<=0 or NoTieneCartas:
+        NoTieneCartas= len(self.getCartasEnMano())==0 and len(self.getDeck())==0
+        if  self.getPuntosVida()<=0 or NoTieneCartas:
             return True #devuelve true si esderrotado
     
          
