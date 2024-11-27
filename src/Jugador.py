@@ -389,9 +389,12 @@ class Jugador:
                         tablero.quitarCartaTablero(cartaTrampa, oponente.getId())  # Descarta la carta trampa
                         continue
                     if len(monstruosOponente) > 0:
-                        cartaDefensora = monstruosOponente[0]
+                        cartaDefensora = cartaMounstrorival
                         print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
-                        tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
+                        danioAEnemigo, danioAJugador = tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
+                        self.__puntosVida = self.__puntosVida - danioAJugador;
+                        oponente.__puntosVida =  oponente.__puntosVida - danioAEnemigo;
+                    
                     else:
                         print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
                         oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
@@ -400,7 +403,7 @@ class Jugador:
                     print(f"{self.getNombre()} ha terminado su fase de batalla.")
                     print(f"=========================================================")
                 else:
-                    print(f"La Maquina ha decidido no atacar a tu carta {cartaMounstrorival.getNombre()} porque no le conviene")
+                    print(f"La Maquina ha decidido no usar a {cartaAtacante.getNombre()} para atacar a tu carta {cartaMounstrorival.getNombre()} porque no le conviene")
 
 
     def llenarTableroMaquina(self, tablero: Tablero):
