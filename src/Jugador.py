@@ -1,6 +1,7 @@
 import Partida
 from Tablero import Tablero;
 from Cartas import *;
+from Deck import *;
 
 class Jugador:
 
@@ -14,7 +15,7 @@ class Jugador:
         self.__id = Jugador.jugadores;
         self.__puntosVida = 4000;
         self.__nombre = nombre;
-        self.__deck = deck; #es una lista de Cartas
+        self.__deck = Deck(); #es una lista de Cartas
         self.__cartasEnMano = [];
     
     #Getters y setters 
@@ -343,11 +344,12 @@ class Jugador:
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
         
-    def esDerrotado(self,id_jugador):
+    def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        NoTieneCartas= len(self.getCartasMano(id_jugador))==0 and len(self.getBaraja(id_jugador))==0
-        if  self.getPuntosVida(id_jugador)<=0 or NoTieneCartas:
+        NoTieneCartas= len(self.getCartasEnMano())==0 and len(self.getDeck().getBaraja())==0
+        if  self.getPuntosVida()<=0 or NoTieneCartas:
             return True #devuelve true si esderrotado
+        return False
     
          
     #toString
