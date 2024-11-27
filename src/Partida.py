@@ -71,8 +71,12 @@ class Partida:
         #por cada ronda se hace esto:
 
         self.__ronda+=1
-        print("Comenzará una nueva ronda")
+        input(f"Presione enter para comenzar una nueva ronda ")
+        input("Loading...")
+
+        print(f"------> Ronda {self.__ronda} comienza:")
         print(f"{'=='*40}")
+    
 
 
 
@@ -86,6 +90,8 @@ class Partida:
                 self.__tablero.getJugador2().tomar5Cartas()
         else: #cuando haya pasado la primera ronda, se toma una sola carta por turno
             if self.__jugadoractual ==1:
+                print("-Es tu turno de robar una carta-")
+                input("Presiona enter para tomar la carta del Deck... ")
                 j1.tomarCartaEnTurno()
             else:
                 print(f'{"Turno de la maquina".center(30,"-")}') #!Print para test, luego eliminar
@@ -121,6 +127,7 @@ class Partida:
         #verifica quien va a declarar batalla, de quien es el turno
         if self.getJugadorActual() ==1:
             j1.declararBatalla(maquina,self)
+            input("+----Da enter para mostrar el tablero actualizado")
         else: #es decir si el turno es de la maquina
             maquina.declararBatallaComoMaquina(self.getTablero(), j1)
 

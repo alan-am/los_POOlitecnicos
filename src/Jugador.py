@@ -1,8 +1,7 @@
 import Partida
 from Tablero import Tablero;
 from Cartas import *;
-from Deck import *;
-
+from Deck import *
 class Jugador:
 
     #Atributo estatico
@@ -287,7 +286,7 @@ class Jugador:
 
     def declararBatallaComoMaquina(self, tablero: Tablero, oponente):
     
-        print(f"La {self.getNombre()} te va a declarar batalla. ¡Prepárate!")
+        input(f"La {self.getNombre()} te va a declarar batalla!! {oponente.getNombre()} estás preparadx?: " )
 
         # Obtener monstruos en ataque que pueden atacar
         monstruosAtacantes = []
@@ -302,7 +301,7 @@ class Jugador:
                 if carta.getIsInAtaque():
                     carta.setIsInAtaque(False)
                     carta.setIsBocaArriba(False)
-                    print(f"{self.getNombre()} pone al monstruo {carta.getNombre()} en defensa.")
+                    print(f"---> {self.getNombre()} pone al monstruo {carta.getNombre()} en defensa.")
             return
 
         # Obtener monstruos del oponente
@@ -311,27 +310,29 @@ class Jugador:
         for cartaAtacante in monstruosAtacantes:
             if len(monstruosOponente) > 0:
                 cartaDefensora = monstruosOponente[0]
-                print(f"{cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
+                print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
                 tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
             else:
                 print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
                 oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
             cartaAtacante.setPuedeAtacar(False)
 
-            print(f"La {self.getNombre()} ha terminado su fase de batalla.")
+            print(f"{self.getNombre()} ha terminado su fase de batalla.")
+            print(f"=========================================================")
 
 
     def llenarTableroMaquina(self, tablero: Tablero):
         print(f"La {self.getNombre()} está organizando su tablero.")
+        input("Loading....")
         #print(self.imprimirMano()) solo fue para encontrar el error
         mano_maquina = self.getCartasEnMano().copy()
-
+        print("")
         # Colocar cartas de monstruo
         for carta in mano_maquina:
             if isinstance(carta, CartaMonstruo):
                 if len(tablero.tablerocompartido[2]["CartasMonstruo"]) < 3:
                     tablero.aniadirCartaTablero(carta, 2) #quita automat la carta de la mano
-                    print(f"La {self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
+                    print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
 
         # Colocar cartas mágicas o trampas
             else: #si no es monstruo será cualquier otra
@@ -339,14 +340,15 @@ class Jugador:
                     tablero.aniadirCartaTablero(carta, 2)
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
 
-        print(f"La {self.getNombre()} ha terminado de organizar su tablero.")
+        print(f"{self.getNombre()} ha terminado de organizar su tablero.")
+        input("Presiona enter para seguir  ")
 
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
         
     def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        NoTieneCartas= (len(self.getCartasEnMano())==0 and len(self.getDeck().getBaraja())==0)
+        NoTieneCartas= len(self.getCartasEnMano())==0 and len(self.getDeck().getBaraja())==0
         if  self.getPuntosVida()<=0 or NoTieneCartas:
             return True #devuelve true si esderrotado
         return False

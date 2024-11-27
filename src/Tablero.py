@@ -36,12 +36,12 @@ class Tablero:
 
         if isinstance(Carta,CartaMonstruo) and len(self.tablerocompartido[id_jugador]["CartasMonstruo"])<3: #compara el tipo de carta y la cantidad
             self.tablerocompartido[id_jugador]["CartasMonstruo"].append(Carta)
-            print(f"Carta {Carta.getNombre()} añadida")
+            print(f"+----Carta {Carta.getNombre()} añadida")
             self.quitarCarta_Mano(id_jugador,Carta)
             
         elif (isinstance(Carta,CartaMagica) or isinstance(Carta,CartaTrampa)) and len(self.tablerocompartido[id_jugador]["CartasEspeciales"])<3:
             self.tablerocompartido[id_jugador]["CartasEspeciales"].append(Carta)
-            print(f"Carta {Carta.getNombre()} añadida")
+            print(f"+----Carta {Carta.getNombre()} añadida")
             self.quitarCarta_Mano(id_jugador,Carta)
         else:
             print(f"No se pudo incluir esa carta, espacio lleno") ## para avisarle al jugador que alcanzó el límite¿?no estoy segura de esto
@@ -261,43 +261,62 @@ class Tablero:
         dic_e_1 ={}
         dic_m_2 ={}
         dic_e_2 ={}
+        mostrar_m1=[]
         def llenar_dic(dic_m,dic_e,diclleno): #diclleno seria cartas_j1
             cartas_m = diclleno["CartasMonstruo"]
             cartas_e = diclleno["CartasEspeciales"]
-            i = 0
-            a = 0
+            i = 1
+            a = 1
             for monstruo in cartas_m:
                 if monstruo.getIsBocaArriba():
-                    dic_m[i] = [monstruo, monstruo.getAtaque(),monstruo.getDefensa()]
+                    dic_m[i] = [monstruo.getNombre(),monstruo.getAtaque(),monstruo.getDefensa()]
                 else:
-                    dic_m[i] = [monstruo,"|--???--|","|--???--|"]
+                    dic_m[i] = [monstruo.getNombre(),"|--???--|","|--???--|"]
                 i+=1
             for especial in cartas_e:
                 if isinstance(especial,CartaMagica):
                     if especial.getIsBocaArriba():
-                        dic_e[a] = [especial, especial.getIncrementoAtaque(),especial.getIncrementoDefensa()]
-                else: #si es de trampa solo se guarda el nombre
-                    dic_e[a] = [especial,"--C.Trampa--","--C.Trampa--"]
-                a +=1
-                    
+                        dic_e[a] = [especial.getNombre(),especial.getIncrementoAtaque(),especial.getIncrementoDefensa()]
+                    else:
+                        dic_e[a] = [especial.getNombre(),"|--???--|","|--???--|"]
 
+                else: #si es de trampa solo se guarda el nombre
+                    dic_e[a] = [especial.getNombre(),"----Carta Trampa----"]
+                a+=1
+        
+               
         llenar_dic(dic_m_1,dic_e_1,cartas_j1)
         llenar_dic(dic_m_2,dic_e_2,cartas_j2)
-        jugador1 = np.array([[dic_m_1[0][0]],[dic_m_1[1][0]],[dic_m_1[2][0]]],
-                            [[dic_m_1[0][1]],[dic_m_1[1][1]],[dic_m_1[2][1]]],
-                            [[dic_m_1[0][2]],[dic_m_1[1][2]],[dic_m_1[2][2]]])
-        return f'''{"TABLERO".center(55,"-")}
+        
+
+
+        return f'''{"TABLERO".center(70,"-")}
 {"Jugador 1".center(70,"=")}
 ----+ Puntos de vida :{self.getJugador1().getPuntosVida()}
-Monstruo: 
-Ataque:
-Defensa:
-{jugador1}
+Monstruo        Ataque---Defensa
+{dic_m_1.get(1,"----+espacio vacío+----")}
+{dic_m_1.get(2,"----+espacio vacío+----")}
+{dic_m_1.get(3,"----+espacio vacío+----")}
+
 Especiales: 
+Mágicas          Inc.ATK---Inc.DEF
+{dic_e_1.get(1,"----+espacio vacío+----")}
+{dic_e_1.get(2,"----+espacio vacío+----")}
+{dic_e_1.get(3,"----+espacio vacío+----")}
+
 {"Máquina".center(70,"=")}
 ----+ Puntos de vida :{self.getJugador2().getPuntosVida()}
-Monstruo: 
+Monstruo        Ataque---Defensa
+-------------------------------------------------------
+{dic_m_2.get(1,"----+espacio vacío+----")}
+{dic_m_2.get(2,"----+espacio vacío+----")}
+{dic_m_2.get(3,"----+espacio vacío+----")}
+
 Especiales: 
+Mágicas          Inc.ATK---Inc.DEF
+{dic_e_2.get(1,"----+espacio vacío+----")}
+{dic_e_2.get(2,"----+espacio vacío+----")}
+{dic_e_2.get(3,"----+espacio vacío+----")}
 
 
 '''
