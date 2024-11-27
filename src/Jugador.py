@@ -156,7 +156,7 @@ class Jugador:
                     #caso en el que no tenga
                     else: 
                         #el danio del atacante aniadido con las cartas magicas lo sacamos accediendo a su carta magica asociada
-                        incAtkJugador = cartaSeleccionada.getCartaMagica().getIncrementoAtaque()
+                        incAtkJugador = cartaSeleccionada.getMagica().getIncrementoAtaque()
                         danio = cartaSeleccionada.getAtaque() + incAtkJugador;
                         print(f"| Se ha atacado directamente con {cartaSeleccionada.getNombre()}")
                         print(f" \t {cartaSeleccionada.getAtaque()}  +  {incAtkJugador} -->  {enemigo.getPuntosVida()} Puntos Vida {enemigo.getNombre()} ")
@@ -306,7 +306,7 @@ class Jugador:
                 #magica seleccionada previamente
                 if cartaAAsociar.getTipoMonstruo() == cartaSeleccionada.getTipoMonstruo():
                     #seteamos la nueva carta magica a esta carta Monstruo
-                    cartaAAsociar.setCartaMagica(cartaSeleccionada)
+                    cartaAAsociar.setMagica(cartaSeleccionada)
                     tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
 
                 else: 
@@ -336,6 +336,9 @@ class Jugador:
 
         # Obtener monstruos en ataque que pueden atacar
         monstruosAtacantes = []
+        cartasMagicas=[]
+        cartasTrampa=[]
+        
         for carta in tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]:
             if carta.getIsInAtaque() and carta.getPuedeAtacar():
                 monstruosAtacantes.append(carta)
@@ -349,11 +352,38 @@ class Jugador:
                     carta.setIsBocaArriba(False)
                     print(f"---> {self.getNombre()} pone al monstruo {carta.getNombre()} en defensa.")
             return
-
+        
         # Obtener monstruos del oponente
         monstruosOponente = tablero.tablerocompartido[oponente.getId()]["CartasMonstruo"]
-        # Aca ataca con cada mounstro disponible 
+
+        #Obtener cartas magicas y cartas trampa
+        for carta in tablero.getTableroCompartido()[self.getId()]["CartasEspeciales"]:
+            if isinstance(carta, CartaTrampa):
+                cartasTrampa.append(carta)
+            elif isinstance(carta, CartaMagica):
+                cartasMagicas.append(carta)
+
+        #Funcion de carta magica
+        for cartaMagica in cartasMagicas:
+            if tablero.validarAgregacionCartaMagica(cartaMagica, self):
+                for monstruo in tablero.getTableroCompartido()[self.getId()]["CartasMonstruo"]:
+                    if monstruo.getTipoMonstruo() == cartaMagica.getTipoMonstruo():
+                        if cartaMagica.getIncrementoAtaque() > 0:
+                            monstruo.setAtaque(monstruo.getAtaque() + cartaMagica.getIncrementoAtaque())
+                            print(f"---> {self.getNombre()} equipa '{cartaMagica.getNombre()}' a '{monstruo.getNombre()}', aumentando su ataque en {cartaMagica.getIncrementoAtaque()}.")
+                        elif cartaMagica.getIncrementoDefensa() > 0:
+                            monstruo.setDefensa(monstruo.getDefensa() + cartaMagica.getIncrementoDefensa())
+                            print(f"---> {self.getNombre()} equipa '{cartaMagica.getNombre()}' a '{monstruo.getNombre()}', aumentando su defensa en {cartaMagica.getIncrementoDefensa()}.")
+                        tablero.quitarCartaTablero(cartaMagica, self.getId())  # Eliminar la carta mágica tras equiparla
+                        break      
+
+        #Funcion de carta mounstro y carta  trampa               
         for cartaAtacante in monstruosAtacantes:
+            cartaTrampa = tablero.verificarCartaTrampa(oponente, cartaAtacante)
+            if cartaTrampa:
+                print(f"---> {oponente.getNombre()} activa la carta trampa '{cartaTrampa.getNombre()}' y detiene el ataque de '{cartaAtacante.getNombre()}'.")
+                tablero.quitarCartaTablero(cartaTrampa, oponente.getId())  # Descarta la carta trampa
+                continue
             if len(monstruosOponente) > 0:
                 cartaDefensora = monstruosOponente[0]
                 print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
@@ -365,6 +395,7 @@ class Jugador:
 
             print(f"{self.getNombre()} ha terminado su fase de batalla.")
             print(f"=========================================================")
+
 
 
     def llenarTableroMaquina(self, tablero: Tablero):

@@ -1,6 +1,5 @@
 from Deck import Deck
 from Cartas import *
-import numpy as np
 class Tablero:
 
     #Constructor
