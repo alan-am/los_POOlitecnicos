@@ -98,7 +98,7 @@ class Partida:
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
             #!Logica aniadida para para que el jugador elija cuantas quiera ...
             print("Desea añadir una carta en su tablero??")
-            eleccion = input("1. Si \n2. No \n");
+            eleccion = input("1. Si \n2. No \n>");
             #validamos su seleccion
             while eleccion != "1"  and eleccion != "2":
                 print("Elige un numero entre 1 y 2")
@@ -107,8 +107,8 @@ class Partida:
             #    jugar = input("--> ¿Desea añadir una carta en su tablero? (si/no) ").lower()
             while eleccion == "1":
                 j1.jugarCarta(self)
-                print("Desea añadir una carta en su tablero??")
-                eleccion = input("1. Si \n2. No \n");
+                print("Desea añadir una carta en su tablero?")
+                eleccion = input("1. Si \n2. No \n>");
                 while eleccion != "1"  and eleccion != "2":
                     print("Elige un numero entre 1 y 2")
                     eleccion = input("> ");
@@ -177,7 +177,19 @@ class Partida:
             print(f"El ganador es {j1.getNombre()}!")
         else:
             print("La partida se acabo, terminaron en empate !!")
+    
 
+    def resetearEstadoCartasMounstro2(self):
+        '''Resetea el atributo .puedeAtacar de las cartas mosntruo en el tablero de cada jugador'''
+        pass
+
+
+
+
+
+    def mostrarReglas(self):
+        '''Muestra al usuario las reglas de este juego de cartas yugioh'''
+        pass;
 
     
 
