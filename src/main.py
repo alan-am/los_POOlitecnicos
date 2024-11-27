@@ -15,13 +15,13 @@ def main():
     maquina = partida.getTablero().getJugador2() #j2 es la maquina
     
     #TEST
-    print("Mostrando la informacion de ambos jugadores" ) 
+        #print("Mostrando la informacion de ambos jugadores" ) 
     #Luego cuando ya este todo testeado eliminar esto de mostrar nombre, pq se supone
     #que el jugador no deberia ver su baraja xd, solo sus cartas en mano
-    print("")
-    print(usuario.toString())
-    print(maquina.toString())
-    print("")
+        #print("")
+        #print(usuario.toString())
+        #print(maquina.toString())
+        #print("")
     # cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()
     # while cambio_nom not in ["si","no"]:
     #     cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()

@@ -52,7 +52,7 @@ class Partida:
                 #print del tablero para que el jugador vea como queda
                 print(self.getTablero().toString()) #Aniadido Alan
                 self.cambiarTurno()
-            print("Es su primer turno, no puede declarar batalla")
+            print("--- Es su primer turno, no puede declarar batalla")
         else: 
             for i in range(2):#por cada jugador
                 self.faseTomarCarta(j1,maquina)
@@ -103,6 +103,8 @@ class Partida:
         
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
             #!Logica aniadida para para que el jugador elija cuantas quiera ...
+            input("|--> Presiona enter para visualizar tus cartas en mano ")
+            j1.imprimirMano()
             print("Desea añadir una carta en su tablero??")
             eleccion = input("1. Si \n2. No \n>");
             #validamos su seleccion
