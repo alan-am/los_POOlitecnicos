@@ -64,7 +64,7 @@ class Partida:
                 self.getTablero().destruirCartaMagica(jugador_actual)
                 #print del tablero para que el jugador vea como queda
                 input("> Da enter para mostrar el tablero actualizado ")
-                self.getTablero().toString() #Aniadido Alan 
+                print(self.getTablero().toString()) #Aniadido Alan 
                 #reestablece el estado de las cartas para el siguiente turno
                 self.resetearEstadoCartasMounstro(jugador_actual)
                 #cambia de un jugador a otro, cambia turno
@@ -87,15 +87,19 @@ class Partida:
         if self.__turno <=3 and (len(j1.getCartasEnMano())==0 or len(j2.getCartasEnMano())==0): #verifica que sea el primer turno de cada jugador
             if j1.getId() == self.__jugadoractual:
                 j1.tomar5Cartas()
+                print(f"{j1.getNombre()} ha tomado 5 cartas del deck")
             else:
                 self.__tablero.getJugador2().tomar5Cartas()
+                print(f"{j2.getNombre()} ha tomado 5 cartas del deck")
         else: #cuando haya pasado la primera ronda, se toma una sola carta por turno
             if self.__jugadoractual ==1:
                 print("-Es tu turno de robar una carta-")
                 input("Presiona enter para tomar la carta del Deck... ")
                 j1.tomarCartaEnTurno()
             else:
-                print(f'{"Turno de la maquina".center(30,"-")}') #!Print para test, luego eliminar
+                print(f'{"Turno de la maquina".center(30,"-")}')
+                 #!Print para test, luego eliminar
+                print("La máquina ya ha robado su carta")
                 j2.tomarCartaEnTurno()
         
  
@@ -104,6 +108,7 @@ class Partida:
         
         if self.getJugadorActual() ==1: #si está jugando el usuario se llama a la función jugar carta
             #!Logica aniadida para para que el jugador elija cuantas quiera ...
+            j1.setNoAgregoMonstruo(True)
             input("|--> Presiona enter para visualizar tus cartas en mano ")
             j1.imprimirMano()
             print("Desea añadir una carta en su tablero??")
@@ -124,6 +129,7 @@ class Partida:
 
 
         else: #si es el turno de la maquina, se llama a 
+            maquina.setNoAgregoMonstruo(True)
             maquina.llenarTableroMaquina(self.getTablero())
     
     def faseBatalla(self,j1:Jugador,maquina:Jugador):

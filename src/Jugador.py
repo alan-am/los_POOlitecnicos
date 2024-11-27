@@ -106,14 +106,14 @@ class Jugador:
         espacioCartasMonstruoJ = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
 
         #Validacion existan cartas monstruo
-        while tablero.hayCartasMonstruoEnAtaque(self): #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
+        #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #preguntamos si desea atacar
-            print("|    Ejecutar ataque?")
-            eleccion = input("1. Si \n2. No \n > ");
-            #validamos su seleccion
-            while eleccion != "1"  and eleccion != "2":
-                print("Elige un numero entre 1 y 2")
-                eleccion = input(" > ");
+        print("|    Ejecutar ataque?")
+        eleccion = input("1. Si \n2. No \n > ");
+        #validamos su seleccion
+        while eleccion != "1"  and eleccion != "2":
+            print("Elige un numero entre 1 y 2")
+            eleccion = input(" > ");
         #Validacion existan cartas monstruo
         while tablero.hayCartasMonstruoEnAtaque(self) and eleccion == "1": #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #si enetró en el while es porque quiere atacar
@@ -146,8 +146,8 @@ class Jugador:
                         print("| Se ha atacado directamente! pero una carta Trampa se interpuso")
                         #eliminamos la carta trampa q se interpuso
                         cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
-                        print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo().value}")
-                        print("| Carta Trampa eliminada del tablero")
+                        print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo()}")
+                        print("Carta Trampa eliminada del tablero")
                         tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
                         cartaSeleccionada.setPuedeAtacar(False);
 
@@ -210,7 +210,7 @@ class Jugador:
             # actualiz la vida del jugador CHECK
             # se cambia el atributo  de la carta elegida puedeAtacar a False CHECK
             '''vuelve a preguntar y eleccion se actualiza'''
-            print("Deseas atacar?")
+            print("|    Ejecutar ataque?")
             eleccion = input("1. Si \n2. No \n");
             #validamos su seleccion
             while eleccion != "1"  and eleccion != "2":
@@ -248,6 +248,7 @@ class Jugador:
     #antes de aniadirla verificamos q tipo de carta es, validamos que 
     # tenga suficiente espacio para ese tipo y preguntamos(en el caso de cartas mosntruo q tipo de posicion)
     #Si es un carta monstruo
+
         if(isinstance(cartaSeleccionada, CartaMonstruo)):
             #validamos q haya espacio
             if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3 and self.__noagregoMonstruo:
@@ -369,9 +370,11 @@ class Jugador:
         # Colocar cartas de monstruo
         for carta in mano_maquina:
             if isinstance(carta, CartaMonstruo):
-                if len(tablero.tablerocompartido[2]["CartasMonstruo"]) < 3:
-                    tablero.aniadirCartaTablero(carta, 2) #quita automat la carta de la mano
-                    print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
+                if self.__noagregoMonstruo: #si no se ha agregadomonstruo en ese turno #seactualiza en fase (Partida())
+                    if len(tablero.tablerocompartido[2]["CartasMonstruo"]) < 3:
+                        tablero.aniadirCartaTablero(carta, 2) #quita automat la carta de la mano
+                        print(f"{self.getNombre()} coloca al monstruo {carta.getNombre()} en el tablero.")
+                        self.setNoAgregoMonstruo(False)#yatieneun monstruo agregado
 
         # Colocar cartas mágicas o trampas
             else: #si no es monstruo será cualquier otra
@@ -380,7 +383,7 @@ class Jugador:
                     print(f"{self.getNombre()} coloca una carta especial: {carta.getNombre()}.")
 
         print(f"{self.getNombre()} ha terminado de organizar su tablero.")
-        input("Presiona enter para seguir  ")
+        input("Enter para seguir  ")
 
         ### FIN DE LAS FUNCIONES DE MAQUINA
     
@@ -388,9 +391,8 @@ class Jugador:
     def esDerrotado(self):
         ##verifica que el jugador fue derrotado
         NoTieneCartas= len(self.getCartasEnMano())==0 and len(self.getDeck().getBaraja())==0
-        if  self.getPuntosVida()<=0 or NoTieneCartas:
-            return True #devuelve true si esderrotado
-        return False
+        return self.getPuntosVida()<=0 or NoTieneCartas
+     #devuelve true si esderrotado
     
          
     #toString
