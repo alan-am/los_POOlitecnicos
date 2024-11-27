@@ -380,22 +380,27 @@ class Jugador:
         #Funcion de carta mounstro y carta  trampa               
         for cartaAtacante in monstruosAtacantes:
             cartaTrampa = tablero.verificarCartaTrampa(oponente, cartaAtacante)
-            if cartaTrampa:
-                print(f"---> {oponente.getNombre()} activa la carta trampa '{cartaTrampa.getNombre()}' y detiene el ataque de '{cartaAtacante.getNombre()}'.")
-                tablero.quitarCartaTablero(cartaTrampa, oponente.getId())  # Descarta la carta trampa
-                continue
-            if len(monstruosOponente) > 0:
-                cartaDefensora = monstruosOponente[0]
-                print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
-                tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
-            else:
-                print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
-                oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
-            cartaAtacante.setPuedeAtacar(False)
+            for cartaMounstrorival in monstruosOponente:
+               
 
-            print(f"{self.getNombre()} ha terminado su fase de batalla.")
-            print(f"=========================================================")
+                if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):
+                    if cartaTrampa:
+                        print(f"---> {oponente.getNombre()} activa la carta trampa '{cartaTrampa.getNombre()}' y detiene el ataque de '{cartaAtacante.getNombre()}'.")
+                        tablero.quitarCartaTablero(cartaTrampa, oponente.getId())  # Descarta la carta trampa
+                        continue
+                    if len(monstruosOponente) > 0:
+                        cartaDefensora = monstruosOponente[0]
+                        print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
+                        tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
+                    else:
+                        print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
+                        oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
+                    cartaAtacante.setPuedeAtacar(False)
 
+                    print(f"{self.getNombre()} ha terminado su fase de batalla.")
+                    print(f"=========================================================")
+                else:
+                    print(f"La Maquina ha decidido no atacar a tu carta {cartaMounstrorival.getNombre()} porque no le conviene")
 
 
     def llenarTableroMaquina(self, tablero: Tablero):
