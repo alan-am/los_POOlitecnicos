@@ -156,7 +156,7 @@ class Jugador:
                     #caso en el que no tenga
                     else: 
                         #el danio del atacante aniadido con las cartas magicas lo sacamos accediendo a su carta magica asociada
-                        incAtkJugador = cartaSeleccionada.getMagica().getIncrementoAtaque()
+                        incAtkJugador = cartaSeleccionada.getCartaMagica().getIncrementoAtaque()
                         danio = cartaSeleccionada.getAtaque() + incAtkJugador;
                         print(f"| Se ha atacado directamente con {cartaSeleccionada.getNombre()}")
                         print(f" \t {cartaSeleccionada.getAtaque()}  +  {incAtkJugador} -->  {enemigo.getPuntosVida()} Puntos Vida {enemigo.getNombre()} ")
@@ -272,9 +272,9 @@ class Jugador:
             else:
                 #if para especificar mejor la advertencia al usuario
                 if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
-                    print("WARNING| Ya no puedes colocar mas cartas mosntruos en este turno")
+                    print("WARNING| Ya no puedes colocar mas cartas monstruos en este turno")
                 else:
-                    print("WARNING| Has alcanzado el limite de cartas mosntruos en el tablero")
+                    print("WARNING| Has alcanzado el limite de cartas monstruos en el tablero")
         #Caso si la carta es trampa
         elif isinstance(cartaSeleccionada, CartaTrampa):
             #validamos que haya espacio
@@ -306,7 +306,7 @@ class Jugador:
                 #magica seleccionada previamente
                 if cartaAAsociar.getTipoMonstruo() == cartaSeleccionada.getTipoMonstruo():
                     #seteamos la nueva carta magica a esta carta Monstruo
-                    cartaAAsociar.setMagica(cartaSeleccionada)
+                    cartaAAsociar.setCartaMagica(cartaSeleccionada)
                     tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
 
                 else: 

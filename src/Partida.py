@@ -37,7 +37,6 @@ class Partida:
    
     #Metodos
 
-
     #una "ronda" es un turno por jugador (2 en total), en la primera ronda no se puede declarar batalla
     def ronda(self):
         '''se encarga de que el juego tenga secuencia'''
@@ -66,7 +65,7 @@ class Partida:
                 input("> Da enter para mostrar el tablero actualizado ")
                 print(self.getTablero().toString()) #Aniadido Alan 
                 #reestablece el estado de las cartas para el siguiente turno
-                self.resetearEstadoCartasMounstro(jugador_actual)
+                self.resetearEstadoCartasMounstruo(jugador_actual)
                 #cambia de un jugador a otro, cambia turno
                 self.cambiarTurno()  
         #por cada ronda se hace esto:
@@ -168,8 +167,8 @@ class Partida:
         #intenté acomodar este método
 
 
-    def resetearEstadoCartasMounstro(self, id_jugador):
-        """Después de cada turno, resetear el estado de las cartas monstruo"""
+    def resetearEstadoCartasMounstruo(self, id_jugador):
+    #Después de cada turno, resetear el estado de las cartas monstruo de ataque se reinicia 
         jugador = None
         if id_jugador == 1:
             jugador = self.getTablero().getJugador1()
@@ -177,9 +176,9 @@ class Partida:
             jugador = self.getTablero().getJugador2()
         for carta in jugador.getCartasEnMano():
             if isinstance(carta, CartaMonstruo):
-                carta.setPuedeAtacar(True)
-                #by Alan, lo de abajo no va, solo se resetea el PuedeAtacar 
-                #carta.setIsInAtaque(True)
+                carta.setPuedeAtacar(True)               
+               
+
     
     
     def finalizarPartida(self, j1, j2):
