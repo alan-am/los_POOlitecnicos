@@ -63,6 +63,7 @@ class Partida:
                 #luego de la batalla, busca las cartas inservibles y chao
                 self.getTablero().destruirCartaMagica(jugador_actual)
                 #print del tablero para que el jugador vea como queda
+                input("> Da enter para mostrar el tablero actualizado ")
                 self.getTablero().toString() #Aniadido Alan 
                 #reestablece el estado de las cartas para el siguiente turno
                 self.resetearEstadoCartasMounstro(jugador_actual)
@@ -129,7 +130,6 @@ class Partida:
         #verifica quien va a declarar batalla, de quien es el turno
         if self.getJugadorActual() ==1:
             j1.declararBatalla(maquina,self)
-            input("+----Da enter para mostrar el tablero actualizado")
         else: #es decir si el turno es de la maquina
             maquina.declararBatallaComoMaquina(self.getTablero(), j1)
 

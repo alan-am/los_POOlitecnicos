@@ -81,6 +81,7 @@ class CartaMonstruo(Carta):
         self.__isInAtaque = True; #* por defecto #! si se pone en defensa se coloca boca abajo
         self.__isBocaArriba = True; #* por defecto #se muestra el atk/def al imrpimir
         self.__puedeAtacar = True; #* por defecto #true si puede atacar en ese turno
+    
 
     #Getters y setters 
     def getAtaque(self):

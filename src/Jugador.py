@@ -16,6 +16,7 @@ class Jugador:
         self.__nombre = nombre;
         self.__deck = Deck(); #es una lista de Cartas
         self.__cartasEnMano = [];
+        self.__noagregoMonstruo = True; #por defecto, cambia en cada turno porque solo puede agregar un monstruo por vez
     
     #Getters y setters 
     def getId(self):
@@ -42,6 +43,9 @@ class Jugador:
         return self.__nombre;
     def setNombre(self, nuevo_nombre):
         self.__nombre = nuevo_nombre;
+    def setNoAgregoMonstruo(self,boolean):
+        self.__noagregoMonstruo = boolean #si el ingresado es false, significa que ya agregó una en ese turno
+        #y que no puede agregar más 
     
 
     #Metodos
@@ -246,7 +250,7 @@ class Jugador:
     #Si es un carta monstruo
         if(isinstance(cartaSeleccionada, CartaMonstruo)):
             #validamos q haya espacio
-            if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
+            if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3 and self.__noagregoMonstruo:
                 #preguntamos en que modo pone la carta
                 print("Elige el modo de la carta: ")
                 eleccion = input("1. Ataque \n2. Defensa \n");
@@ -264,6 +268,7 @@ class Jugador:
                 
                 #Aniadimos la carta a tablero
                 tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
+                self.setNoAgregoMonstruo(False)
             else:
                 print("WARNING| Ya no puedes colocar más cartas Monstruo")
         #Caso si la cartas es Magica o trampa
