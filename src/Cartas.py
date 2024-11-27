@@ -145,7 +145,7 @@ class CartaMonstruo(Carta):
         return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque}, DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}'''
 
 
-#lo de :> era para intentar darle mejor aspecto pero no se logró
+
 
 
 #SUB-CLASE

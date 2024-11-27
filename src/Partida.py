@@ -170,16 +170,15 @@ class Partida:
     def finalizarPartida(self, j1, j2):
         """Finaliza la partida determinando el ganador."""
         if j1.esDerrotado():
-            print(f"El jugador{j1.getNombre()} ha sido derrotado.")
-            print(f"El ganador es {j2.getNombre()}!")
+            print(f"El jugador {j1.getNombre()} ha sido derrotado.")
+            print(f"La ganadora es la {j2.getNombre()}!")
         elif j2.esDerrotado():
-            print(f"El jugador {j2.getNombre()} ha sido derrotado.")
+            print(f"La {j2.getNombre()} ha sido derrotada.")
             print(f"El ganador es {j1.getNombre()}!")
-        else:
-            print("La partida se acabo, terminaron en empate !!")
-    
 
-    def resetearEstadoCartasMounstro2(self):
+
+
+    def resetearEstadoCartasMounstro2(self): #Prueba # la funcion original parece que no etsa funcionando bien
         '''Resetea el atributo .puedeAtacar de las cartas mosntruo en el tablero de cada jugador'''
         pass
 
@@ -190,7 +189,6 @@ class Partida:
     def mostrarReglas(self):
         '''Muestra al usuario las reglas de este juego de cartas yugioh'''
         pass;
-
     
 
 

@@ -1,6 +1,6 @@
 from Deck import Deck
 from Cartas import *
-
+import numpy as np
 class Tablero:
 
     #Constructor
@@ -177,7 +177,9 @@ class Tablero:
 
                     return danioRealAEnemigo, danioRealAJugador;
             
-                elif (cartaJugador.getAtaque() + incAtkJugador ) < (cartaEnemigo.getAtaque()+incAtkEnemigo):
+                #elif (cartaJugador.getAtaque() + incAtkJugador ) < (cartaEnemigo.getAtaque()+incAtkEnemigo):
+                else: #si no es mayor y no es igual, el último caso es que será menor
+                    #hice esto porque tiraba error, ya que no todos los caminos tenían un return válido
                     danioRealAEnemigo = 0
                     danioRealAJugador = (cartaEnemigo.getAtaque()+incAtkEnemigo) - (cartaJugador.getAtaque() + incAtkJugador )
                     print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
@@ -188,14 +190,14 @@ class Tablero:
                     return danioRealAEnemigo, danioRealAJugador;
             
             else:
-                if (cartaJugador.getAtaque() + incAtkJugador ) > (cartaEnemigo.getDefensa() + incDefEnemigo):
+                if (cartaJugador.getAtaque() + incAtkJugador ) >= (cartaEnemigo.getDefensa() + incDefEnemigo):
                     print(f"| Ataque y Defensa | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getDefensa()} + {incDefEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
                     self.quitarCartaTablero(cartaEnemigo,enemigoID)
                     #la carta en defensa debe cambiar a boca arriba
                     cartaEnemigo.setIsBocaArriba(True)
-
+                    #aunque no lo dice el juego, puse >= para que no dé error
                     #no se realiza danio ni al atacante ni al defensor
                     return 0, 0
 
@@ -255,26 +257,48 @@ class Tablero:
     def toString(self):
         cartas_j1 = self.tablerocompartido[1]
         cartas_j2= self.tablerocompartido[2]
-        car_monstruos_j1 = []
-        car_especiales_j1=[]
-        car_monstruos_j2=[]
-        car_especiales_j2=[]
-        def llenarlistas(listavacia1,listavacia2,diccionario): #listavacia1 sera de monstruos y lista2 de especiales
-            for carta in diccionario["CartasMonstruo"]:
-                nombreCarta = carta.getNombre();
-                listavacia1.append(nombreCarta);
-            for carta in diccionario["CartasEspeciales"]:
-                nombre = carta.getNombre();
-                listavacia2.append(nombre)
-        llenarlistas(car_monstruos_j1,car_especiales_j1,cartas_j1)
-        llenarlistas(car_monstruos_j2,car_especiales_j2,cartas_j2)
+        dic_m_1= {}
+        dic_e_1 ={}
+        dic_m_2 ={}
+        dic_e_2 ={}
+        def llenar_dic(dic_m,dic_e,diclleno): #diclleno seria cartas_j1
+            cartas_m = diclleno["CartasMonstruo"]
+            cartas_e = diclleno["CartasEspeciales"]
+            i = 0
+            a = 0
+            for monstruo in cartas_m:
+                if monstruo.getIsBocaArriba():
+                    dic_m[i] = [monstruo, monstruo.getAtaque(),monstruo.getDefensa()]
+                else:
+                    dic_m[i] = [monstruo,"|--???--|","|--???--|"]
+                i+=1
+            for especial in cartas_e:
+                if isinstance(especial,CartaMagica):
+                    if especial.getIsBocaArriba():
+                        dic_e[a] = [especial, especial.getIncrementoAtaque(),especial.getIncrementoDefensa()]
+                else: #si es de trampa solo se guarda el nombre
+                    dic_e[a] = [especial,"--C.Trampa--","--C.Trampa--"]
+                a +=1
+                    
+
+        llenar_dic(dic_m_1,dic_e_1,cartas_j1)
+        llenar_dic(dic_m_2,dic_e_2,cartas_j2)
+        jugador1 = np.array([[dic_m_1[0][0]],[dic_m_1[1][0]],[dic_m_1[2][0]]],
+                            [[dic_m_1[0][1]],[dic_m_1[1][1]],[dic_m_1[2][1]]],
+                            [[dic_m_1[0][2]],[dic_m_1[1][2]],[dic_m_1[2][2]]])
         return f'''{"TABLERO".center(55,"-")}
 {"Jugador 1".center(70,"=")}
-Monstruo: {car_monstruos_j1}
-Especiales: {car_especiales_j1}
-{"Jugador 2".center(70,"=")}
-Monstruo: {car_monstruos_j2}
-Especiales: {car_especiales_j2}
+----+ Puntos de vida :{self.getJugador1().getPuntosVida()}
+Monstruo: 
+Ataque:
+Defensa:
+{jugador1}
+Especiales: 
+{"Máquina".center(70,"=")}
+----+ Puntos de vida :{self.getJugador2().getPuntosVida()}
+Monstruo: 
+Especiales: 
+
 
 '''
 
