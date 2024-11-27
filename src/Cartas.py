@@ -152,14 +152,14 @@ class CartaMonstruo(Carta):
         if self.__isInAtaque:
             var = "Ataque"
 
-        return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque}, DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}'''
+        return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque} , DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}'''
     
     #String corto para mostrar solo atk, def, tipoMonstruo y modo
     def toString3(self):
         var = "Defensa"
         if self.__isInAtaque:
             var = "Ataque"
-        return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque}, DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}'''
+        return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque} + {self.__cartaMagica.getIncrementoAtaque()}, DEF: {self.__defensa} + {self.__cartaMagica.getIncrementoDefensa()}]   Tipo: {self.__tipoMonstruo.value}'''
 
 
 

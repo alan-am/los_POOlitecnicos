@@ -122,13 +122,13 @@ class Jugador:
             #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
             #boca arriba damos permiso de atacar;
             for cartaMonstruo in espacioCartasMonstruoJ:
-                print(f'{i+1}. {cartaMonstruo.toString2()}') #A lomejor tambien mostrar ATK y DEF 
+                print(f'{i+1}. {cartaMonstruo.toString3()}')
                 i += 1;
             seleccion = input(" > ")
             # validacion por si el usuario pone letras  o se pasa del rango-_-
             while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                 print("Por favor, ingresa un número válido.")
-                seleccion = input("> ")
+                seleccion = input(" > ")
 
             cartaSeleccionada = espacioCartasMonstruoJ[int(seleccion)-1]
             #validamos que la carta elegida este en posicion de ataque y pueda atacar #!si esta en ataque esta boca arriba !!
@@ -147,7 +147,7 @@ class Jugador:
                         #eliminamos la carta trampa q se interpuso
                         cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
                         print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo()}")
-                        print("Carta Trampa eliminada del tablero")
+                        print("| Carta Trampa eliminada del tablero")
                         tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
                         cartaSeleccionada.setPuedeAtacar(False);
 
@@ -155,9 +155,8 @@ class Jugador:
                         
                     #caso en el que no tenga
                     else: 
-                        #determinamos el danio del atacante aniadido con las cartas magicas
-                        incAtkJugador, incDefJugador = tablero.verificarCartasMagicas(self, cartaSeleccionada)
-
+                        #el danio del atacante aniadido con las cartas magicas lo sacamos accediendo a su carta magica asociada
+                        incAtkJugador = cartaSeleccionada.getCartaMagica().getIncrementoAtaque()
                         danio = cartaSeleccionada.getAtaque() + incAtkJugador;
                         print(f"| Se ha atacado directamente con {cartaSeleccionada.getNombre()}")
                         print(f" \t {cartaSeleccionada.getAtaque()}  +  {incAtkJugador} -->  {enemigo.getPuntosVida()} Puntos Vida {enemigo.getNombre()} ")
@@ -178,7 +177,7 @@ class Jugador:
                         else: 
                             print(f'{i+1}. CARTA MONSTRUO|| *** Carta boca abajo ***')
                         i+=1
-                    seleccion = input("> ")
+                    seleccion = input(" > ")
                     # validacion por si el usuario pone letras  o se pasa del rango-_-
                     while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
                         print("Por favor, ingresa un número válido.")
@@ -271,7 +270,11 @@ class Jugador:
                 tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
                 self.setNoAgregoMonstruo(False)
             else:
-                print("WARNING| Ya no puedes colocar más cartas Monstruo")
+                #if para especificar mejor la advertencia al usuario
+                if len(tablero.tablerocompartido[self.__id]["CartasMonstruo"])<3:
+                    print("WARNING| Ya no puedes colocar mas cartas mosntruos en este turno")
+                else:
+                    print("WARNING| Has alcanzado el limite de cartas mosntruos en el tablero")
         #Caso si la carta es trampa
         elif isinstance(cartaSeleccionada, CartaTrampa):
             #validamos que haya espacio
@@ -279,11 +282,11 @@ class Jugador:
                 #Aniadimos la carta a tablero
                 tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
             else:
-                print("No se puede agregar mas cartas Magicas o Trampa") 
+                print("WARNING| No se puede agregar mas cartas Magicas o Trampa") 
         #Caso si la carta seleccionada es Magica
         elif isinstance(cartaSeleccionada, CartaMagica):
             #validamos que ya exista un monstruo en el tablero con mismo atributo de la carta
-            if tablero.validarAgregacionCartaMagica():
+            if tablero.validarAgregacionCartaMagica(cartaSeleccionada, self):
                 espacioCartasMonstruoJ = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
                 #Mostramos las cartas monstruo:
                 print("| Selecciona el monstruo al cual asociar la carta Magica")
@@ -304,18 +307,21 @@ class Jugador:
                 if cartaAAsociar.getTipoMonstruo() == cartaSeleccionada.getTipoMonstruo():
                     #seteamos la nueva carta magica a esta carta Monstruo
                     cartaAAsociar.setCartaMagica(cartaSeleccionada)
+                    tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
+
                 else: 
                     print(f'WARNING| La carta Magica elegida no se puede asociar a la carta Monstruo "{cartaAAsociar.getNombre()}" ')
-
+            else: 
+                print(f'WARNING| No existe carta Monstruo en tablero con la cual asociarla')
        
 
     def imprimirMano(self):
         ###Imprime por consola las cartas en mano que tiene el jugador'''
         for Carta in self.__cartasEnMano:
-            print(Carta.toString())
+            print(Carta.toString2())
 
     def listarCartasEnMano(self):
-        ###Metodo hecho por Alan, escribe su funcionalidad xd
+        ###retorna una lista solo con el nombre de las cartas en mano
         cartas = []
         for Carta in self.__cartasEnMano:
             cartas.append(Carta.getNombre())

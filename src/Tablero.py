@@ -96,21 +96,6 @@ class Tablero:
         
         return cartaEncontrada
     
-    def verificarCartasMagicas(self, jugador, cartaMonstruo):
-        '''Itera en el espacio de cartas especiales del jugador, validando cuales
-         coinciden con el tipo de monstruo de 'carta' y va sumando los incrementos de ataque y defensa
-          retorna dicha tupla de valores '''
-        espacioEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
-        incAtk = 0;
-        incDef = 0;
-        for cartaEspecial in espacioEspecialesJ:
-            if isinstance(cartaEspecial, CartaMagica):
-                if cartaEspecial.getTipoMonstruo() == cartaMonstruo.getTipoMonstruo():
-                    incAtk += cartaEspecial.getIncrementoAtaque()
-                    incDef += cartaEspecial.getIncrementoDefensa()
-
-        return incAtk, incDef; 
-
     def destruirCartaMagica(self, id_jugador):
         '''Verifica si existen cartasMonstruo en el tablero con igual atributos de
         cartas magicas en el tablero, carta magica que no encuentra coincidencias es eliminada
@@ -138,7 +123,7 @@ class Tablero:
         
     
     #Revisar lo que recibe
-    def ataqueEntreCartas(self, cartaJugador, cartaEnemigo, jugador, enemigo):    #!->>> devuelvo una tupla bien definida?
+    def ataqueEntreCartas(self, cartaJugador: CartaMonstruo, cartaEnemigo, jugador, enemigo):    #!->>> devuelvo una tupla bien definida?
         '''Realiza la logica del ataque entre cartas , verificando si existen cartas trampas o 
         magicas que beneficien a los jugadores y tiene en cuenta los distintos caso de ataque - ataque y 
         ataque - defensa; retorna una tupla con el valor real del danio recibido al enemigo y al atacante'''
@@ -149,8 +134,8 @@ class Tablero:
         if self.verificarCartaTrampa(enemigo, cartaJugador) is None:
             
             #Antes de atacar debo verificar si existen cartas magicas q incrementen los valores de ataque
-            incAtkJugador, incDefJugador = self.verificarCartasMagicas(jugador, cartaJugador)
-            incAtkEnemigo, incDefEnemigo = self.verificarCartasMagicas(enemigo, cartaEnemigo)
+            incAtkJugador, incDefJugador = cartaJugador.getCartaMagica().getIncrementoAtaque(), cartaJugador.getCartaMagica().getIncrementoDefensa()
+            incAtkEnemigo, incDefEnemigo = cartaEnemigo.getCartaMagica().getIncrementoAtaque(), cartaEnemigo.getCartaMagica().getIncrementoDefensa()
 
             #Comprobamos si la carta enemigo esta en ataque
             if cartaEnemigo.getIsInAtaque():
@@ -159,21 +144,26 @@ class Tablero:
                     danioRealAEnemigo = (cartaJugador.getAtaque() + incAtkJugador ) - (cartaEnemigo.getAtaque()+incAtkEnemigo) ;
                     danioRealAJugador = 0;
                     #formato salida
-                    print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
+                    print(f"|| Choque de ataques ||     ||{cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}||")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getAtaque()} + {incAtkEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
+                    #Se elimina la carta magica asociada y la propia carta del enemigo
                     self.quitarCartaTablero(cartaEnemigo,enemigoID)
+                    self.eliminarCartaMagicaAsociada(enemigo, cartaEnemigo)
                     return danioRealAEnemigo, danioRealAJugador;
             
                 elif (cartaJugador.getAtaque() + incAtkJugador ) == (cartaEnemigo.getAtaque()+incAtkEnemigo):
                     danioRealAJugador = 0;
                     danioRealAEnemigo = 0;
-                    print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
+                    print(f"|| Choque de ataques ||     ||{cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}||")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getAtaque()} + {incAtkEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
                     print(f"| {cartaEnemigo.getNombre()} destruyó a {cartaJugador.getNombre()} en batalla!")
+
                     self.quitarCartaTablero(cartaEnemigo,enemigoID)
+                    self.eliminarCartaMagicaAsociada(enemigo, cartaEnemigo)
                     self.quitarCartaTablero(cartaJugador,jugadorID)
+                    self.eliminarCartaMagicaAsociada(jugador, cartaJugador)
 
                     return danioRealAEnemigo, danioRealAJugador;
             
@@ -182,19 +172,23 @@ class Tablero:
                     #hice esto porque tiraba error, ya que no todos los caminos tenían un return válido
                     danioRealAEnemigo = 0
                     danioRealAJugador = (cartaEnemigo.getAtaque()+incAtkEnemigo) - (cartaJugador.getAtaque() + incAtkJugador )
-                    print(f"| Choque de ataques | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
+                    print(f"|| Choque de ataques ||     ||{cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}||")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getAtaque()} + {incAtkEnemigo}")
                     print(f"| {cartaEnemigo.getNombre()} destruyó a {cartaJugador.getNombre()} en batalla!")
                     self.quitarCartaTablero(cartaJugador,jugadorID);
+                    self.eliminarCartaMagicaAsociada(jugador, cartaJugador)
+
 
                     return danioRealAEnemigo, danioRealAJugador;
             
             else:
                 if (cartaJugador.getAtaque() + incAtkJugador ) >= (cartaEnemigo.getDefensa() + incDefEnemigo):
-                    print(f"| Ataque y Defensa | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
+                    print(f"|| Ataque y Defensa ||      ||{cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}||")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getDefensa()} + {incDefEnemigo}")
                     print(f"| {cartaJugador.getNombre()} destruyó a {cartaEnemigo.getNombre()} en batalla!")
                     self.quitarCartaTablero(cartaEnemigo,enemigoID)
+                    self.eliminarCartaMagicaAsociada(enemigo, cartaEnemigo)
+                    
                     #la carta en defensa debe cambiar a boca arriba
                     cartaEnemigo.setIsBocaArriba(True)
                     #aunque no lo dice el juego, puse >= para que no dé error
@@ -203,9 +197,8 @@ class Tablero:
 
                 elif (cartaJugador.getAtaque() + incAtkJugador ) < (cartaEnemigo.getDefensa() + incDefEnemigo):
                     danioRealAJugador = (cartaEnemigo.getDefensa() + incDefEnemigo) - (cartaJugador.getAtaque() + incAtkJugador )
-                    print(f"| Ataque y Defensa | {cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}")
+                    print(f"|| Ataque y Defensa ||      ||{cartaJugador.getNombre()} vs {cartaEnemigo.getNombre()}||")
                     print(f"\t {cartaJugador.getAtaque()} + {incAtkJugador}  -->  <--  {cartaEnemigo.getDefensa()} + {incDefEnemigo}")
-                    print("Has recibido daño!");
                     danioRealAEnemigo = 0 
 
                     #la carta en defensa debe cambiar a boca arriba
@@ -216,7 +209,7 @@ class Tablero:
         else: 
             #Si no es None Significa que si hay una carta trampa que detiene el ataque del jugador
             cartaTrampa = self.verificarCartaTrampa(enemigo, cartaJugador);
-            print(f"| La carta trampa {cartaTrampa.getNombre()} detuvo el Ataque!")
+            print(f"|    La carta trampa {cartaTrampa.getNombre()} detuvo el Ataque!")
             #eliminamos la carta trampa ya utilizada del tablero del enemigo
             self.quitarCartaTablero(cartaTrampa, enemigoID);
             return 0, 0
@@ -259,7 +252,7 @@ class Tablero:
         en el tablero del jugador dicha carta por su id , y procede a eliminarla'''
 
         #validamos que la carta mosntruo tenga una carta asociada
-        if cartaMonstruo.getCartaMagica().getTipoMonstruo() is not None:
+        if cartaMonstruo.getCartaMagica().getNombre() != "Carta Defecto":
             id_cartaMagicaAsociada = cartaMonstruo.getCartaMagica().getId()
             espacioCartasEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
             i = 0
@@ -350,6 +343,30 @@ Mágicas          Inc.ATK---Inc.DEF
 {dic_e_2.get(2,"----+espacio vacío+----")}
 {dic_e_2.get(3,"----+espacio vacío+----")}
 
+
+'''
+    
+
+
+
+
+
+#OBSOLETA
+'''
+def verificarCartasMagicas(self, jugador, cartaMonstruo):
+    #Itera en el espacio de cartas especiales del jugador, validando cuales
+    #coinciden con el tipo de monstruo de 'carta' y va sumando los incrementos de ataque y defensa
+    #retorna dicha tupla de valores 
+    espacioEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
+    incAtk = 0;
+    incDef = 0;
+    for cartaEspecial in espacioEspecialesJ:
+        if isinstance(cartaEspecial, CartaMagica):
+            if cartaEspecial.getTipoMonstruo() == cartaMonstruo.getTipoMonstruo():
+                incAtk += cartaEspecial.getIncrementoAtaque()
+                incDef += cartaEspecial.getIncrementoDefensa()
+
+    return incAtk, incDef; 
 
 '''
 

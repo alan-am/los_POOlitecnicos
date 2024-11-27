@@ -10,7 +10,7 @@ def main():
     #cuerpo de la partida
     partida = Partida()
 
-    print("---+ Jugador 2 corresponde a la máquina")
+    print("---+ Jugador 2 corresponde a la máquina(Billy)")
     usuario = partida.getTablero().getJugador1()
     maquina = partida.getTablero().getJugador2() #j2 es la maquina
     
