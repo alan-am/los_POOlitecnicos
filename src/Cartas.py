@@ -81,9 +81,18 @@ class CartaMonstruo(Carta):
         self.__isInAtaque = True; #* por defecto #! si se pone en defensa se coloca boca abajo
         self.__isBocaArriba = True; #* por defecto #se muestra el atk/def al imrpimir
         self.__puedeAtacar = True; #* por defecto #true si puede atacar en ese turno
+        #se le aniade un atributo CartaMagica para la asociacion
+        self.__cartaMagica = CartaMagica("Carta Defecto", "Estas es una carta por defecto", 0, 0, None )
     
 
     #Getters y setters 
+    def getCartaMagica(self):
+        return self.__cartaMagica;
+    def setCartaMagica(self, cartaMagica: CartaMagica):
+        self.__cartaMagica = cartaMagica;
+
+
+
     def getAtaque(self):
         return self.__ataque
     def setAtaque(self, nuevoAtaque):
@@ -144,6 +153,13 @@ class CartaMonstruo(Carta):
             var = "Ataque"
 
         return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque}, DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}, ATR: {self.__tipoAtributo.value}'''
+    
+    #String corto para mostrar solo atk, def, tipoMonstruo y modo
+    def toString3(self):
+        var = "Defensa"
+        if self.__isInAtaque:
+            var = "Ataque"
+        return f'''CARTA MONSTRUO|| {self.getNombre()}, [MODO {var}] [ATK: {self.__ataque}, DEF: {self.__defensa}]   Tipo: {self.__tipoMonstruo.value}'''
 
 
 

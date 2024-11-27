@@ -147,7 +147,7 @@ class Jugador:
                         #eliminamos la carta trampa q se interpuso
                         cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
                         print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo().value}")
-                        print("Carta Trampa eliminada del tablero")
+                        print("| Carta Trampa eliminada del tablero")
                         tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
                         cartaSeleccionada.setPuedeAtacar(False);
 
@@ -222,7 +222,7 @@ class Jugador:
             para confirmar que es una carta q se puede poner en tablero
             '''
         #PASOS
-        #1 preguntar si desea jugar alguna carta de su mano, en caso de que si, llamar a esta funcion
+        #1 mostrar en cada turno del jugador sus cartas en mano, luego preguntarle si desea aniadir alguna
         #1.5 complementar con un while para q el jugador pueda aniadir cuantas veces quiera
         #2 se complementa con la llamada de la funcion cambiarPosicionDeAtaque, luego de ejecutarse jugarCarta()
         #(lo de arriba iria en la funcion de fases de partida o directamente en el main)
@@ -271,14 +271,41 @@ class Jugador:
                 self.setNoAgregoMonstruo(False)
             else:
                 print("WARNING| Ya no puedes colocar más cartas Monstruo")
-        #Caso si la cartas es Magica o trampa
-        elif isinstance(cartaSeleccionada, CartaMagica) or isinstance(cartaSeleccionada, CartaTrampa):
+        #Caso si la carta es trampa
+        elif isinstance(cartaSeleccionada, CartaTrampa):
             #validamos que haya espacio
             if len(tablero.tablerocompartido[self.__id]["CartasEspeciales"])<3:
                 #Aniadimos la carta a tablero
                 tablero.aniadirCartaTablero(cartaSeleccionada, self.__id)
             else:
                 print("No se puede agregar mas cartas Magicas o Trampa") 
+        #Caso si la carta seleccionada es Magica
+        elif isinstance(cartaSeleccionada, CartaMagica):
+            #validamos que ya exista un monstruo en el tablero con mismo atributo de la carta
+            if tablero.validarAgregacionCartaMagica():
+                espacioCartasMonstruoJ = tablero.tablerocompartido[self.__id]["CartasMonstruo"]
+                #Mostramos las cartas monstruo:
+                print("| Selecciona el monstruo al cual asociar la carta Magica")
+                i = 0 
+                for cartaMonstruo in espacioCartasMonstruoJ:
+                    print(f'{i+1}. {cartaMonstruo.toString3()}')
+                    i += 1       
+
+                seleccion = input("Selecciona la carta a Asociar: \n > ")
+                # validacion por si el usuario pone letras  o se pasa del rango-_-
+                while  (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
+                    print("Por favor, ingresa un número válido.")
+                    seleccion = input(" > ")
+                cartaAAsociar: CartaMonstruo = espacioCartasMonstruoJ[int(seleccion)-1]
+
+                #validamos que la cartaMonstruo seleccionada a asociar sea del mismo atributo que la carta
+                #magica seleccionada previamente
+                if cartaAAsociar.getTipoMonstruo() == cartaSeleccionada.getTipoMonstruo():
+                    #seteamos la nueva carta magica a esta carta Monstruo
+                    cartaAAsociar.setCartaMagica(cartaSeleccionada)
+                else: 
+                    print(f'WARNING| La carta Magica elegida no se puede asociar a la carta Monstruo "{cartaAAsociar.getNombre()}" ')
+
        
 
     def imprimirMano(self):

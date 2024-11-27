@@ -253,6 +253,38 @@ class Tablero:
         return self.tablerocompartido
 
 
+    def eliminarCartaMagicaAsociada(self, jugador, cartaMonstruo: CartaMonstruo):
+        '''Recibe un jugador, evalua si la carta monstruo dada posee una carta magica 
+        asociada, una vez verificado determina el id de la carta magica y luego busca
+        en el tablero del jugador dicha carta por su id , y procede a eliminarla'''
+
+        #validamos que la carta mosntruo tenga una carta asociada
+        if cartaMonstruo.getCartaMagica().getTipoMonstruo() is not None:
+            id_cartaMagicaAsociada = cartaMonstruo.getCartaMagica().getId()
+            espacioCartasEspecialesJ = self.tablerocompartido[jugador.getId()]["CartasEspeciales"]
+            i = 0
+            indiceCarta = None;
+            for cartaEspecial in espacioCartasEspecialesJ:
+                id_cartaEspecial = cartaEspecial.getId()
+                if isinstance(cartaEspecial, CartaMagica) and id_cartaMagicaAsociada == id_cartaEspecial:
+                    indiceCarta = i;
+                i+=1;
+            cartaAEliminar = espacioCartasEspecialesJ[indiceCarta]
+            self.quitarCartaTablero(cartaAEliminar,jugador.getId())
+
+
+    def validarAgregacionCartaMagica(self, cartaMagica: CartaMagica, jugador):
+        '''Recibe un carta magica, determina su tipo de atributo e itera el espacio
+        de mosntruos del jugador par aver si existe algun mosntruo del mismo atributo, retorna
+        un boolean'''
+        espacioMonstruosJ = self.tablerocompartido[jugador.getId()]["CartasMonstruo"]
+        i = 0 ;
+        for cartaMonstruo in espacioMonstruosJ:
+            if cartaMonstruo.getTipoMonstruo() == cartaMagica.getTipoMonstruo():
+                i += 1;
+
+        return i > 0 
+
     
     def toString(self):
         cartas_j1 = self.tablerocompartido[1]
