@@ -65,7 +65,7 @@ class Partida:
                 input("> Da enter para mostrar el tablero actualizado ")
                 print(self.getTablero().toString()) #Aniadido Alan 
                 #reestablece el estado de las cartas para el siguiente turno
-                self.resetearEstadoCartasMounstruo(jugador_actual)
+                self.resetearEstadoCartasMounstro2()
                 #cambia de un jugador a otro, cambia turno
                 self.cambiarTurno()  
         #por cada ronda se hace esto:
@@ -194,7 +194,20 @@ class Partida:
 
     def resetearEstadoCartasMounstro2(self): #Prueba # la funcion original parece que no etsa funcionando bien
         '''Resetea el atributo .puedeAtacar de las cartas mosntruo en el tablero de cada jugador'''
-        pass
+        #guardamos el id de cada jugador en el tablero
+        idJ1 = self.__tablero.getJugador1().getId()
+        idJ2 = self.__tablero.getJugador1().getId()
+
+        #Accedemos al espacio de cartas monstruo de cada jugador
+        espacioCartasMonstruoJ1 =  self.__tablero.tablerocompartido[idJ1]["CartasMonstruo"]
+        espacioCartasMonstruoJ2 =  self.__tablero.tablerocompartido[idJ2]["CartasMonstruo"]
+
+        #iteramos en cada carta mosntruo de cada espacio cambiando el atributo puedeAtacar
+        for cartaMonstruo in espacioCartasMonstruoJ1:
+            cartaMonstruo.setPuedeAtacar(True);
+        for cartaMonstruo in espacioCartasMonstruoJ2:
+            cartaMonstruo.setPuedeAtacar(True);
+
 
 
 
