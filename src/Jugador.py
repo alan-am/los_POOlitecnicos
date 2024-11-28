@@ -205,6 +205,15 @@ class Jugador:
                     print("WARNING| La carta seleccionada ya ha atacado en este Turno.")
                 elif cartaSeleccionada.getPuedeAtacar():
                     print("WARNING| La carta seleccionada no esta en modo de ataque")            #cambiamos el estado de la carta  seleccionada para que ya no se pueda utilizar en el turno. OJO
+            
+            '''vuelve a preguntar y eleccion se actualiza, antes valida si todavía puede atacar'''
+             #si todavia puede atacar pregunta
+            print("|    Ejecutar ataque?")
+            eleccion = input("1. Si \n2. No \n");
+            #validamos su seleccion
+            while eleccion != "1"  and eleccion != "2":
+                print("Elige un numero entre 1 y 2")
+                eleccion = input("> ");
         #Especificaciones funcion:
         # verificar si no es el primer turno -> se lo valida en otra funcion de partida o del main CHEC (en "ronda")
         #Da a elegir al jugador con q carta Monstruo de su tablero quiere atacar y a cual de la otras quiere atacar CHECK
@@ -212,16 +221,8 @@ class Jugador:
         # primero verifica si tiene cartas mosntruo en el tablero, sino ataca directamente CHECK
         # actualiz la vida del jugador CHECK
         # se cambia el atributo  de la carta elegida puedeAtacar a False CHECK
-        '''vuelve a preguntar y eleccion se actualiza'''
-        if tablero.hayCartasMonstruoEnAtaque(self): #si todavia puede atacar pregunta
-            print("|    Ejecutar ataque?")
-            eleccion = input("1. Si \n2. No \n");
-            #validamos su seleccion
-            while eleccion != "1"  and eleccion != "2":
-                print("Elige un numero entre 1 y 2")
-                eleccion = input("> ");
-        else:
-            print("---> No tiene cartas monstruos disponibles para atacar")
+        
+
        
             
     def jugarCarta(self, partida: Partida):
