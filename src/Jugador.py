@@ -214,6 +214,8 @@ class Jugador:
             while eleccion != "1"  and eleccion != "2":
                 print("Elige un numero entre 1 y 2")
                 eleccion = input("> ");
+        if not tablero.hayCartasMonstruoEnAtaque(self):
+            print("WARNING| No existen cartas monstruo en modo ataque para atacar")
         #Especificaciones funcion:
         # verificar si no es el primer turno -> se lo valida en otra funcion de partida o del main CHEC (en "ronda")
         #Da a elegir al jugador con q carta Monstruo de su tablero quiere atacar y a cual de la otras quiere atacar CHECK
@@ -342,7 +344,7 @@ class Jugador:
 
     def declararBatallaComoMaquina(self, tablero: Tablero, oponente):
     
-        input(f"La {self.getNombre()} te va a declarar batalla!! {oponente.getNombre()} estás preparadx?: " )
+        input(f"La {self.getNombre()} buscara declararte batalla!! {oponente.getNombre()} estás preparadx?: " )
 
         # Obtener monstruos en ataque que pueden atacar
         monstruosAtacantes = []
@@ -391,6 +393,7 @@ class Jugador:
         for cartaAtacante in monstruosAtacantes:
             cartaTrampa = tablero.verificarCartaTrampa(oponente, cartaAtacante)
             if cartaTrampa:
+                        print(f" La maquina ataco con {cartaAtacante.getNombre()}! ")
                         print(f"---> {oponente.getNombre()} activa la carta trampa '{cartaTrampa.getNombre()}' y detiene el ataque de '{cartaAtacante.getNombre()}'.")
                         tablero.quitarCartaTablero(cartaTrampa, oponente.getId())  # Descarta la carta trampa
                         continue
@@ -405,7 +408,7 @@ class Jugador:
                 for cartaMounstrorival in monstruosOponente:
                 
 
-                    if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):    
+                    if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()) and cartaAtacante.getPuedeAtacar():    
                         cartaDefensora = cartaMounstrorival
                         print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
                         danioAEnemigo, danioAJugador = tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)

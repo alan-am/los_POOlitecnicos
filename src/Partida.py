@@ -61,7 +61,8 @@ class Partida:
                     print(f"{'-'*30}")
                     self.faseBatalla(j1,maquina)
                     #luego de la batalla, busca las cartas inservibles y chao
-                    self.getTablero().destruirCartaMagica(jugador_actual)
+                    #funcion desactualizada
+                    #self.getTablero().destruirCartaMagica(jugador_actual)
                     #print del tablero para que el jugador vea como queda
                     input("> Da enter para mostrar el tablero actualizado ")
                     print(self.getTablero().toString()) #Aniadido Alan 
@@ -87,10 +88,10 @@ class Partida:
         if self.__turno <=3 and (len(j1.getCartasEnMano())==0 or len(j2.getCartasEnMano())==0): #verifica que sea el primer turno de cada jugador
             if j1.getId() == self.__jugadoractual:
                 j1.tomar5Cartas()
-                print(f"{j1.getNombre()} ha tomado 5 cartas del deck")
+                print(f"|   {j1.getNombre()} ha tomado 5 cartas del deck")
             else:
                 self.__tablero.getJugador2().tomar5Cartas()
-                print(f"{j2.getNombre()} ha tomado 5 cartas del deck")
+                print(f"|   {j2.getNombre()} ha tomado 5 cartas del deck")
         else: #cuando haya pasado la primera ronda, se toma una sola carta por turno
             if self.__jugadoractual ==1:
                 print("-Es tu turno de robar una carta-")
@@ -99,7 +100,7 @@ class Partida:
             else:
                 print(f'{"Turno de la maquina".center(30,"-")}')
                  #!Print para test
-                print("La máquina ya ha robado su carta")
+                print("|    La máquina ya ha robado su carta")
                 j2.tomarCartaEnTurno()
         
  
@@ -145,7 +146,7 @@ class Partida:
 
 
     def sorteoInicios(self,j1, j2):
-        print("¡Bienvenido al juego de YuGiOH!")
+        print("¡Bienvenido al juego de 𝐘𝐔𝐆𝐈-𝐎𝐇 !")
         JugadoresIniciales = [j1,j2]
         JugadorEmpieza = random.choice(JugadoresIniciales)
         self.__turno = JugadorEmpieza.getId()#con esto ya modifiqué el turno por primera vez
@@ -218,6 +219,13 @@ class Partida:
         '''Muestra al usuario las reglas de este juego de cartas yugioh'''
         pass;
     
+    def presentacionCreadores(self):
+        print("\n\nJuego codificado por: \n")
+        print("Mayra Lucas - Estudiante de Espol en ingeniería en Ciencias de la Computación".center(100))
+        print("Geovanny Lacouture - Estudiante de Espol en ingeniería en Ciencias de la Computación".center(100))
+        print("Alan Aguilar - Estudiante de Espol en ingeniería en Ciencias de la Computación".center(100))
+        print("<3".center(100))
 
+        input("...  Game over")
 
         
