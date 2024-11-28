@@ -209,12 +209,15 @@ class Jugador:
             # actualiz la vida del jugador CHECK
             # se cambia el atributo  de la carta elegida puedeAtacar a False CHECK
             '''vuelve a preguntar y eleccion se actualiza'''
-            print("|    Ejecutar ataque?")
-            eleccion = input("1. Si \n2. No \n");
-            #validamos su seleccion
-            while eleccion != "1"  and eleccion != "2":
-                print("Elige un numero entre 1 y 2")
-                eleccion = input("> ");
+            if tablero.hayCartasMonstruoEnAtaque(self): #si todavia puede atacar pregunta
+                print("|    Ejecutar ataque?")
+                eleccion = input("1. Si \n2. No \n");
+                #validamos su seleccion
+                while eleccion != "1"  and eleccion != "2":
+                    print("Elige un numero entre 1 y 2")
+                    eleccion = input("> ");
+            else:
+                print("---> Ya no tiene cartas monstruos disponibles para atacar")
     def jugarCarta(self, partida: Partida):
         '''Funcion que muestra las cartas en mano del jugador y le da a elegir
             que carta aniadir al tablero, luego de este haberlo seleccionado se la debe validar
