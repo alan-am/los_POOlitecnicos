@@ -383,30 +383,29 @@ class Jugador:
         #Funcion de carta mounstro y carta  trampa               
         for cartaAtacante in monstruosAtacantes:
             cartaTrampa = tablero.verificarCartaTrampa(oponente, cartaAtacante)
-            for cartaMounstrorival in monstruosOponente:
-               
-
-                if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):
-                    if cartaTrampa:
+            if cartaTrampa:
                         print(f"---> {oponente.getNombre()} activa la carta trampa '{cartaTrampa.getNombre()}' y detiene el ataque de '{cartaAtacante.getNombre()}'.")
                         tablero.quitarCartaTablero(cartaTrampa, oponente.getId())  # Descarta la carta trampa
                         continue
-                    if len(monstruosOponente) > 0:
-                        cartaDefensora = cartaMounstrorival
-                        print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
-                        danioAEnemigo, danioAJugador = tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
-                        self.__puntosVida = self.__puntosVida - danioAJugador;
-                        oponente.__puntosVida =  oponente.__puntosVida - danioAEnemigo;
-                    
-                    else:
-                        print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
-                        oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
-                    cartaAtacante.setPuedeAtacar(False)
+            if len(monstruosOponente)==0:
+                print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
+                oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
 
-                    print(f"{self.getNombre()} ha terminado su fase de batalla.")
-                    print(f"=========================================================")
+            print(f"{self.getNombre()} ha terminado su fase de batalla.")
+            print(f"=========================================================")
+            for cartaMounstrorival in monstruosOponente:
+               
+
+                if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):    
+                    cartaDefensora = cartaMounstrorival
+                    print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
+                    danioAEnemigo, danioAJugador = tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
+                    self.__puntosVida = self.__puntosVida - danioAJugador;
+                    oponente.__puntosVida =  oponente.__puntosVida - danioAEnemigo;
+                
                 else:
                     print(f"La Maquina ha decidido no usar a {cartaAtacante.getNombre()} para atacar a tu carta {cartaMounstrorival.getNombre()} porque no le conviene")
+            cartaAtacante.setPuedeAtacar(False)
 
 
     def llenarTableroMaquina(self, tablero: Tablero):
