@@ -54,28 +54,29 @@ class Partida:
             print("--- Es su primer turno, no puede declarar batalla")
         else: 
             for i in range(2):#por cada jugador
-                self.faseTomarCarta(j1,maquina)
-                print(f"{'-'*30}")
-                self.fasePrincipal(j1,maquina)
-                print(f"{'-'*30}")
-                self.faseBatalla(j1,maquina)
-                #luego de la batalla, busca las cartas inservibles y chao
-                self.getTablero().destruirCartaMagica(jugador_actual)
-                #print del tablero para que el jugador vea como queda
-                input("> Da enter para mostrar el tablero actualizado ")
-                print(self.getTablero().toString()) #Aniadido Alan 
-                #reestablece el estado de las cartas para el siguiente turno
-                self.resetearEstadoCartasMounstro2()
-                #cambia de un jugador a otro, cambia turno
-                self.cambiarTurno()  
+                if not j1.esDerrotado() and not maquina.esDerrotado():
+                    self.faseTomarCarta(j1,maquina)
+                    print(f"{'-'*30}")
+                    self.fasePrincipal(j1,maquina)
+                    print(f"{'-'*30}")
+                    self.faseBatalla(j1,maquina)
+                    #luego de la batalla, busca las cartas inservibles y chao
+                    self.getTablero().destruirCartaMagica(jugador_actual)
+                    #print del tablero para que el jugador vea como queda
+                    input("> Da enter para mostrar el tablero actualizado ")
+                    print(self.getTablero().toString()) #Aniadido Alan 
+                    #reestablece el estado de las cartas para el siguiente turno
+                    self.resetearEstadoCartasMounstro2()
+                    #cambia de un jugador a otro, cambia turno
+                    self.cambiarTurno()  
         #por cada ronda se hace esto:
+        if not j1.esDerrotado() and not maquina.esDerrotado():
+            self.__ronda+=1
+            input(f"Presione enter para comenzar una nueva ronda ")
+            input("Loading...")
 
-        self.__ronda+=1
-        input(f"Presione enter para comenzar una nueva ronda ")
-        input("Loading...")
-
-        print(f"------> Ronda {self.__ronda} comienza:")
-        print(f"{'=='*40}")
+            print(f"------> Ronda {self.__ronda} comienza:")
+            print(f"{'=='*40}")
     
 
 

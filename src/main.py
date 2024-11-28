@@ -21,7 +21,7 @@ def main():
         #print("")
         #print(usuario.toString())
         #print(maquina.toString())
-        #print("")
+        #alvprint("")
     # cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()
     # while cambio_nom not in ["si","no"]:
     #     cambio_nom = input("¿Deseas cambiar el nombre de tu jugador?(si/no) ").lower()

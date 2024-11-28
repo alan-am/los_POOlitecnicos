@@ -108,92 +108,94 @@ class Jugador:
         #Validacion existan cartas monstruo
         #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
             #preguntamos si desea atacar
-        print("|    Ejecutar ataque?")
-        eleccion = input("1. Si \n2. No \n > ");
-        #validamos su seleccion
-        while eleccion != "1"  and eleccion != "2":
-            print("Elige un numero entre 1 y 2")
-            eleccion = input(" > ");
-        #Validacion existan cartas monstruo
-        while tablero.hayCartasMonstruoEnAtaque(self) and eleccion == "1": #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
-            #si enetró en el while es porque quiere atacar
-            print("Elige tu carta de ataque: ")
-            i = 0;
-            #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
-            #boca arriba damos permiso de atacar;
-            for cartaMonstruo in espacioCartasMonstruoJ:
-                print(f'{i+1}. {cartaMonstruo.toString3()}')
-                i += 1;
-            seleccion = input(" > ")
-            # validacion por si el usuario pone letras  o se pasa del rango-_-
-            while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
-                print("Por favor, ingresa un número válido.")
+        if len(espacioCartasMonstruoJ) >0:
+            print("|    Ejecutar ataque?")
+            eleccion = input("1. Si \n2. No \n > ");
+            #validamos su seleccion
+            while eleccion != "1"  and eleccion != "2":
+                print("Elige un numero entre 1 y 2")
+                eleccion = input(" > ");
+            #Validacion existan cartas monstruo
+            while tablero.hayCartasMonstruoEnAtaque(self) and eleccion == "1": #Verifica que haya cartas en modo ataque e implicitamente q existan cartas en el espacio
+                #si enetró en el while es porque quiere atacar
+                print("Elige tu carta de ataque: ")
+                i = 0;
+                #mostramos las cartas a elegir del jugador propio, y solo las que estan en posicion de ataque y estan
+                #boca arriba damos permiso de atacar;
+                for cartaMonstruo in espacioCartasMonstruoJ:
+                    print(f'{i+1}. {cartaMonstruo.toString3()}')
+                    i += 1;
                 seleccion = input(" > ")
-
-            cartaSeleccionada = espacioCartasMonstruoJ[int(seleccion)-1]
-            #validamos que la carta elegida este en posicion de ataque y pueda atacar #!si esta en ataque esta boca arriba !!
-            if cartaSeleccionada.getIsInAtaque() and cartaSeleccionada.getPuedeAtacar():
-                #logica de mostrarle la seleccion de las cartas enemigas
-                espacioEnemigo = tablero.tablerocompartido[enemigo.getId()]["CartasMonstruo"]
-                # primero verificamos si el enemigo tiene o no cartas en su tablero
-                #para ver si realizamos ataque directo o no
-                if len(espacioEnemigo) == 0:
-                    #atacamos directamente
-
-                    #primero verificamos si el enemigo tiene cartas trampa que impidan el ataque
-                    #caso en el que si tenga:
-                    if tablero.verificarCartaTrampa(enemigo, cartaSeleccionada) is not None:
-                        print("| Se ha atacado directamente! pero una carta Trampa se interpuso")
-                        #eliminamos la carta trampa q se interpuso
-                        cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
-                        print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo()}")
-                        print("| Carta Trampa eliminada del tablero")
-                        tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
-                        cartaSeleccionada.setPuedeAtacar(False);
-
-
-                        
-                    #caso en el que no tenga
-                    else: 
-                        #el danio del atacante aniadido con las cartas magicas lo sacamos accediendo a su carta magica asociada
-                        incAtkJugador = cartaSeleccionada.getCartaMagica().getIncrementoAtaque()
-                        danio = cartaSeleccionada.getAtaque() + incAtkJugador;
-                        print(f"| Se ha atacado directamente con {cartaSeleccionada.getNombre()}")
-                        print(f" \t {cartaSeleccionada.getAtaque()}  +  {incAtkJugador} -->  {enemigo.getPuntosVida()} Puntos Vida {enemigo.getNombre()} ")
-                        #Se actualiza la vida del enemigo
-                        n_vidaenemigo = enemigo.getPuntosVida() - danio;
-                        enemigo.setPuntosVida(n_vidaenemigo);
-                        cartaSeleccionada.setPuedeAtacar(False);
-
-
-                else:
-                    # damos a elegir que carta quiere atacar
-                    print("Elige la carta Enemiga a atacar: ")
-                    i = 0;
-                    for cartaMonstruo in espacioEnemigo:
-                        #mostramos los datos de la carta solo si esta boca arriba
-                        if cartaMonstruo.getIsBocaArriba():
-                            print(f'{i+1}. {cartaMonstruo.toString2()}')
-                        else: 
-                            print(f'{i+1}. CARTA MONSTRUO|| *** Carta boca abajo ***')
-                        i+=1
+                # validacion por si el usuario pone letras  o se pasa del rango-_-
+                while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
+                    print("Por favor, ingresa un número válido.")
                     seleccion = input(" > ")
-                    # validacion por si el usuario pone letras  o se pasa del rango-_-
-                    while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
-                        print("Por favor, ingresa un número válido.")
+
+                cartaSeleccionada = espacioCartasMonstruoJ[int(seleccion)-1]
+                #validamos que la carta elegida este en posicion de ataque y pueda atacar #!si esta en ataque esta boca arriba !!
+                if cartaSeleccionada.getIsInAtaque() and cartaSeleccionada.getPuedeAtacar():
+                    #logica de mostrarle la seleccion de las cartas enemigas
+                    espacioEnemigo = tablero.tablerocompartido[enemigo.getId()]["CartasMonstruo"]
+                    # primero verificamos si el enemigo tiene o no cartas en su tablero
+                    #para ver si realizamos ataque directo o no
+                    if len(espacioEnemigo) == 0:
+                        #atacamos directamente
+
+                        #primero verificamos si el enemigo tiene cartas trampa que impidan el ataque
+                        #caso en el que si tenga:
+                        if tablero.verificarCartaTrampa(enemigo, cartaSeleccionada) is not None:
+                            print("| Se ha atacado directamente! pero una carta Trampa se interpuso")
+                            #eliminamos la carta trampa q se interpuso
+                            cartaTrampa = tablero.verificarCartaTrampa(enemigo, cartaSeleccionada)
+                            print(f"{cartaTrampa.getNombre()} detiene el ataque de un monstruo con tipo de atributo {cartaTrampa.getTipoAtributo()}")
+                            print("| Carta Trampa eliminada del tablero")
+                            tablero.quitarCartaTablero(cartaTrampa, enemigo.getId())
+                            cartaSeleccionada.setPuedeAtacar(False);
+
+
+                            
+                        #caso en el que no tenga
+                        else: 
+                            #el danio del atacante aniadido con las cartas magicas lo sacamos accediendo a su carta magica asociada
+                            incAtkJugador = cartaSeleccionada.getCartaMagica().getIncrementoAtaque()
+                            danio = cartaSeleccionada.getAtaque() + incAtkJugador;
+                            print(f"| Se ha atacado directamente con {cartaSeleccionada.getNombre()}")
+                            print(f" \t {cartaSeleccionada.getAtaque()}  +  {incAtkJugador} -->  {enemigo.getPuntosVida()} Puntos Vida {enemigo.getNombre()} ")
+                            #Se actualiza la vida del enemigo
+                            n_vidaenemigo = enemigo.getPuntosVida() - danio;
+                            enemigo.setPuntosVida(n_vidaenemigo);
+                            cartaSeleccionada.setPuedeAtacar(False);
+
+
+                    else:
+                        # damos a elegir que carta quiere atacar
+                        print("Elige la carta Enemiga a atacar: ")
+                        i = 0;
+                        for cartaMonstruo in espacioEnemigo:
+                            #mostramos los datos de la carta solo si esta boca arriba
+                            if cartaMonstruo.getIsBocaArriba():
+                                print(f'{i+1}. {cartaMonstruo.toString2()}')
+                            else: 
+                                print(f'{i+1}. CARTA MONSTRUO|| *** Carta boca abajo ***')
+                            i+=1
                         seleccion = input(" > ")
-                    
-                    cartaEnemigaSeleccionada = espacioEnemigo[int(seleccion)-1]
+                        # validacion por si el usuario pone letras  o se pasa del rango-_-
+                        while (not seleccion.isdigit()) or (int(seleccion)> i  or int(seleccion) <= 0):
+                            print("Por favor, ingresa un número válido.")
+                            seleccion = input(" > ")
+                        
+                        cartaEnemigaSeleccionada = espacioEnemigo[int(seleccion)-1]
 
-                    #Ejecutamos el ataque:
+                        #Ejecutamos el ataque:
 
-                    danioAEnemigo , danioAJugador = tablero.ataqueEntreCartas(cartaSeleccionada, cartaEnemigaSeleccionada, self, enemigo)
+                        danioAEnemigo , danioAJugador = tablero.ataqueEntreCartas(cartaSeleccionada, cartaEnemigaSeleccionada, self, enemigo)
 
-                    #Actualizamos la vida de los jugadores
-                    #!comprobar si se puede acceder directamente
-                    self.__puntosVida = self.__puntosVida - danioAJugador;
-                    enemigo.__puntosVida =  enemigo.__puntosVida - danioAEnemigo;
-                    cartaSeleccionada.setPuedeAtacar(False);
+                        #Actualizamos la vida de los jugadores
+                        #!comprobar si se puede acceder directamente
+                        self.__puntosVida = self.__puntosVida - danioAJugador;
+                        enemigo.__puntosVida =  enemigo.__puntosVida - danioAEnemigo;
+                        cartaSeleccionada.setPuedeAtacar(False);
+            
 
             else:
                     #dividimos en un if para ser mas especifico con la advertencia al usuario
@@ -218,6 +220,9 @@ class Jugador:
                     eleccion = input("> ");
             else:
                 print("---> Ya no tiene cartas monstruos disponibles para atacar")
+        else:
+            print("WARNING| No puede atacar porque no hay cartas monstruos equipadas")
+            
     def jugarCarta(self, partida: Partida):
         '''Funcion que muestra las cartas en mano del jugador y le da a elegir
             que carta aniadir al tablero, luego de este haberlo seleccionado se la debe validar
@@ -390,22 +395,25 @@ class Jugador:
             if len(monstruosOponente)==0:
                 print(f"{cartaAtacante.getNombre()} realiza un ataque directo")
                 oponente.setPuntosVida(oponente.getPuntosVida() - cartaAtacante.getAtaque())
+                cartaAtacante.setPuedeAtacar(False)
 
-            print(f"{self.getNombre()} ha terminado su fase de batalla.")
-            print(f"=========================================================")
-            for cartaMounstrorival in monstruosOponente:
-               
-
-                if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):    
-                    cartaDefensora = cartaMounstrorival
-                    print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
-                    danioAEnemigo, danioAJugador = tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
-                    self.__puntosVida = self.__puntosVida - danioAJugador;
-                    oponente.__puntosVida =  oponente.__puntosVida - danioAEnemigo;
+                print(f"{self.getNombre()} ha terminado su fase de batalla.")
+                print(f"=========================================================")
+            else:
+                for cartaMounstrorival in monstruosOponente:
                 
-                else:
-                    print(f"La Maquina ha decidido no usar a {cartaAtacante.getNombre()} para atacar a tu carta {cartaMounstrorival.getNombre()} porque no le conviene")
-            cartaAtacante.setPuedeAtacar(False)
+
+                    if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):    
+                        cartaDefensora = cartaMounstrorival
+                        print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
+                        danioAEnemigo, danioAJugador = tablero.ataqueEntreCartas(cartaAtacante, cartaDefensora, self, oponente)
+                        self.__puntosVida = self.__puntosVida - danioAJugador;
+                        oponente.__puntosVida =  oponente.__puntosVida - danioAEnemigo;
+                        cartaAtacante.setPuedeAtacar(False)
+                    
+                    else:
+                        print(f"La Maquina ha decidido no usar a {cartaAtacante.getNombre()} para atacar a tu carta {cartaMounstrorival.getNombre()} porque no le conviene")
+                    
 
 
     def llenarTableroMaquina(self, tablero: Tablero):
