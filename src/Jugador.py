@@ -445,8 +445,12 @@ class Jugador:
         
     def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        NoTieneCartas= len(self.getCartasEnMano())==0 and len(self.getDeck().getBaraja())==0
-        return self.getPuntosVida()<=0 or NoTieneCartas
+        sinCartasEnMano= len(self.getCartasEnMano())==0
+        sinCartasEnDeck=len(self.getDeck().getBaraja())==0
+        sinVida=self.getPuntosVida()<=0
+        if self.getPuntosVida()<=0 or (sinCartasEnMano and sinCartasEnDeck):
+            return True
+        return False
      #devuelve true si esderrotado
     
          
