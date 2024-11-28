@@ -393,9 +393,8 @@ class Jugador:
 
             print(f"{self.getNombre()} ha terminado su fase de batalla.")
             print(f"=========================================================")
-            for cartaMounstrorival in monstruosOponente:
-               
 
+            for cartaMounstrorival in monstruosOponente:
                 if (cartaMounstrorival.getAtaque() + cartaMounstrorival.getCartaMagica().getIncrementoAtaque()) < (cartaAtacante.getAtaque() + cartaAtacante.getCartaMagica().getIncrementoAtaque()):    
                     cartaDefensora = cartaMounstrorival
                     print(f"---+ {cartaAtacante.getNombre()} ataca a {cartaDefensora.getNombre()}!")
@@ -437,8 +436,12 @@ class Jugador:
         
     def esDerrotado(self):
         ##verifica que el jugador fue derrotado
-        NoTieneCartas= len(self.getCartasEnMano())==0 and len(self.getDeck().getBaraja())==0
-        return self.getPuntosVida()<=0 or NoTieneCartas
+        sinCartasEnMano= len(self.getCartasEnMano())==0
+        sinCartasEnDeck=len(self.getDeck().getBaraja())==0
+        sinVida=self.getPuntosVida()<=0
+        if self.getPuntosVida()<=0 or (sinCartasEnMano and sinCartasEnDeck):
+            return True
+        return False
      #devuelve true si esderrotado
     
          
